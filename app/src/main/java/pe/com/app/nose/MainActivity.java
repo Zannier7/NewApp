@@ -30,31 +30,49 @@ import org.w3c.dom.Text;
 
 public class MainActivity extends AppCompatActivity implements GoogleApiClient.OnConnectionFailedListener {
 
+    private TextView uidTextView;
+    /*Login Google*/
     private TextView nameTextView;
     private TextView emailTextView;
-    private TextView uidTextView;
     private ImageView photoImageView;
     private TextView idTextView;
-    private GoogleApiClient apiclientGoo;
+    private GoogleApiClient googleApiClient;
+    private FirebaseAuth firebaseAuth;
+    private  FirebaseAuth.AuthStateListener firebaseAuthListener;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        uidTextView = (TextView) findViewById(R.id.uidTextView);
+
+        photoImageView = (ImageView) findViewById(R.id.photoImageView);
         nameTextView = (TextView) findViewById(R.id.nameTextView);
         emailTextView = (TextView) findViewById(R.id.emailTextView);
-        uidTextView = (TextView) findViewById(R.id.uidTextView);
-        photoImageView = (ImageView) findViewById(R.id.photoImageView);
         idTextView = (TextView) findViewById(R.id.idTextView);
 
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                 .requestEmail()
                 .build();
 
-        apiclientGoo = new GoogleApiClient.Builder(this)
-                .enableAutoManage(this,this)
-                .addApi(Auth.GOOGLE_SIGN_IN_API,gso)
+        googleApiClient = new GoogleApiClient.Builder(this)
+                .enableAutoManage(this, this)
+                .addApi(Auth.GOOGLE_SIGN_IN_API, gso)
                 .build();
+
+        firebaseAuth = FirebaseAuth.getInstance();
+        firebaseAuthListener = new FirebaseAuth.AuthStateListener() {
+            @Override
+            public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
+                FirebaseUser user = firebaseAuth.getCurrentUser();
+                if (user!= null){
+                    setUserData(user);
+                }else{
+                    goLogInScreen();
+                }
+            }
+        };
 
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         if (user != null) {
@@ -69,75 +87,55 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
 
         } else {
 
-            goLoginScreen();
+            goLogInScreen();
         }
 
     }
 
-    private void goLoginScreen(){
+    private void setUserData(FirebaseUser user) {
+        nameTextView.setText(user.getDisplayName());
+        emailTextView.setText(user.getEmail());
+        idTextView.setText(user.getUid());
 
+        Glide.with(this).load(user.getPhotoUrl()).into(photoImageView);
+    }
+
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        firebaseAuth.addAuthStateListener(firebaseAuthListener);
+    }
+
+    private void goLogInScreen() {
         Intent intent = new Intent(this, LoginActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(intent);
     }
 
-
-    @Override
-    protected void onStart(){
-        super.onStart();
-        OptionalPendingResult<GoogleSignInResult> opr = Auth.GoogleSignInApi.silentSignIn(apiclientGoo);
-        if (opr.isDone()){
-            GoogleSignInResult result = opr.get();
-            handleSingInResult(result);
-        }else{
-            opr.setResultCallback(new ResultCallback<GoogleSignInResult>() {
-                @Override
-                public void onResult(@NonNull GoogleSignInResult googleSignInResult) {
-                    handleSingInResult(googleSignInResult);
-                }
-            });
-
-        }
-    }
-
-    private void handleSingInResult(GoogleSignInResult result) {
-        if (result.isSuccess()){
-            GoogleSignInAccount account = result.getSignInAccount();
-            nameTextView.setText(account.getDisplayName());
-            emailTextView.setText(account.getEmail());
-            idTextView.setText(account.getId());
-            Glide.with(this).load(account.getPhotoUrl()).into(photoImageView);
-        }else{
-            goLoginScreen();
-        }
-    }
-
-    public void logout(View view){
-        Auth.GoogleSignInApi.signOut(apiclientGoo).setResultCallback(new ResultCallback<Status>() {
+    public void logout(View view) {
+        firebaseAuth.signOut();
+        Auth.GoogleSignInApi.signOut(googleApiClient).setResultCallback(new ResultCallback<Status>() {
             @Override
             public void onResult(@NonNull Status status) {
-                if (status.isSuccess()){
-                    goLoginScreen();
-                }else{
-                    Toast.makeText(getApplicationContext(),"No se puedo cerrar sesión",Toast.LENGTH_SHORT).show();
+                if (status.isSuccess()) {
+                    goLogInScreen();
+                } else {
+                    Toast.makeText(getApplicationContext(), "No se pudo cerrar sesion", Toast.LENGTH_SHORT).show();
                 }
             }
         });
-
-        FirebaseAuth.getInstance().signOut();
-        LoginManager.getInstance().logOut();
-        goLoginScreen();
-
     }
 
-    public void revoke(View view){
-        Auth.GoogleSignInApi.revokeAccess(apiclientGoo).setResultCallback(new ResultCallback<Status>() {
+    public void revoke(View view) {
+        firebaseAuth.signOut();
+        Auth.GoogleSignInApi.revokeAccess(googleApiClient).setResultCallback(new ResultCallback<Status>() {
             @Override
             public void onResult(@NonNull Status status) {
-                if(status.isSuccess()){
-                    goLoginScreen();
-                }else{
-                    Toast.makeText(getApplicationContext(),"No se pudo revocar el acceso",Toast.LENGTH_SHORT).show();
+                if (status.isSuccess()) {
+                    goLogInScreen();
+                } else {
+                    Toast.makeText(getApplicationContext(),"No se pudo revocar el acceso", Toast.LENGTH_SHORT).show();
                 }
             }
         });
@@ -146,5 +144,14 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
     @Override
     public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
 
+    }
+
+    @Override
+    protected void onStop(){
+        super.onStop();
+
+        if (firebaseAuthListener != null){
+            firebaseAuth.removeAuthStateListener(firebaseAuthListener);
+        }
     }
 }
