@@ -26,21 +26,21 @@
             android:id="@+id/nameTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/app_name"
+            android:text="nombre/apellidos"
             android:textSize="24sp" />
 
         <TextView
             android:id="@+id/emailTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/app_name"
+            android:text="email"
             android:textSize="16sp" />
 
         <TextView
             android:id="@+id/idTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/app_name"
+            android:text="iduser"
             android:textSize="14sp" />
 
         <TextView
@@ -60,14 +60,12 @@
         android:layout_height="wrap_content"
         android:text="@string/logout"
         style="@style/Widget.AppCompat.Button.Borderless.Colored"
-        android:onClick="logOut"
-        />
+        android:onClick="logout"/>
 
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="revoke"
         style="@style/Widget.AppCompat.Button.Borderless"
-        android:onClick="revoke"
-        />
+        android:onClick="revoke"/>
 </LinearLayout>

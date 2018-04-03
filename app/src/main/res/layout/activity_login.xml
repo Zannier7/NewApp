@@ -19,10 +19,8 @@
         android:id="@+id/loginButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentLeft="true"
-        android:layout_marginBottom="17dp"
-        android:layout_marginLeft="12dp"
+        android:layout_alignTop="@+id/signInButton"
+        android:layout_toLeftOf="@+id/signInButton"
         android:paddingBottom="10dp"
         android:paddingTop="10dp" />
 
@@ -30,14 +28,14 @@
         android:id="@+id/signInButton"
         android:layout_width="149dp"
         android:layout_height="38dp"
+        android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"
-        android:layout_alignTop="@+id/loginButton"
-        android:layout_marginRight="16dp" />
+        android:layout_marginBottom="31dp"
+        android:layout_marginRight="31dp" />
 
 
     <ProgressBar
         android:id="@+id/progressBar"
-        style="?android:attr/progressBarStyleLarge"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
@@ -45,36 +43,53 @@
         android:indeterminate="true"
         android:visibility="gone" />
 
-    <EditText
-        android:id="@+id/user"
-        android:layout_width="232dp"
+    <android.support.design.widget.TextInputLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="190dp"
-        android:ems="10"
-        android:hint="Usuario"
-        android:inputType="textPersonName" />
+        android:layout_marginBottom="50dp"
+        android:gravity="center_horizontal">
 
-    <EditText
-        android:id="@+id/pass"
-        android:layout_width="230dp"
-        android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        android:ems="10"
-        android:hint="Contraseña"
-        android:inputType="textPersonName" />
-
+        <EditText
+            android:id="@+id/user"
+            android:layout_width="232dp"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="Usuario"
+            android:inputType="textEmailAddress" />
+    </android.support.design.widget.TextInputLayout>
     <Button
         android:id="@+id/button2"
         android:layout_width="104dp"
         android:layout_height="31dp"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="187dp"
-        android:background="@color/singIn"
+        android:layout_marginBottom="140dp"
+        android:background="@color/common_google_signin_btn_text_light_focused"
+        android:elevation="55dp"
         android:text="Iniciar Sesion"
         android:textAllCaps="false"
         android:textColor="@color/com_facebook_button_text_color" />
+
+    <android.support.design.widget.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:layout_centerInParent="true"
+        android:layout_marginTop="50dp">
+
+        <EditText
+            android:id="@+id/pass"
+            android:layout_width="230dp"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="Contraseña"
+            android:inputType="textPassword"/>
+    </android.support.design.widget.TextInputLayout>
+
+
+
 
 </RelativeLayout>

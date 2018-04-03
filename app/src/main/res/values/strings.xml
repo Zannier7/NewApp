@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Nose</string>
+    <string name="app_name">EventApp</string>
     <string name="facebook_app_id">1836020866443087</string>
     <string name="fb_login_protocol_scheme">fb1836020866443087</string>
     <string name="cancel_login">Se canceló la operación</string>
