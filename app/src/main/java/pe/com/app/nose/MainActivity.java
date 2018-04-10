@@ -12,6 +12,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.facebook.AccessToken;
@@ -55,6 +56,7 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
     private EditText login_password;
     private ProgressDialog progressDialog;
     private Button register_button;
+    private TextView tvForgotPass;
     ///Google
     private GoogleApiClient googleApiClient;
     private SignInButton mgoogleBtn;
@@ -72,6 +74,7 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
         login_password=(EditText)findViewById(R.id.login_password);
         register_button =(Button)findViewById(R.id.register_button);
         progressDialog = new ProgressDialog(this);
+        tvForgotPass = (TextView)findViewById(R.id.tvForgotPass);
 
 
         progressBar = (ProgressBar) findViewById(R.id.progressBar);
@@ -83,6 +86,13 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
             @Override
             public void onClick(View v) {
                 doLogin();
+            }
+        });
+        tvForgotPass.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(MainActivity.this,Update_Pass.class));
+                finish();
             }
         });
 

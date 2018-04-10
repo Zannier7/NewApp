@@ -104,5 +104,14 @@ tools:context="pe.com.app.nose.MainActivity">
         android:textAllCaps="false"
         android:textColor="@color/com_facebook_button_text_color" />
 
+    <TextView
+        android:id="@+id/tvForgotPass"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="139dp"
+        android:text="Olvide mi Contraseña" />
+
 
 </RelativeLayout>
