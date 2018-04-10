@@ -1,71 +1,108 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+xmlns:tools="http://schemas.android.com/tools"
+android:layout_width="match_parent"
+android:layout_height="match_parent"
+android:layout_centerHorizontal="true"
+tools:context="pe.com.app.nose.MainActivity">
+
+<ImageView
+    android:id="@+id/logo"
+    android:layout_width="105dp"
+    android:layout_height="86dp"
+    android:layout_alignParentTop="true"
     android:layout_centerHorizontal="true"
-    android:orientation="vertical"
-    tools:context="pe.com.app.nose.MainActivity">
+    android:layout_marginTop="58dp"
+    android:background="@drawable/logo" />
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        android:gravity="center"
-        android:orientation="vertical">
+<com.facebook.login.widget.LoginButton
+    android:id="@+id/facebookBtn"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_alignTop="@+id/googleBtn"
+    android:layout_toLeftOf="@+id/googleBtn"
+    android:paddingBottom="10dp"
+    android:paddingTop="10dp" />
 
-        <ImageView
-            android:id="@+id/photoImageView"
-            android:layout_width="56dp"
-            android:layout_height="56dp"
-            android:layout_margin="8dp"
-            android:background="@color/colorAccent" />
+<com.google.android.gms.common.SignInButton
+    android:id="@+id/googleBtn"
+    android:layout_width="149dp"
+    android:layout_height="38dp"
+    android:layout_alignParentBottom="true"
+    android:layout_alignParentRight="true"
+    android:layout_marginBottom="31dp"
+    android:layout_marginRight="31dp" />
 
-        <TextView
-            android:id="@+id/nameTextView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="nombre/apellidos"
-            android:textSize="24sp" />
 
-        <TextView
-            android:id="@+id/emailTextView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="email"
-            android:textSize="16sp" />
+<ProgressBar
+    android:id="@+id/progressBar"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_centerHorizontal="true"
+    android:layout_centerVertical="true"
+    android:indeterminate="true"
+    android:visibility="gone" />
 
-        <TextView
-            android:id="@+id/idTextView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="iduser"
-            android:textSize="14sp" />
+<android.support.design.widget.TextInputLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_alignParentTop="true"
+    android:layout_centerHorizontal="true"
+    android:layout_marginTop="190dp"
+    android:layout_marginBottom="50dp"
+    android:gravity="center_horizontal">
 
-        <TextView
-            android:id="@+id/uidTextView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/emailTextView"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="20dp"
-            android:text="UID"
-            android:textSize="14sp" />
+    <EditText
+        android:id="@+id/login_email"
+        android:layout_width="232dp"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="Usuario"
+        android:inputType="textEmailAddress" />
+</android.support.design.widget.TextInputLayout>
 
-    </LinearLayout>
+<Button
+    android:id="@+id/iniciar"
+    android:layout_width="104dp"
+    android:layout_height="31dp"
+    android:layout_alignParentBottom="true"
+    android:layout_alignParentLeft="true"
+    android:layout_marginBottom="168dp"
+    android:layout_marginLeft="75dp"
+    android:background="@color/common_google_signin_btn_text_light_focused"
+    android:elevation="55dp"
+    android:text="Iniciar Sesion"
+    android:textAllCaps="false"
+    android:textColor="@color/com_facebook_button_text_color" />
+
+
+<android.support.design.widget.TextInputLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:gravity="center_horizontal"
+    android:layout_centerInParent="true"
+    android:layout_marginTop="50dp">
+
+    <EditText
+        android:id="@+id/login_password"
+        android:layout_width="230dp"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="Contraseña"
+        android:inputType="textPassword"/>
+</android.support.design.widget.TextInputLayout>
 
     <Button
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/logout"
-        style="@style/Widget.AppCompat.Button.Borderless.Colored"
-        android:onClick="logout"/>
+        android:id="@+id/register_button"
+        android:layout_width="104dp"
+        android:layout_height="31dp"
+        android:layout_alignTop="@+id/iniciar"
+        android:layout_toRightOf="@+id/facebookBtn"
+        android:background="@color/common_google_signin_btn_text_light_focused"
+        android:elevation="55dp"
+        android:text="Registrarse"
+        android:textAllCaps="false"
+        android:textColor="@color/com_facebook_button_text_color" />
 
-    <Button
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="revoke"
-        style="@style/Widget.AppCompat.Button.Borderless"
-        android:onClick="revoke"/>
-</LinearLayout>
+
+</RelativeLayout>
