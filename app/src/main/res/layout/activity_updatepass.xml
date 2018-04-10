@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Update_Pass"
+    android:orientation="vertical">
+
+    <ImageView
+        android:id="@+id/logo"
+        android:layout_width="105dp"
+        android:layout_height="86dp"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="25dp"
+        android:background="@drawable/logo" />
+
+    <android.support.design.widget.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="166dp"
+        android:gravity="center_horizontal">
+
+        <EditText
+            android:id="@+id/pass1"
+            android:layout_width="282dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="166dp"
+            android:ems="10"
+            android:hint="Ingrese su nueva Contraseña:"
+            android:inputType="textPersonName" />
+
+    </android.support.design.widget.TextInputLayout>
+
+    <android.support.design.widget.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_marginBottom="212dp"
+        android:gravity="center_horizontal">
+
+        <EditText
+            android:id="@+id/pass2"
+            android:layout_width="282dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="166dp"
+            android:ems="10"
+            android:hint="Repita la contraseña:"
+            android:inputType="textPersonName" />
+
+    </android.support.design.widget.TextInputLayout>
+
+    <Button
+        android:id="@+id/cambiar_pass"
+        android:layout_width="104dp"
+        android:layout_height="31dp"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="131dp"
+        android:background="@color/common_google_signin_btn_text_light_focused"
+        android:elevation="55dp"
+        android:text="Cambiar"
+        android:textAllCaps="false"
+        android:textColor="@color/com_facebook_button_text_color" />
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/atrasM"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginBottom="21dp"
+        android:layout_marginRight="29dp"
+        android:clickable="true"
+        app:backgroundTint="@color/colorPrimary"
+        app:srcCompat="?android:attr/actionModeCloseDrawable" />
+
+</RelativeLayout>

@@ -1,13 +1,16 @@
 package pe.com.app.nose;
 
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
@@ -46,8 +49,12 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
     private CallbackManager mCallbackManager;
     private static final String TAG = "FACELOG";
     private Button mfacebookBtn;
-
-
+    /*Usuario libre*/
+    private Button iniciar;
+    private EditText login_email;
+    private EditText login_password;
+    private ProgressDialog progressDialog;
+    private Button register_button;
     ///Google
     private GoogleApiClient googleApiClient;
     private SignInButton mgoogleBtn;
@@ -59,12 +66,34 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        /*Autenticacion con correo y pass*/
+        iniciar = (Button)findViewById(R.id.iniciar);
+        login_email = (EditText)findViewById(R.id.login_email);
+        login_password=(EditText)findViewById(R.id.login_password);
+        register_button =(Button)findViewById(R.id.register_button);
+        progressDialog = new ProgressDialog(this);
+
+
         progressBar = (ProgressBar) findViewById(R.id.progressBar);
         mAuth = FirebaseAuth.getInstance();
         mCallbackManager = CallbackManager.Factory.create();
         mfacebookBtn = (Button) findViewById(R.id.facebookBtn);
 
+        iniciar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                doLogin();
+            }
+        });
 
+        register_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this,Register.class);
+                startActivity(intent);
+                finish();
+            }
+        });
 
         mfacebookBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -124,10 +153,26 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
 
     }
 
+    private void doLogin() {
+        String login_user = login_email.getText().toString().trim();
+        String login_pass = login_password.getText().toString().trim();
 
-
-
-
+        if (!TextUtils.isEmpty(login_user) && !TextUtils.isEmpty(login_pass)) {
+            progressDialog.setMessage("Ingresando... Find your Fun");
+            progressDialog.show();
+            mAuth.signInWithEmailAndPassword(login_user,login_pass)
+                    .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                        @Override
+                        public void onComplete(@NonNull Task<AuthResult> task) {
+                            progressDialog.dismiss();
+                            if (task.isSuccessful()) {
+                                Toast.makeText(MainActivity.this, "Login siii :)", Toast.LENGTH_SHORT).show();
+                            } else
+                                Toast.makeText(MainActivity.this, "Usuario no registrado", Toast.LENGTH_SHORT).show();
+                        }
+                    });
+        }
+    }
 
 
     @Override
