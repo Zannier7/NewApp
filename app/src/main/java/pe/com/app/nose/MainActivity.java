@@ -3,6 +3,7 @@ package pe.com.app.nose;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
@@ -11,6 +12,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -41,7 +43,6 @@ import com.google.firebase.auth.GoogleAuthProvider;
 import java.util.Arrays;
 
 public class MainActivity extends AppCompatActivity implements GoogleApiClient.OnConnectionFailedListener {
-
     private LoginButton loginButton;
     private FirebaseAuth mAuth;
     private FirebaseAuth.AuthStateListener fireAuthStateListener;
@@ -49,17 +50,17 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
     /*Facebook*/
     private CallbackManager mCallbackManager;
     private static final String TAG = "FACELOG";
-    private Button mfacebookBtn;
+    private ImageView mfacebookBtn;
     /*Usuario libre*/
     private Button iniciar;
     private EditText login_email;
     private EditText login_password;
     private ProgressDialog progressDialog;
-    private Button register_button;
+    private TextView register_button;
     private TextView tvForgotPass;
     ///Google
     private GoogleApiClient googleApiClient;
-    private SignInButton mgoogleBtn;
+    private ImageView mgoogleBtn;
     public static final int SIGN_IN_CODE = 777;
     private FirebaseAuth.AuthStateListener firebaseAuthListener;
 
@@ -67,12 +68,14 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        getSupportActionBar().hide();
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 
         /*Autenticacion con correo y pass*/
         iniciar = (Button)findViewById(R.id.iniciar);
         login_email = (EditText)findViewById(R.id.login_email);
         login_password=(EditText)findViewById(R.id.login_password);
-        register_button =(Button)findViewById(R.id.register_button);
+        register_button =(TextView)findViewById(R.id.register_button);
         progressDialog = new ProgressDialog(this);
         tvForgotPass = (TextView)findViewById(R.id.tvForgotPass);
 
@@ -80,7 +83,7 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
         progressBar = (ProgressBar) findViewById(R.id.progressBar);
         mAuth = FirebaseAuth.getInstance();
         mCallbackManager = CallbackManager.Factory.create();
-        mfacebookBtn = (Button) findViewById(R.id.facebookBtn);
+        mfacebookBtn = (ImageView) findViewById(R.id.facebookBtn);
 
         iniciar.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -139,7 +142,7 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
                 .addApi(Auth.GOOGLE_SIGN_IN_API, gso)
                 .build();
 
-        mgoogleBtn = (SignInButton) findViewById(R.id.googleBtn);
+        mgoogleBtn = (ImageView) findViewById(R.id.googleBtn);
 
         mgoogleBtn.setOnClickListener(new View.OnClickListener() {
             @Override
