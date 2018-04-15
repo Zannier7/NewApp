@@ -233,7 +233,7 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
 
 
     private void goMainScreen() {
-        Intent intent = new Intent(this, MenuActivity.class);
+        Intent intent = new Intent(this, InicioActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(intent);
     }

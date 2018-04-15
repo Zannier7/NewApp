@@ -2,6 +2,7 @@ package pe.com.app.nose;
 
 
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
 import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
@@ -38,6 +39,8 @@ public class MenuActivity extends AppCompatActivity implements GoogleApiClient.O
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_menu);
+        getSupportActionBar().hide();
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 
         uidTextView = (TextView) findViewById(R.id.uidTextView);
         photoImageView = (ImageView) findViewById(R.id.photoImageView);
@@ -108,16 +111,11 @@ public class MenuActivity extends AppCompatActivity implements GoogleApiClient.O
 
 
 
-    private void goLoginScreen(){
-        Intent intent = new Intent(this, MainActivity.class);
-        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
-        startActivity(intent);
-    }
 
     public void logout(View view){
         FirebaseAuth.getInstance().signOut();
         LoginManager.getInstance().logOut();
-        goLoginScreen();
+        goLogInScreen();
     }
 
     @Override
