@@ -21,7 +21,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         design:menu="@menu/menu_navigation" />
-
 </LinearLayout>
 
 
@@ -29,8 +28,7 @@
         android:id="@+id/fragmento_contenedor"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@+id/linearLayout1"
-        android:background="@color/com_facebook_blue" >
+        android:layout_below="@+id/linearLayout1">
     </FrameLayout>
 
 
