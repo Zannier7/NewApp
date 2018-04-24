@@ -24,7 +24,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
 
-public class MenuActivity extends AppCompatActivity implements GoogleApiClient.OnConnectionFailedListener {
+public class MenuActivity extends AppCompatActivity {
 
     private TextView uidTextView;
     private TextView nameTextView;
@@ -47,15 +47,6 @@ public class MenuActivity extends AppCompatActivity implements GoogleApiClient.O
         nameTextView = (TextView) findViewById(R.id.nameTextView);
         emailTextView = (TextView) findViewById(R.id.emailTextView);
         idTextView = (TextView) findViewById(R.id.idTextView);
-
-        GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-                .requestEmail()
-                .build();
-
-        googleApiClient = new GoogleApiClient.Builder(this)
-                .enableAutoManage(this, this)
-                .addApi(Auth.GOOGLE_SIGN_IN_API, gso)
-                .build();
 
         firebaseAuth = FirebaseAuth.getInstance();
         firebaseAuthListener = new FirebaseAuth.AuthStateListener() {
@@ -114,14 +105,9 @@ public class MenuActivity extends AppCompatActivity implements GoogleApiClient.O
 
     public void logout(View view){
         FirebaseAuth.getInstance().signOut();
-        LoginManager.getInstance().logOut();
         goLogInScreen();
     }
 
-    @Override
-    public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
-
-    }
 
     @Override
     protected void onStop(){
