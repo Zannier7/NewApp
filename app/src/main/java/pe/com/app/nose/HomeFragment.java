@@ -35,16 +35,6 @@ import com.google.android.gms.tasks.Task;
 
 public class HomeFragment extends Fragment implements OnMapReadyCallback, LocationListener,GoogleMap.OnInfoWindowClickListener {
 
-
-/*  private TextView uidTextView;
-  private TextView nameTextView;
-  private TextView emailTextView;
-  private ImageView photoImageView;
-  private TextView idTextView;
-  private GoogleApiClient googleApiClient;
-  private FirebaseAuth firebaseAuth;
-  private  FirebaseAuth.AuthStateListener firebaseAuthListener;*/
-
     private Boolean mLocationPermissionsGranted = false;
     private GoogleMap mMap;
     private MapView mapView;
