@@ -1,73 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".HomeFragment">
 
 
-    <RelativeLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
-
-        <ImageView
-            android:id="@+id/photoImageView"
-            android:layout_width="104dp"
-            android:layout_height="112dp"
-            android:layout_alignParentTop="true"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="78dp"
-            android:background="@color/colorAccent" />
-
-        <TextView
-            android:id="@+id/nameTextView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentTop="true"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="215dp"
-            android:text="nombre/apellidos"
-            android:textSize="24sp" />
-
-        <TextView
-            android:id="@+id/emailTextView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentTop="true"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="269dp"
-            android:text="email"
-            android:textSize="16sp" />
-
-        <TextView
-            android:id="@+id/idTextView"
-            android:layout_width="77dp"
-            android:layout_height="wrap_content"
-            android:layout_alignBottom="@+id/photoImageView"
-            android:layout_alignParentEnd="true"
-            android:layout_marginEnd="32dp"
-            android:text="UID"
-            android:textSize="14sp" />
-
-        <TextView
-            android:id="@+id/uidTextView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignBottom="@+id/nameTextView"
-            android:layout_marginEnd="-53dp"
-            android:layout_toStartOf="@+id/emailTextView"
-            android:text="UID"
-            android:textSize="14sp" />
-
-
-        <Button
-            style="@style/Widget.AppCompat.Button.Borderless.Colored"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:layout_alignParentStart="true"
-            android:onClick="logout"
-            android:text="@string/logout" />
-    </RelativeLayout>
 </FrameLayout>
