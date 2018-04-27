@@ -1,12 +1,17 @@
 package pe.com.app.nose;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.location.Address;
 import android.location.Criteria;
+import android.location.Geocoder;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
-import android.support.annotation.NonNull;
+import android.media.audiofx.Equalizer;
+import android.os.PersistableBundle;
+import android.provider.Settings;
 import android.support.v4.app.ActivityCompat;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -17,7 +22,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
-import com.google.android.gms.location.LocationServices;
+import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapView;
@@ -26,16 +31,19 @@ import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.maps.UiSettings;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
+
+import java.io.IOException;
+import java.util.List;
+import java.util.Locale;
 
 
-public class HomeFragment extends Fragment implements OnMapReadyCallback, LocationListener,GoogleMap.OnInfoWindowClickListener {
+public class HomeFragment extends Fragment implements OnMapReadyCallback {
 
-    private Boolean mLocationPermissionsGranted = false;
+    /*private Boolean mLocationPermissionsGranted = false;
     private GoogleMap mMap;
     private MapView mapView;
     private FusedLocationProviderClient mFusedLocationProviderClient;
@@ -43,12 +51,18 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback, Locati
     private LocationManager locationManager;
     private String provider;
 
-    private final int FINE_LOCATION_PERMISSION = 9999;
+    private final int FINE_LOCATION_PERMISSION = 9999;*/
 
-    @Override
+    private GoogleMap mMap;
+    private Marker marcador;
+    double lat = 0.0;
+    double lng = 0.0;
+    String mensaje1;
+
+   /* @Override
     public void onResume() {
         super.onResume();
-        if (ActivityCompat.checkSelfPermission(getContext(), android.Manifest.permission.ACCESS_FINE_LOCATION)
+        /*if (ActivityCompat.checkSelfPermission(getContext(), android.Manifest.permission.ACCESS_FINE_LOCATION)
                 != PackageManager.PERMISSION_GRANTED &&
                 ActivityCompat.checkSelfPermission(getContext(), android.Manifest.permission.ACCESS_COARSE_LOCATION)
                         != PackageManager.PERMISSION_GRANTED) {
@@ -62,29 +76,153 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback, Locati
     @Override
     public void onPause() {
         super.onPause();
-        locationManager.removeUpdates(this);
-    }
+        /*locationManager.removeUpdates(this);
+    }*/
 
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         final View view = inflater.inflate(R.layout.fragment_home, container, false);
 
-      /*uidTextView = (TextView) view.findViewById(R.id.uidTextView);
-      photoImageView = (ImageView) view.findViewById(R.id.photoImageView);
-      nameTextView = (TextView) view.findViewById(R.id.nameTextView);
-      emailTextView = (TextView) view.findViewById(R.id.emailTextView);
-      idTextView = (TextView) view.findViewById(R.id.idTextView);*/
+        /*getLocation2();*/
 
         SupportMapFragment mapFragment = (SupportMapFragment) this.getChildFragmentManager()
                 .findFragmentById(R.id.map);
+
         mapFragment.getMapAsync(this);
 
-        getLocation2();
 
         return view;
     }
 
-    public void getLocation2(){
+    @Override
+    public void onMapReady(GoogleMap googleMap) {
+        /*MapsInitializer.initialize(getContext());
+        mMap = googleMap;
+        mMap.setMinZoomPreference(14.0f);
+        ;
+        googleMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);*/
+        mMap = googleMap;
+        if (ActivityCompat.checkSelfPermission(getContext(), android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(getContext(), android.Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+
+            return;
+        }
+        mMap.setMyLocationEnabled(true);
+
+        UiSettings uiSettings = googleMap.getUiSettings();
+
+        uiSettings.setAllGesturesEnabled(true);
+        uiSettings.setCompassEnabled(true);
+        uiSettings.setRotateGesturesEnabled(true);
+        uiSettings.setScrollGesturesEnabled(true);
+        uiSettings.setTiltGesturesEnabled(true);
+        uiSettings.setZoomControlsEnabled(true);
+        uiSettings.setZoomGesturesEnabled(true);
+
+        miUbicacion();
+
+
+    }
+
+    public void locationStart(){
+        LocationManager mlocManager = (LocationManager) getActivity().getSystemService(Context.LOCATION_SERVICE);
+        final boolean gpsEnabled = mlocManager.isProviderEnabled(LocationManager.GPS_PROVIDER);
+        if (!gpsEnabled){
+            Intent settingsIntent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
+            startActivity(settingsIntent);
+        }
+    }
+
+   /*public void setLocation(Location loc){
+        //Obtener dirección mediante la lat y long
+        if (loc.getLatitude()!= 0.0  && loc.getLongitude()!=0.0){
+            try {
+                Geocoder geocoder = new Geocoder(getContext(), Locale.getDefault());
+                List<Address> list = geocoder.getFromLocation(
+                        loc.getLatitude(), loc.getLongitude(), 1);
+                if (!list.isEmpty()) {
+                    Address DirCalle = list.get(0);
+                    direccion = (DirCalle.getAddressLine(0));
+                }
+
+            } catch (IOException e) {
+                e.printStackTrace();
+                Log.d("error","Tu error pendejo"+e.getMessage());
+            }
+        }
+    }*/
+
+    private void AgregarMarcador(double lat, double lng) {
+        LatLng coordenadas = new LatLng(lat, lng);
+        CameraUpdate MiUbicacion = CameraUpdateFactory.newLatLngZoom(coordenadas, 18);
+        if (marcador != null) marcador.remove();
+        marcador = mMap.addMarker(new MarkerOptions()
+                .position(coordenadas)
+                .title("Mi Ubicación"));
+
+        mMap.animateCamera(MiUbicacion);
+    }
+
+    private void ActualizarUbicacion(Location location) {
+        if (location != null) {
+            lat = location.getLatitude();
+            lng = location.getLongitude();
+            AgregarMarcador(lat, lng);
+
+        }
+    }
+
+    LocationListener locListener = new LocationListener() {
+
+        @Override
+        public void onLocationChanged(Location location) {
+
+            ActualizarUbicacion(location);
+            /*setLocation(location);*/
+        }
+
+        @Override
+        public void onStatusChanged(String s, int i, Bundle bundle) {
+
+        }
+
+        @Override
+        public void onProviderEnabled(String s) {
+            mensaje1 = ("GPS Activado");
+            Mensaje();
+        }
+
+        @Override
+        public void onProviderDisabled(String s) {
+            mensaje1 = ("GPS Desactivado");
+            locationStart();
+            Mensaje();
+        }
+    };
+
+    private static int PETICION_PERMISO_LOCALIZACION = 101;
+
+    private void miUbicacion() {
+        if (ActivityCompat.checkSelfPermission(getContext(), android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(getContext(), android.Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(getActivity(),
+                    new String[]{android.Manifest.permission.ACCESS_FINE_LOCATION},
+                    PETICION_PERMISO_LOCALIZACION);
+            return;
+        } else {
+            LocationManager locationManager = (LocationManager) getActivity().getSystemService(Context.LOCATION_SERVICE);
+            Location location = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
+            ActualizarUbicacion(location);
+            locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER,1200,0,locListener);
+        }
+
+    }
+
+    public void Mensaje() {
+        Toast toast = Toast.makeText(getActivity(), mensaje1, Toast.LENGTH_LONG);
+        //toast.setGravity(Gravity.CENTER_VERTICAL, 0, 0);
+        toast.show();
+    }
+
+   /* public void getLocation2(){
 
         locationManager = (LocationManager) getActivity().getSystemService(Context.LOCATION_SERVICE);
         Criteria criteria = new Criteria();
@@ -121,58 +259,9 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback, Locati
             mapView.getMapAsync(this);
         }
     }
+*/
 
-    @Override
-    public void onMapReady(GoogleMap googleMap) {
-        MapsInitializer.initialize(getContext());
-        mMap = googleMap;
-        mMap.setMinZoomPreference(14.0f);
-
-        // Add a marker in Sydney and move the camera
-        googleMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
-
-        /*if (mLocationPermissionsGranted){
-            getLocation();
-            if (ActivityCompat.checkSelfPermission(getContext(),
-                    android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED
-                    && ActivityCompat.checkSelfPermission(getContext(),
-                    android.Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-
-                return;
-            }
-            mMap.setMyLocationEnabled(true);
-        }*/
-        UiSettings uiSettings = googleMap.getUiSettings();
-        uiSettings.setCompassEnabled(true);
-        uiSettings.setZoomControlsEnabled(true);
-        uiSettings.setMyLocationButtonEnabled(true);
-
-
-    }
-
-    private void getLocation(){
-        mFusedLocationProviderClient = LocationServices.getFusedLocationProviderClient( getContext());
-        try{
-            Task<Location> location = mFusedLocationProviderClient.getLastLocation();
-            location.addOnCompleteListener(new OnCompleteListener<Location>() {
-                @Override
-                public void onComplete(@NonNull com.google.android.gms.tasks.Task<Location> task) {
-                    if(task.isSuccessful()){
-                        Location currentLocation =(Location) task.getResult();
-                        moveCamera(new LatLng(currentLocation.getLatitude(),currentLocation.getLongitude()),
-                                DEFAULT_ZOOM);
-                    }
-                }
-            });
-        }catch (SecurityException e){
-            Log.d("Hey Calma:","tu error u.u"+e.getMessage());
-        }
-    }
-
-    private void  moveCamera(LatLng latLng,float zoom){
-            mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng,zoom));
-    }
-
+/*
     @Override
     public void onLocationChanged(Location location) {
         Double lat,lng;
@@ -208,5 +297,7 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback, Locati
     @Override
     public void onInfoWindowClick(Marker marker) {
         Toast.makeText(getActivity(),"Marker "+marker.getTitle()+" is clicked",Toast.LENGTH_SHORT).show();
-    }
+    }*/
+
+
 }
