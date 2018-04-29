@@ -20,6 +20,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.Toast;
 
 import com.google.android.gms.maps.CameraUpdate;
@@ -52,7 +53,7 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback {
     private String provider;
 
     private final int FINE_LOCATION_PERMISSION = 9999;*/
-
+    private Button infoevento;
     private GoogleMap mMap;
     private Marker marcador;
     double lat = 0.0;
@@ -84,6 +85,18 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback {
         final View view = inflater.inflate(R.layout.fragment_home, container, false);
 
         /*getLocation2();*/
+        infoevento = (Button)view.findViewById(R.id.infoevento);
+
+        infoevento.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), PopupDescripcion.class);
+                startActivity(intent);
+
+            }
+        });
+
+
 
         SupportMapFragment mapFragment = (SupportMapFragment) this.getChildFragmentManager()
                 .findFragmentById(R.id.map);

@@ -31,19 +31,21 @@
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="546dp">
 
             <LinearLayout
                 android:id="@+id/linearLayout1"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="125dp"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentTop="true"
                 android:background="@color/colorPrimary"
                 android:gravity="center_horizontal"
                 android:orientation="vertical">
 
                 <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="70dp"
+                    android:layout_height="73dp"
                     android:layout_marginBottom="40dp"
 
                     android:layout_marginTop="40dp"
@@ -90,8 +92,8 @@
                     android:layout_alignParentTop="true"
                     android:layout_toRightOf="@+id/imageView_userIcon"
                     android:background="@color/editTextBG"
-                    android:inputType="textEmailAddress"
                     android:hint="Correo electronico"
+                    android:inputType="textEmailAddress"
                     android:paddingLeft="20dp"
                     android:textSize="15sp" />
 
@@ -206,18 +208,18 @@
                     android:id="@+id/facebookBtn"
                     android:layout_width="50dp"
                     android:layout_height="50dp"
+                    android:layout_marginRight="15dp"
                     android:background="@color/facebookBlue"
                     android:padding="10dp"
-                    android:layout_marginRight="15dp"
                     android:src="@drawable/img_facebook" />
 
 
                 <ImageView
                     android:id="@+id/googleBtn"
-                    android:layout_marginLeft="15dp"
-
                     android:layout_width="50dp"
+
                     android:layout_height="50dp"
+                    android:layout_marginLeft="15dp"
                     android:background="@color/googleRed"
                     android:padding="10dp"
                     android:src="@drawable/img_googleplus" />

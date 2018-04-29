@@ -64,6 +64,14 @@
         <activity android:name=".Update_Pass" />
         <activity android:name=".InicioActivity" />
 
+        <activity android:name=".PopupDescripcion"
+            android:theme="@style/AppTheme.CustomTheme"
+
+            ></activity>
+
+
+
+
     </application>
 
 </manifest>

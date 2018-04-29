@@ -47,6 +47,19 @@
             android:layout_marginStart="21dp"
             android:src="@mipmap/directions" />
 
+        <Button
+            android:id="@+id/infoevento"
+            android:layout_width="155dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_alignTop="@+id/imageView3"
+            android:background="@color/colorPrimary"
+            android:fontFamily="sans-serif-medium"
+            android:text="Info Evento"
+            android:textColor="@color/white" />
+
 
     </RelativeLayout>
+
+
 </FrameLayout>
