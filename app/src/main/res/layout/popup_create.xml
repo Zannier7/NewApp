@@ -16,7 +16,7 @@
         android:orientation="vertical" >
 
         <android.support.design.widget.FloatingActionButton
-            android:id="@+id/create"
+            android:id="@+id/invitar"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
@@ -113,6 +113,7 @@
            android:layout_marginTop="10dp">
 
         <android.support.v7.widget.SwitchCompat
+                android:id="@+id/tipo"
                android:layout_width="match_parent"
                android:layout_height="wrap_content"
                android:text="Público"
@@ -131,7 +132,7 @@
         android:orientation="horizontal"
         android:layout_marginTop="10dp">
         <Switch
-            android:id="@+id/switch2"
+            android:id="@+id/lugar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
@@ -147,6 +148,7 @@
     </LinearLayout>
 
     <Button
+        android:id="@+id/createEvent"
         android:layout_width = "wrap_content"
         android:layout_height = "wrap_content"
         android:text="Crear Evento"
