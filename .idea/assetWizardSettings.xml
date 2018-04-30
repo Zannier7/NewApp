@@ -23,8 +23,8 @@
                                           <PersistentState>
                                             <option name="values">
                                               <map>
-                                                <entry key="color" value="cd0b00" />
-                                                <entry key="scalingPercent" value="81" />
+                                                <entry key="color" value="ffffff" />
+                                                <entry key="scalingPercent" value="96" />
                                                 <entry key="trimmed" value="true" />
                                               </map>
                                             </option>
@@ -36,7 +36,7 @@
                                           <PersistentState>
                                             <option name="values">
                                               <map>
-                                                <entry key="url" value="jar:file:/C:/Program%20Files/Android/Android%20Studio/plugins/android/lib/android.jar!/images/material_design_icons/maps/ic_person_pin_circle_black_24dp.xml" />
+                                                <entry key="url" value="jar:file:/C:/Program%20Files/Android/Android%20Studio/plugins/android/lib/android.jar!/images/material_design_icons/maps/ic_directions_black_24dp.xml" />
                                               </map>
                                             </option>
                                           </PersistentState>
@@ -59,13 +59,14 @@
                                   <option name="values">
                                     <map>
                                       <entry key="backgroundAssetType" value="COLOR" />
-                                      <entry key="backgroundColor" value="ff1744" />
-                                      <entry key="backgroundLayerName" value="ic_launcher_background" />
+                                      <entry key="backgroundColor" value="69f0ae" />
+                                      <entry key="backgroundLayerName" value="directions3" />
+                                      <entry key="foregroundAssetType" value="CLIP_ART" />
                                       <entry key="foregroundImage" value="C:\Users\Def-CON\Desktop\splash2.png" />
-                                      <entry key="foregroundLayerName" value="logos" />
-                                      <entry key="outputName" value="logo" />
-                                      <entry key="previewDensity" value="XXHIGH" />
-                                      <entry key="showSafeZone" value="false" />
+                                      <entry key="foregroundLayerName" value="direction2" />
+                                      <entry key="legacyIconShape" value="CIRCLE" />
+                                      <entry key="outputName" value="direction" />
+                                      <entry key="webIconShape" value="CIRCLE" />
                                     </map>
                                   </option>
                                 </PersistentState>
@@ -96,7 +97,7 @@
                                 <PersistentState>
                                   <option name="values">
                                     <map>
-                                      <entry key="url" value="jar:file:/C:/Program%20Files/Android/Android%20Studio/plugins/android/lib/android.jar!/images/material_design_icons/maps/ic_person_pin_circle_black_24dp.xml" />
+                                      <entry key="url" value="jar:file:/C:/Program%20Files/Android/Android%20Studio/plugins/android/lib/android.jar!/images/material_design_icons/social/ic_person_add_black_24dp.xml" />
                                     </map>
                                   </option>
                                 </PersistentState>
@@ -106,12 +107,10 @@
                         </option>
                         <option name="values">
                           <map>
-                            <entry key="color" value="cd0b00" />
-                            <entry key="height" value="30" />
-                            <entry key="outputName" value="here" />
+                            <entry key="color" value="ffffff" />
+                            <entry key="outputName" value="add" />
                             <entry key="overrideSize" value="true" />
                             <entry key="sourceFile" value="C:\Users\hans-" />
-                            <entry key="width" value="25" />
                           </map>
                         </option>
                       </PersistentState>

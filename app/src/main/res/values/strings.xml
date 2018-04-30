@@ -2,11 +2,7 @@
     <string name="app_name">EventApp</string>
     <string name="facebook_app_id">1836020866443087</string>
     <string name="fb_login_protocol_scheme">fb1836020866443087</string>
-    <string name="cancel_login">Se canceló la operación</string>
-    <string name="error_login">Ocurrió un error al ingresar</string>
     <string name="logout">Cerrar sesión</string>
-    <string name="firebase_error_login">Error al iniciar sesión en Firebase </string>
-    <string name="title_activity_inicio_pag">Map</string>
     <string name="inicio">Inicio</string>
     <string name="perfil">Perfil</string>
     <string name="notificaciones">Notificaciones</string>
@@ -14,13 +10,14 @@
     <string name="eventos">Eventos</string>
 
     <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="title_activity_maps">Map</string>
 
     <string-array name="tipoEventos">
+        <item>Seleccione tipo de evento</item>
         <item>Teatro</item>
+        <item>Cine</item>
+        <item>Arte</item>
         <item>Ambiente</item>
         <item>Concierto</item>
-        <item>Tono Loco</item>
+        <item>Tecnología</item>
     </string-array>
 </resources>

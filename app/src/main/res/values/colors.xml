@@ -1,13 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#e74c3c</color>
+    <color name="colorPrimary">#ff1744</color>
     <color name="colorPrimaryDark">#f6fa2612</color>
     <color name="colorAccent">#1a5276</color>
-    <color name="singIn">#58d68d</color>
-    <color name="text">#ffffff</color>
+    <color name="colorAdd">#3d5afe</color>
 
     <color name="facebookBlue">#3F5996</color>
-    <color name="twitterBlue">#29C5F6</color>
     <color name="googleRed">#D03E2F</color>
 
 

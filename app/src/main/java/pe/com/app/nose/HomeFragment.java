@@ -12,6 +12,7 @@ import android.location.LocationManager;
 import android.media.audiofx.Equalizer;
 import android.os.PersistableBundle;
 import android.provider.Settings;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.ActivityCompat;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -53,7 +54,8 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback {
     private String provider;
 
     private final int FINE_LOCATION_PERMISSION = 9999;*/
-    private Button infoevento;
+
+    private FloatingActionButton create;
     private GoogleMap mMap;
     private Marker marcador;
     double lat = 0.0;
@@ -85,16 +87,16 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback {
         final View view = inflater.inflate(R.layout.fragment_home, container, false);
 
         /*getLocation2();*/
-        infoevento = (Button)view.findViewById(R.id.infoevento);
-
-        infoevento.setOnClickListener(new View.OnClickListener() {
+        create = (FloatingActionButton)view.findViewById(R.id.create);
+        create.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getActivity(), PopupDescripcion.class);
+                Intent intent = new Intent(getActivity(),Popup_create.class);
                 startActivity(intent);
-
             }
         });
+
+
 
 
 
@@ -128,7 +130,6 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback {
         uiSettings.setRotateGesturesEnabled(true);
         uiSettings.setScrollGesturesEnabled(true);
         uiSettings.setTiltGesturesEnabled(true);
-        uiSettings.setZoomControlsEnabled(true);
         uiSettings.setZoomGesturesEnabled(true);
 
         miUbicacion();

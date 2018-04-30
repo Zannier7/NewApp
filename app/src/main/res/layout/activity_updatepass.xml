@@ -8,7 +8,6 @@
     android:orientation="vertical">
 
     <ImageView
-        android:id="@+id/logo"
         android:layout_width="105dp"
         android:layout_height="86dp"
         android:layout_alignParentTop="true"
@@ -65,7 +64,7 @@
         android:layout_height="31dp"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="143dp"
+        android:layout_marginBottom="214dp"
         android:background="@color/common_google_signin_btn_text_light_focused"
         android:elevation="55dp"
         android:text="Cambiar"
@@ -82,6 +81,6 @@
         android:layout_marginRight="29dp"
         android:clickable="true"
         app:backgroundTint="@color/colorPrimary"
-        app:srcCompat="?android:attr/actionModeCloseDrawable" />
+        android:src="@drawable/back" />
 
 </RelativeLayout>

@@ -11,7 +11,7 @@
         android:layout_width="40dp"
         android:layout_height="40dp"
         android:layout_gravity="end"
-        android:background="@drawable/circle"
+        android:backgroundTint="@color/colorPrimary"
         android:text="X"
         android:textAlignment="center"
         android:textColor="#ffffff"
@@ -120,7 +120,7 @@ android:layout_height = "wrap_content"
 android:text = "Sígueme"
 android:layout_marginTop = "25dp"
 android:layout_gravity = "center_horizontal"
-android:background = "@drawable/circle"
+android:backgroundTint="@color/colorPrimary"
 android:textColor="@color/white" />
 
 </LinearLayout>

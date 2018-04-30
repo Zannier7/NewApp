@@ -2,15 +2,18 @@ package pe.com.app.nose;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.util.DisplayMetrics;
 
-import static pe.com.app.nose.R.*;
+
+
 
 public class PopupDescripcion extends Activity{
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(layout.popup_descripcion);
+
+        setContentView(R.layout.popup_descripcion);
 
         DisplayMetrics dm = new DisplayMetrics();
         getWindowManager().getDefaultDisplay().getMetrics(dm);

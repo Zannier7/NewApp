@@ -22,41 +22,70 @@
            android:name="com.google.android.gms.maps.SupportMapFragment" />
 
        <Spinner
-           android:id="@+id/Tipos"
            android:layout_width="250dp"
            android:layout_height="wrap_content"
            android:layout_alignParentTop="true"
            android:layout_centerHorizontal="true"
            android:layout_marginTop="12dp"
-           android:entries="@array/tipoEventos" />
+           android:entries="@array/tipoEventos"
+           android:background="@color/white"/>
    </RelativeLayout>
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <ImageView
-            android:id="@+id/imageView3"
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/atrasE"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/textView"
+            android:layout_alignParentLeft="true"
+            android:layout_marginLeft="40dp"
+            android:clickable="true"
+            android:src="@drawable/ic_directions_black_24dp"
+            app:backgroundTint="#69F0AE" />
+
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/create"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentRight="true"
+            android:layout_marginBottom="51dp"
+            android:layout_marginRight="14dp"
+            android:clickable="true"
+            android:src="@drawable/create"
+            app:backgroundTint="#ff1744" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/textView4"
+            android:layout_alignTop="@+id/atrasE"
+            android:text="Destino"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/textView4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignRight="@+id/create"
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="15dp"
+            android:text="Las Condes - Av. La Paz" />
+
+        <TextView
+            android:id="@+id/textView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
             android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
-            android:layout_marginBottom="13dp"
-            android:layout_marginLeft="21dp"
-            android:layout_marginStart="21dp"
-            android:src="@mipmap/directions" />
+            android:layout_marginLeft="28dp"
+            android:text="Indicaciones"
+            android:textStyle="bold" />
 
-        <Button
-            android:id="@+id/infoevento"
-            android:layout_width="155dp"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:layout_alignTop="@+id/imageView3"
-            android:background="@color/colorPrimary"
-            android:fontFamily="sans-serif-medium"
-            android:text="Info Evento"
-            android:textColor="@color/white" />
 
 
     </RelativeLayout>
