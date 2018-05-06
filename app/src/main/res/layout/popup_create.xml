@@ -15,18 +15,7 @@
         android:layout_height="wrap_content"
         android:orientation="vertical" >
 
-        <android.support.design.widget.FloatingActionButton
-            android:id="@+id/invitar"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:layout_alignParentRight="true"
-            android:layout_marginLeft="260dp"
-            android:layout_marginRight="14dp"
-            android:padding="85dp"
-            android:clickable="true"
-            android:src="@drawable/add"
-            android:backgroundTint="@color/colorAdd"/>
+
 
         <android.support.design.widget.TextInputLayout
             android:layout_width="match_parent"
@@ -48,6 +37,7 @@
 
         </android.support.design.widget.TextInputLayout>
 
+
         <android.support.design.widget.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -67,7 +57,21 @@
                 android:inputType="textMultiLine"
                 />
 
+
         </android.support.design.widget.TextInputLayout>
+
+
+        <Spinner
+            android:layout_gravity="center_horizontal"
+            android:id="@+id/categoria"
+            android:prompt="@string/categ_selec"
+            android:layout_width="282dp"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="5dp"
+            android:layout_weight="1"/>
 
     </LinearLayout >
 
