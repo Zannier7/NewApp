@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    xmlns:design="http://schemas.android.com/apk/res-auto"
-    tools:context=".InicioActivity"
-    android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+xmlns:tools="http://schemas.android.com/tools"
+android:layout_width="match_parent"
+android:layout_height="match_parent"
+xmlns:design="http://schemas.android.com/apk/res-auto"
+tools:context=".InicioActivity"
+android:theme="@style/Theme.AppCompat.Light.NoActionBar">
 
 
 
@@ -24,12 +24,12 @@
 </LinearLayout>
 
 
-    <FrameLayout
-        android:id="@+id/fragmento_contenedor"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_below="@+id/linearLayout1">
-    </FrameLayout>
+<FrameLayout
+    android:id="@+id/fragmento_contenedor"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_below="@+id/linearLayout1">
+</FrameLayout>
 
 
 

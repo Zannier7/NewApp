@@ -56,9 +56,14 @@
         <activity android:name=".InicioActivity" />
         <activity
             android:name=".PopupDescripcion"
-            android:theme="@style/AppTheme.CustomTheme" />
+            android:theme="@style/AppTheme.CustomTheme" ></activity>
         <activity android:name=".Popup_create"
             android:theme="@style/AppTheme.CustomTheme"></activity>
+
+        <activity android:name=".PopupPerfil"
+            android:theme="@style/AppTheme.CustomTheme"></activity>
+
+
     </application>
 
 </manifest>

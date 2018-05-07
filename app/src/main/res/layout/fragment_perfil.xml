@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".PerfilFragment">
 
     <!-- TODO: Update blank fragment layout -->
@@ -28,8 +29,8 @@
                 android:layout_height="100dp"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="45dp"
-                android:src="@drawable/pro_profile"
-                android:background="#fff" />
+                android:background="#fff"
+                android:src="@drawable/pro_profile" />
 
             <TextView
                 android:id="@+id/nameTextView"
@@ -88,6 +89,7 @@
                     android:src="@drawable/pro_phone" />
 
                 <TextView
+                    android:id="@+id/phoneTextView"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
@@ -131,11 +133,12 @@
                     android:src="@drawable/pro_info" />
 
                 <TextView
+                    android:id="@+id/pro_descripcion"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
                     android:paddingLeft="20dp"
-                    android:text="Me gusta las pizzas"
+
                     android:textStyle="bold" />
             </LinearLayout>
         </LinearLayout>
@@ -154,5 +157,23 @@
 
     </LinearLayout>
 
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/pro_profile_edit"
+            android:layout_width="58dp"
+            android:layout_height="56dp"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginRight="27dp"
+            android:layout_marginTop="192dp"
+            android:clickable="true"
+            android:src="@drawable/create"
+            app:backgroundTint="#7FFF00" />
+
+
+    </RelativeLayout>
 
 </FrameLayout>

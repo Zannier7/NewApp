@@ -71,8 +71,8 @@
             android:id="@+id/textView4"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignRight="@+id/create"
             android:layout_alignParentBottom="true"
+            android:layout_alignRight="@+id/create"
             android:layout_marginBottom="15dp"
             android:text="Las Condes - Av. La Paz" />
 
@@ -85,7 +85,6 @@
             android:layout_marginLeft="28dp"
             android:text="Indicaciones"
             android:textStyle="bold" />
-
 
 
     </RelativeLayout>

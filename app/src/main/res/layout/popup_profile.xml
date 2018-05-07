@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#000"
+    android:padding ="5dp"
+    android:layout_gravity="center" >
+    <TextView
+
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_gravity="end"
+        android:backgroundTint="@color/colorPrimary"
+        android:text="X"
+        android:textAlignment="center"
+        android:textColor="#ffffff"
+        android:textStyle="bold" />
+
+    <LinearLayout
+        android:layout_width = "match_parent"
+        android:layout_height = "wrap_content"
+        android:orientation = "vertical" >
+
+        <TextView
+            android:layout_width = "wrap_content"
+            android:layout_height = "wrap_content"
+            android:text = "Elina Grofild"
+            android:textStyle = "bold"
+            android:textColor = "@color/white"
+            android:layout_gravity = "center_horizontal"
+            android:layout_marginTop = "5dp" />
+        <TextView
+            android:layout_width = "wrap_content"
+            android:layout_height = "wrap_content"
+            android:text = "hans19982601@gmail.com"
+            android:textColor = "@color/white"
+            android:layout_gravity = "center_horizontal"
+            android:layout_marginTop = "5dp" />
+        <TextView
+            android:layout_width = "wrap_content"
+            android:layout_height = "wrap_content"
+            android:text = "26/01/2018"
+            android:textColor = "@color/white"
+            android:layout_gravity = "center_horizontal"
+            android:layout_marginTop = "5dp" />
+    </LinearLayout >
+
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <RelativeLayout
+                android:id="@+id/relativeLayoutcorreo"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="30dp"
+                android:layout_marginRight="30dp"
+                android:layout_marginTop="30dp">
+
+                <ImageView
+                    android:id="@+id/imageView_userIcon"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:background="@color/colorPrimary"
+                    android:padding="8dp"
+                    android:src="@drawable/pro_profile"
+                    android:tint="@color/white"
+                    />
+
+                <EditText
+                    android:id="@+id/nombrepro"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBottom="@+id/imageView_userIcon"
+                    android:layout_alignParentTop="true"
+                    android:layout_toRightOf="@+id/imageView_userIcon"
+                    android:background="@color/editTextBG"
+                    android:inputType="phone"
+                    android:hint="Número de contacto"
+                    android:paddingLeft="20dp"
+                    android:textSize="15sp" />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/relativecontra"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_below="@+id/relativeLayoutcorreo"
+                android:layout_marginLeft="30dp"
+                android:layout_marginRight="30dp"
+                android:layout_marginTop="15dp">
+
+                <ImageView
+                    android:id="@+id/imageView_passwordIcon"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:background="@color/colorPrimary"
+                    android:padding="8dp"
+                    android:src="@drawable/pro_profile"
+                    android:tint="@color/white" />
+
+                <EditText
+                    android:id="@+id/categoriapro"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:layout_alignBottom="@+id/imageView_passwordIcon"
+                    android:layout_alignParentTop="true"
+                    android:layout_toRightOf="@+id/imageView_passwordIcon"
+                    android:background="@color/editTextBG"
+                    android:hint="Sobre mi"
+                    android:inputType="textMultiLine"
+                    android:paddingLeft="20dp"
+                    android:textSize="15sp" />
+
+            </RelativeLayout>
+
+
+        </RelativeLayout>
+
+
+
+
+    <Button
+
+        android:layout_width = "wrap_content"
+        android:layout_height = "wrap_content"
+        android:text = "Guardar"
+        android:layout_marginTop = "25dp"
+        android:layout_gravity = "center_horizontal"
+        android:backgroundTint="@color/colorPrimary"
+        android:textColor="@color/white" />
+
+</LinearLayout>
