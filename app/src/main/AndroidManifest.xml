@@ -63,6 +63,9 @@
         <activity android:name=".PopupPerfil"
             android:theme="@style/AppTheme.CustomTheme"></activity>
 
+        <activity android:name=".ReadUbication"
+            android:theme="@style/AppTheme.CustomTheme"></activity>
+
 
     </application>
 

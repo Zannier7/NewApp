@@ -36,6 +36,8 @@ import android.widget.Switch;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
+import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
@@ -55,7 +57,8 @@ import java.util.List;
 import java.util.Locale;
 import java.util.UUID;
 
-public class Popup_create extends Activity  {
+public class Popup_create extends Activity  implements GoogleApiClient.OnConnectionFailedListener,
+        View.OnClickListener {
 
     private EditText date;
     private EditText time;
@@ -110,6 +113,7 @@ public class Popup_create extends Activity  {
         createEvent = (Button)findViewById(R.id.createEvent);
         categoria = (Spinner)findViewById(R.id.categoria);
         selectPlace = (Switch)findViewById(R.id.selectlugar);
+        googleInvite = (FloatingActionButton) findViewById(R.id.googleInvite);
 
 
         DisplayMetrics dm = new DisplayMetrics();
@@ -366,4 +370,18 @@ public class Popup_create extends Activity  {
     }
 
 
+    @Override
+    public void onClick(View v) {
+
+    }
+
+    @Override
+    public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
+
+    }
+
+    @Override
+    public void onPointerCaptureChanged(boolean hasCapture) {
+
+    }
 }

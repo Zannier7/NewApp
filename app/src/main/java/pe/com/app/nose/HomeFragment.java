@@ -118,7 +118,7 @@ public class   HomeFragment extends Fragment implements OnMapReadyCallback {
 
     private void AgregarMarcador(double lat, double lng) {
         LatLng coordenadas = new LatLng(lat, lng);
-        CameraUpdate MiUbicacion = CameraUpdateFactory.newLatLngZoom(coordenadas, 18);
+        CameraUpdate MiUbicacion = CameraUpdateFactory.newLatLngZoom(coordenadas, 10);
         if (marcador != null) marcador.remove();
         marcador = mMap.addMarker(new MarkerOptions()
                 .position(coordenadas)

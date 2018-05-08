@@ -29,9 +29,9 @@
             android:id="@+id/addFriends"
             android:layout_width="100dp"
             android:layout_height="50dp"
-            android:layout_marginLeft="200dp"
+            android:layout_marginLeft="150dp"
             android:clickable="true"
-            android:background="@color/white"
+            android:backgroundTint="@color/white"
             android:src="@drawable/ic_fb"/>
 
         <android.support.design.widget.FloatingActionButton
@@ -40,7 +40,7 @@
             android:layout_height="50dp"
             android:layout_marginLeft="5dp"
             android:clickable="true"
-            android:background="@color/white"
+            android:backgroundTint="@color/white"
             android:src="@drawable/gicon"/>
     </LinearLayout>
 
