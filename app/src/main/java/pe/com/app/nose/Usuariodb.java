@@ -6,15 +6,21 @@ public class Usuariodb {
     private String correo;
     private String fecha_nacimiento;
     private String nombres;
+    private String uid;
+    private String descripcion;
+    private int numero;
 
     public Usuariodb() {
     }
 
-    public Usuariodb(String apellidos, String correo, String fecha_nacimiento, String nombres) {
+    public Usuariodb(String apellidos, String correo, String fecha_nacimiento, String nombres, String uid, String descripcion, int numero) {
         this.apellidos = apellidos;
         this.correo = correo;
         this.fecha_nacimiento = fecha_nacimiento;
         this.nombres = nombres;
+        this.uid = uid;
+        this.descripcion = descripcion;
+        this.numero = numero;
     }
 
     public String getApellidos() {
@@ -47,5 +53,29 @@ public class Usuariodb {
 
     public void setNombres(String nombres) {
         this.nombres = nombres;
+    }
+
+    public String getUid() {
+        return uid;
+    }
+
+    public void setUid(String uid) {
+        this.uid = uid;
+    }
+
+    public String getDescripcion() {
+        return descripcion;
+    }
+
+    public void setDescripcion(String descripcion) {
+        this.descripcion = descripcion;
+    }
+
+    public int getNumero() {
+        return numero;
+    }
+
+    public void setNumero(int numero) {
+        this.numero = numero;
     }
 }

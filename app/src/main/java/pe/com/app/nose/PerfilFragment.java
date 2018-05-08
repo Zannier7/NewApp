@@ -44,7 +44,8 @@ public class PerfilFragment extends Fragment {
     private TextView nameTextView;
     private TextView emailTextView;
     private ImageView photoImageView;
-   // private TextView phoneTextView;
+    private TextView phoneTextView;
+    private TextView cumpleTextView;
     private GoogleApiClient googleApiClient;
     private FirebaseAuth firebaseAuth;
     private FirebaseAuth.AuthStateListener firebaseAuthListener;
@@ -67,7 +68,8 @@ public class PerfilFragment extends Fragment {
 
 
         photoImageView = (ImageView) view.findViewById(R.id.photoImageView);
-     //   phoneTextView = (TextView) view.findViewById(R.id.phoneTextView);
+        cumpleTextView = (TextView) view.findViewById(R.id.cumpleTextView);
+        phoneTextView = (TextView) view.findViewById(R.id.phoneTextView);
         nameTextView = (TextView) view.findViewById(R.id.nameTextView);
         emailTextView = (TextView) view.findViewById(R.id.emailTextView);
         pro_descripcion = (TextView)view.findViewById(R.id.pro_descripcion);
@@ -86,9 +88,23 @@ public class PerfilFragment extends Fragment {
         myRef.child(userID).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                Usuariodb usuariodb = dataSnapshot.getValue(Usuariodb.class);
 
-                pro_descripcion.setText(usuariodb.getFecha_nacimiento());
+                try {
+                    Usuariodb usuariodb = dataSnapshot.getValue(Usuariodb.class);
+
+                    nameTextView.setText(usuariodb.getNombres()+" " +usuariodb.getApellidos());
+                    phoneTextView.setText(Integer.toString(usuariodb.getNumero()));
+                    cumpleTextView.setText(usuariodb.getFecha_nacimiento());
+                    pro_descripcion.setText(usuariodb.getDescripcion());
+                }
+
+                catch ( Exception e){
+                    nameTextView.setText("No hay datos");
+                    phoneTextView.setText("No hay datos");
+                    cumpleTextView.setText("No hay datos");
+                    pro_descripcion.setText("No hay datos");
+                }
+
             }
 
             @Override
@@ -136,12 +152,11 @@ public class PerfilFragment extends Fragment {
 
 
         if (user != null) {
-            String name = user.getDisplayName();
+
             String email = user.getEmail();
             Uri photoUrl = user.getPhotoUrl();
-            String phone = user.getPhoneNumber();
 
-            nameTextView.setText(name);
+
             emailTextView.setText(email);
            // phoneTextView.setText(phone);
 
@@ -158,7 +173,6 @@ public class PerfilFragment extends Fragment {
 
 
     private void setUserData(FirebaseUser user) {
-        nameTextView.setText(user.getDisplayName());
         emailTextView.setText(user.getEmail());
     //    phoneTextView.setText(user.getPhoneNumber());
 
