@@ -66,6 +66,7 @@ public class Popup_create extends Activity  {
     private Switch selectPlace;
     private Button createEvent;
     private Spinner categoria;
+    private FloatingActionButton googleInvite;
 
     private ProgressDialog mProgress;
 
