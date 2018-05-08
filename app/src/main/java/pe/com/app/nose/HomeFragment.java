@@ -43,7 +43,7 @@ import java.util.List;
 import java.util.Locale;
 
 
-public class HomeFragment extends Fragment implements OnMapReadyCallback {
+public class   HomeFragment extends Fragment implements OnMapReadyCallback {
 
 
     private FloatingActionButton create;

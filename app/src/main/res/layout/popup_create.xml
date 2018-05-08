@@ -1,19 +1,36 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding ="5dp"
     android:layout_gravity="center" >
 
+    <ScrollView
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true"
+    android:scrollbarStyle="insideOverlay">
 
-
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
 
 
     <LinearLayout
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical" >
+
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/addFriends"
+            android:layout_width="100dp"
+            android:layout_height="50dp"
+            android:layout_marginLeft="250dp"
+            android:clickable="true"
+            android:src="@drawable/add"/>
 
 
 
@@ -56,10 +73,14 @@
                 android:hint="Descripción"
                 android:inputType="textMultiLine"
                 />
-
-
         </android.support.design.widget.TextInputLayout>
 
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Seleccionar una categoria:"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="10dp"/>
 
         <Spinner
             android:layout_gravity="center_horizontal"
@@ -133,7 +154,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:orientation="horizontal"
+        android:orientation="vertical"
         android:layout_marginTop="10dp">
         <Switch
             android:id="@+id/lugar"
@@ -141,13 +162,17 @@
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
             android:layout_alignParentTop="true"
-            android:text="Mi Ubicación"
+            android:text="Seleccionar Lugar"
             />
-        <TextView
+
+        <Switch
+            android:id="@+id/selectlugar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Seleccionar Lugar"
-            android:textColor="@color/googleRed"/>
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
+            android:textColor="@color/googleRed"
+            android:text="Mi Ubicación "/>
 
     </LinearLayout>
 
@@ -156,9 +181,11 @@
         android:layout_width = "wrap_content"
         android:layout_height = "wrap_content"
         android:text="Crear Evento"
-        android:layout_marginTop="25dp"
+        android:layout_marginTop="15dp"
         android:layout_gravity="center_horizontal"
         android:backgroundTint="@color/colorPrimary"
         android:textColor="@color/white" />
 
+    </LinearLayout>
+</ScrollView>
 </LinearLayout>

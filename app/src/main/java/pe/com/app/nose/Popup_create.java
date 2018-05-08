@@ -16,6 +16,7 @@ import android.location.LocationListener;
 import android.location.LocationManager;
 import android.provider.Settings;
 import android.support.annotation.NonNull;
+import android.support.annotation.RequiresPermission;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
@@ -54,7 +55,7 @@ import java.util.List;
 import java.util.Locale;
 import java.util.UUID;
 
-public class Popup_create extends Activity {
+public class Popup_create extends Activity  {
 
     private EditText date;
     private EditText time;
@@ -62,6 +63,7 @@ public class Popup_create extends Activity {
     private EditText description;
     private SwitchCompat tipo;
     private Switch lugar2;
+    private Switch selectPlace;
     private Button createEvent;
     private Spinner categoria;
 
@@ -81,10 +83,12 @@ public class Popup_create extends Activity {
     private static int posicion;
     private String cate;
     String tipodet;
+    String dato;
+    String email;
+    String uid;
     String valorLong;
     String valorLat;
-    String dato;
-    String uid;
+
     public final int MY_PERMISSIONS_REQUEST =1;
 
     @Override
@@ -104,6 +108,7 @@ public class Popup_create extends Activity {
         lugar2 = (Switch)findViewById(R.id.lugar);
         createEvent = (Button)findViewById(R.id.createEvent);
         categoria = (Spinner)findViewById(R.id.categoria);
+        selectPlace = (Switch)findViewById(R.id.selectlugar);
 
 
         DisplayMetrics dm = new DisplayMetrics();
@@ -140,6 +145,7 @@ public class Popup_create extends Activity {
         /*Obtener id de usuario*/
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         if (user != null) {
+             email = user.getEmail();
              uid = user.getUid();
         }
 
@@ -161,8 +167,22 @@ public class Popup_create extends Activity {
         lugar2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (view.getId() == R.id.lugar) {
+                if (view.getId() == R.id.lugar){
                     if (lugar2.isChecked()) {
+                        Toast.makeText(getApplicationContext(), "Hello", Toast.LENGTH_SHORT).show();
+                        Intent intent = new Intent(getApplicationContext(),ReadUbication.class);
+                        startActivity(intent);
+
+                    }
+                }
+            }
+        });
+
+        selectPlace.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (v.getId() == R.id.selectlugar){
+                    if (selectPlace.isChecked()){
                         LocationManager locationManager = (LocationManager) Popup_create.this.getSystemService(Popup_create.this.LOCATION_SERVICE);
                         if (ActivityCompat.checkSelfPermission(Popup_create.this, android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(Popup_create.this, android.Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
                             Log.d("MENSAJE:", "Faltan permisos");
@@ -214,15 +234,10 @@ public class Popup_create extends Activity {
                                 }
                             });
                         }
-                    } else {
-                        Toast.makeText(getApplicationContext(), "Hello", Toast.LENGTH_SHORT).show();
                     }
-
                 }
             }
         });
-
-
 
 
         time.setOnClickListener(new View.OnClickListener() {
@@ -257,6 +272,13 @@ public class Popup_create extends Activity {
         });
 
 
+        //Valor de ubicación desde la opción seleccionar ubicación
+        Bundle datos = this.getIntent().getExtras();
+        valorLat = datos.getString("latitud");
+        valorLong = datos.getString("longitud");
+
+        Log.d("Lat","your lat"+valorLat);
+
     }
 
 
@@ -272,6 +294,7 @@ public class Popup_create extends Activity {
 
              DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference().child("evento");
              DatabaseReference currentUserDB = mDatabase.child(UUID.randomUUID().toString());
+             currentUserDB.child("email").setValue(email);
              currentUserDB.child("idusuario").setValue(uid);
              currentUserDB.child("titulo").setValue(title2);
              currentUserDB.child("descripcion").setValue(description2);

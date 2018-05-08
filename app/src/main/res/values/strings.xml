@@ -8,6 +8,7 @@
     <string name="notificaciones">Notificaciones</string>
     <string name="configuraciones">Configurariones</string>
     <string name="eventos">Eventos</string>
+    <string name="readubication">Elegir Ubicación</string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="categ_selec">Seleccione una categoria:</string>
