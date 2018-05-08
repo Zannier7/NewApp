@@ -8,12 +8,12 @@ public class Usuariodb {
     private String nombres;
     private String uid;
     private String descripcion;
-    private int numero;
+    private String numero;
 
     public Usuariodb() {
     }
 
-    public Usuariodb(String apellidos, String correo, String fecha_nacimiento, String nombres, String uid, String descripcion, int numero) {
+    public Usuariodb(String apellidos, String correo, String fecha_nacimiento, String nombres, String uid, String descripcion, String numero) {
         this.apellidos = apellidos;
         this.correo = correo;
         this.fecha_nacimiento = fecha_nacimiento;
@@ -71,11 +71,11 @@ public class Usuariodb {
         this.descripcion = descripcion;
     }
 
-    public int getNumero() {
+    public String getNumero() {
         return numero;
     }
 
-    public void setNumero(int numero) {
+    public void setNumero(String numero) {
         this.numero = numero;
     }
 }

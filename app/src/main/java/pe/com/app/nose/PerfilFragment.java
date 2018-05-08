@@ -89,11 +89,12 @@ public class PerfilFragment extends Fragment {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
 
+                Usuariodb usuariodb = dataSnapshot.getValue(Usuariodb.class);
                 try {
-                    Usuariodb usuariodb = dataSnapshot.getValue(Usuariodb.class);
+
 
                     nameTextView.setText(usuariodb.getNombres()+" " +usuariodb.getApellidos());
-                    phoneTextView.setText(Integer.toString(usuariodb.getNumero()));
+                    phoneTextView.setText(usuariodb.getNumero());
                     cumpleTextView.setText(usuariodb.getFecha_nacimiento());
                     pro_descripcion.setText(usuariodb.getDescripcion());
                 }
