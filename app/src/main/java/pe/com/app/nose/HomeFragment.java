@@ -37,6 +37,12 @@ import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.io.IOException;
 import java.util.List;
@@ -53,11 +59,48 @@ public class   HomeFragment extends Fragment implements OnMapReadyCallback {
     double lng = 0.0;
     String mensaje1;
 
+
+    private FirebaseAuth firebaseAuth;
+    private FirebaseAuth.AuthStateListener firebaseAuthListener;
+    private FirebaseDatabase mfirebaseDatabase;
+
     private static int PETICION_PERMISO_LOCALIZACION = 101;
 
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         final View view = inflater.inflate(R.layout.fragment_home, container, false);
+
+        firebaseAuth = FirebaseAuth.getInstance();
+        mfirebaseDatabase = FirebaseDatabase.getInstance();
+        final DatabaseReference myRefEvento = mfirebaseDatabase.getReference(FirebaseReferences.EVENTO_REFERENCE);
+
+
+        myRefEvento.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+
+                for(DataSnapshot datasnapshot: dataSnapshot.getChildren()){
+                    Eventodb eventodb = datasnapshot.getValue(Eventodb.class);
+                    String titulo = eventodb.getTitulo();
+                    String hora = eventodb.getHora();
+                    String ubitlati = eventodb.getUbilat();
+                    String ubitlongi = eventodb.getUbilong();
+
+                    mMap.addMarker(new MarkerOptions()
+                            .position(new LatLng(Double.parseDouble(ubitlati), Double.parseDouble(ubitlongi)))
+                            .title(titulo)
+                            .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN)));
+
+
+                }
+
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
 
         /*getLocation2();*/
         create = (FloatingActionButton)view.findViewById(R.id.create);

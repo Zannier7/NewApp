@@ -99,7 +99,29 @@ public class Popup_create extends Activity  implements GoogleApiClient.OnConnect
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.popup_create);
+        /* <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal" >
 
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/addFriends"
+            android:layout_width="100dp"
+            android:layout_height="50dp"
+            android:layout_marginLeft="150dp"
+            android:clickable="true"
+            android:backgroundTint="@color/white"
+            android:src="@drawable/ic_fb"/>
+
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/googleInvite"
+            android:layout_width="100dp"
+            android:layout_height="50dp"
+            android:layout_marginLeft="5dp"
+            android:clickable="true"
+            android:backgroundTint="@color/white"
+            android:src="@drawable/gicon"/>
+    </LinearLayout>*/
         smonth = C.get(Calendar.MONTH);
         sday = C.get(Calendar.DAY_OF_MONTH);
         syear = C.get(Calendar.YEAR);
@@ -113,7 +135,6 @@ public class Popup_create extends Activity  implements GoogleApiClient.OnConnect
         createEvent = (Button)findViewById(R.id.createEvent);
         categoria = (Spinner)findViewById(R.id.categoria);
         selectPlace = (Switch)findViewById(R.id.selectlugar);
-        googleInvite = (FloatingActionButton) findViewById(R.id.googleInvite);
 
 
         DisplayMetrics dm = new DisplayMetrics();
@@ -174,9 +195,11 @@ public class Popup_create extends Activity  implements GoogleApiClient.OnConnect
             public void onClick(View view) {
                 if (view.getId() == R.id.lugar){
                     if (lugar2.isChecked()) {
-                        Toast.makeText(getApplicationContext(), "Hello", Toast.LENGTH_SHORT).show();
+
                         Intent intent = new Intent(getApplicationContext(),ReadUbication.class);
                         startActivity(intent);
+
+                    }else{
 
                     }
                 }
@@ -307,8 +330,8 @@ public class Popup_create extends Activity  implements GoogleApiClient.OnConnect
              currentUserDB.child("fecha").setValue(date2);
              currentUserDB.child("hora").setValue(time2);
              currentUserDB.child("tipo").setValue(tipodet);
-             currentUserDB.child("ubiLat").setValue(valorLat);
-             currentUserDB.child("ubiLong").setValue(valorLong);
+             currentUserDB.child("ubilat").setValue(valorLat);
+             currentUserDB.child("ubilong").setValue(valorLong);
 
                 Toast.makeText(Popup_create.this,"Exito al registrar el evento",Toast.LENGTH_SHORT).show();
              }else{

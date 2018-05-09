@@ -93,6 +93,7 @@ public class ReadUbication extends AppCompatActivity implements GoogleMap.OnMark
         uiSettings.setZoomControlsEnabled(true);
 
         LatLng lima = new LatLng(-12.0463731, -77.042754);
+
         googleMap.addMarker(new MarkerOptions().position(lima)
                 .title("Puedes Arrastrarme hasta la ubicación")
                 .draggable(true)
