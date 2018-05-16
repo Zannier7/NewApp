@@ -77,11 +77,11 @@ public class   HomeFragment extends Fragment implements OnMapReadyCallback {
 
         myRefEvento.addValueEventListener(new ValueEventListener() {
             @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
+            public void onDataChange(final DataSnapshot dataSnapshot) {
 
-                for(DataSnapshot datasnapshot: dataSnapshot.getChildren()){
+                for(final DataSnapshot datasnapshot: dataSnapshot.getChildren()){
                     Eventodb eventodb = datasnapshot.getValue(Eventodb.class);
-                    String titulo = eventodb.getTitulo();
+                    final String titulo = eventodb.getTitulo();
                     String hora = eventodb.getHora();
                     String ubitlati = eventodb.getUbilat();
                     String ubitlongi = eventodb.getUbilong();
@@ -92,7 +92,28 @@ public class   HomeFragment extends Fragment implements OnMapReadyCallback {
                             .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN)));
 
 
+
+                    mMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
+                        @Override
+                        public boolean onMarkerClick(Marker marker) {
+
+
+
+                            Intent intent = new Intent(getActivity(),PopupDescripcion.class);
+                            startActivity(intent);
+
+                            Toast.makeText(getActivity(),"Titulo" + "  " + datasnapshot.getKey(),Toast.LENGTH_LONG).show();
+                            Log.d("Lat","LLAVE "+datasnapshot.getKey());
+                            return false;
+                        }
+                    });
+
+
+
                 }
+
+
+
 
             }
 

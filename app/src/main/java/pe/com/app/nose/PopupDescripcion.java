@@ -12,7 +12,6 @@ public class PopupDescripcion extends Activity{
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         setContentView(R.layout.popup_descripcion);
 
         DisplayMetrics dm = new DisplayMetrics();
@@ -22,6 +21,7 @@ public class PopupDescripcion extends Activity{
         int height = dm.heightPixels;
 
         getWindow().setLayout((int)(width*.8),(int)(height*.6));
+
 
     }
 }
