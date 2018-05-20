@@ -77,17 +77,18 @@ public class   HomeFragment extends Fragment implements OnMapReadyCallback {
 
         myRefEvento.addValueEventListener(new ValueEventListener() {
             @Override
-            public void onDataChange(final DataSnapshot dataSnapshot) {
+            public void onDataChange(DataSnapshot dataSnapshot) {
 
-                for(final DataSnapshot datasnapshot: dataSnapshot.getChildren()){
+                for(DataSnapshot datasnapshot: dataSnapshot.getChildren()){
                     Eventodb eventodb = datasnapshot.getValue(Eventodb.class);
-                    final String titulo = eventodb.getTitulo();
+                    String titulo = eventodb.getTitulo();
                     String hora = eventodb.getHora();
-                    String ubitlati = eventodb.getUbilat();
-                    String ubitlongi = eventodb.getUbilong();
+                    double ubitlati = eventodb.getUbilat();
+                    double ubitlongi = eventodb.getUbilong();
+
 
                     mMap.addMarker(new MarkerOptions()
-                            .position(new LatLng(Double.parseDouble(ubitlati), Double.parseDouble(ubitlongi)))
+                            .position(new LatLng(ubitlati, ubitlongi))
                             .title(titulo)
                             .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN)));
 
@@ -96,18 +97,13 @@ public class   HomeFragment extends Fragment implements OnMapReadyCallback {
                     mMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
                         @Override
                         public boolean onMarkerClick(Marker marker) {
-
-
-
                             Intent intent = new Intent(getActivity(),PopupDescripcion.class);
-                            startActivity(intent);
+                            
 
-                            Toast.makeText(getActivity(),"Titulo" + "  " + datasnapshot.getKey(),Toast.LENGTH_LONG).show();
-                            Log.d("Lat","LLAVE "+datasnapshot.getKey());
+                            startActivity(intent);
                             return false;
                         }
                     });
-
 
 
                 }
@@ -122,6 +118,8 @@ public class   HomeFragment extends Fragment implements OnMapReadyCallback {
 
             }
         });
+
+
 
         /*getLocation2();*/
         create = (FloatingActionButton)view.findViewById(R.id.create);

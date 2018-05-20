@@ -330,8 +330,8 @@ public class Popup_create extends Activity  implements GoogleApiClient.OnConnect
              currentUserDB.child("fecha").setValue(date2);
              currentUserDB.child("hora").setValue(time2);
              currentUserDB.child("tipo").setValue(tipodet);
-             currentUserDB.child("ubilat").setValue(valorLat);
-             currentUserDB.child("ubilong").setValue(valorLong);
+             currentUserDB.child("ubilat").setValue(Double.parseDouble(valorLat));
+             currentUserDB.child("ubilong").setValue(Double.parseDouble(valorLong));
 
                 Toast.makeText(Popup_create.this,"Exito al registrar el evento",Toast.LENGTH_SHORT).show();
              }else{

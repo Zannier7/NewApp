@@ -8,13 +8,13 @@ public class Eventodb {
     private String hora;
     private String idusuario;
     private String titulo;
-    private String ubilat;
-    private String ubilong;
+    private double ubilat;
+    private double ubilong;
 
     public Eventodb() {
     }
 
-    public Eventodb(String categoria, String descripcion, String email, String fecha, String hora, String idusuario, String titulo, String ubilat, String ubilong) {
+    public Eventodb(String categoria, String descripcion, String email, String fecha, String hora, String idusuario, String titulo, double ubilat, double ubilong) {
         this.categoria = categoria;
         this.descripcion = descripcion;
         this.email = email;
@@ -82,19 +82,19 @@ public class Eventodb {
         this.titulo = titulo;
     }
 
-    public String getUbilat() {
+    public double getUbilat() {
         return ubilat;
     }
 
-    public void setUbilat(String ubilat) {
+    public void setUbilat(double ubilat) {
         this.ubilat = ubilat;
     }
 
-    public String getUbilong() {
+    public double getUbilong() {
         return ubilong;
     }
 
-    public void setUbilong(String ubilong) {
+    public void setUbilong(double ubilong) {
         this.ubilong = ubilong;
     }
 }
