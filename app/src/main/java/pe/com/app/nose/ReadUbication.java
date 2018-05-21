@@ -11,6 +11,7 @@ import android.os.Bundle;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.View;
+import android.widget.Toast;
 
 import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -26,6 +27,8 @@ import com.google.android.gms.maps.model.MarkerOptions;
 import java.io.IOException;
 import java.util.List;
 
+import bolts.Task;
+
 public class ReadUbication extends AppCompatActivity implements GoogleMap.OnMarkerDragListener, OnMapReadyCallback {
 
     private GoogleMap mMap;
@@ -39,6 +42,7 @@ public class ReadUbication extends AppCompatActivity implements GoogleMap.OnMark
         super.onCreate(savedInstanceState);
         setContentView(R.layout.read_ubication);
 
+        getSupportActionBar().hide();
 
         DisplayMetrics dm = new DisplayMetrics();
         getWindowManager().getDefaultDisplay().getMetrics(dm);
@@ -48,7 +52,9 @@ public class ReadUbication extends AppCompatActivity implements GoogleMap.OnMark
 
         getWindow().setLayout((int) (width*.8), (int) (height*.6));
 
+
         atrasMap = (FloatingActionButton) findViewById(R.id.atrasMap);
+
 
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map2);
@@ -57,10 +63,13 @@ public class ReadUbication extends AppCompatActivity implements GoogleMap.OnMark
         atrasMap.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+
                 Intent intent = new Intent(ReadUbication.this, Popup_create.class);
-                intent.putExtra("latitud",lat+ "");
-                intent.putExtra("longitud",longLt+ "");
-                startActivity(intent);
+                intent.putExtra("latitud",lat);
+                intent.putExtra("longitud",longLt);
+                setResult(ReadUbication.RESULT_OK,intent);
+                finish();
             }
         });
 
@@ -72,12 +81,6 @@ public class ReadUbication extends AppCompatActivity implements GoogleMap.OnMark
         mMap.setOnMarkerDragListener(this);
         if (ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             // TODO: Consider calling
-            //    ActivityCompat#requestPermissions
-            // here to request the missing permissions, and then overriding
-            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
-            //                                          int[] grantResults)
-            // to handle the case where the user grants the permission. See the documentation
-            // for ActivityCompat#requestPermissions for more details.
             return;
         }
         mMap.setMyLocationEnabled(true);
@@ -119,6 +122,7 @@ public class ReadUbication extends AppCompatActivity implements GoogleMap.OnMark
             longLt = marker.getPosition().longitude;
             lat = marker.getPosition().latitude;
 
+            Toast.makeText(this, "Latitud "+lat, Toast.LENGTH_SHORT).show();
 
             list =geocoder.getFromLocation(l1.latitude, l1.longitude,1);
             Address address = list.get(0);

@@ -56,17 +56,17 @@
         <activity android:name=".InicioActivity" />
         <activity
             android:name=".PopupDescripcion"
-            android:theme="@style/AppTheme.CustomTheme" ></activity>
-        <activity android:name=".Popup_create"
-            android:theme="@style/AppTheme.CustomTheme"></activity>
-
-        <activity android:name=".PopupPerfil"
-            android:theme="@style/AppTheme.CustomTheme"></activity>
-
-        <activity android:name=".ReadUbication"
-            android:theme="@style/AppTheme.CustomTheme"></activity>
-
-
+            android:theme="@style/AppTheme.CustomTheme" />
+        <activity
+            android:name=".Popup_create"
+            android:theme="@style/AppTheme.CustomTheme" />
+        <activity
+            android:name=".PopupPerfil"
+            android:theme="@style/AppTheme.CustomTheme" />
+        <activity
+            android:name=".ReadUbication"
+            android:theme="@style/AppTheme.CustomTheme" />
+        <activity android:name=".Invite_Google"></activity>
     </application>
 
 </manifest>

@@ -60,12 +60,13 @@ import java.util.UUID;
 public class Popup_create extends Activity  implements GoogleApiClient.OnConnectionFailedListener,
         View.OnClickListener {
 
+
     private EditText date;
     private EditText time;
     private EditText title;
     private EditText description;
     private SwitchCompat tipo;
-    private Switch lugar2;
+    private FloatingActionButton lugar2;
     private Switch selectPlace;
     private Button createEvent;
     private Spinner categoria;
@@ -90,10 +91,27 @@ public class Popup_create extends Activity  implements GoogleApiClient.OnConnect
     String dato;
     String email;
     String uid;
-    String valorLong;
-    String valorLat;
+    Double valorLong;
+    Double valorLat;
 
     public final int MY_PERMISSIONS_REQUEST =1;
+    private ProgressDialog mProgres;
+    private static final int SECACT_REQUEST_CODE = 0;
+
+    //Valor de ubicación desde la opción seleccionar ubicación
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (requestCode==SECACT_REQUEST_CODE){
+            if (resultCode==RESULT_OK){
+                valorLat = data.getDoubleExtra("latitud",0);
+                valorLong = data.getDoubleExtra("longitud",0);
+            }
+        }else{
+            Toast.makeText(this, "Error al leer DATOS", Toast.LENGTH_SHORT).show();
+        }
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -122,6 +140,9 @@ public class Popup_create extends Activity  implements GoogleApiClient.OnConnect
             android:backgroundTint="@color/white"
             android:src="@drawable/gicon"/>
     </LinearLayout>*/
+
+
+
         smonth = C.get(Calendar.MONTH);
         sday = C.get(Calendar.DAY_OF_MONTH);
         syear = C.get(Calendar.YEAR);
@@ -131,11 +152,12 @@ public class Popup_create extends Activity  implements GoogleApiClient.OnConnect
         title =(EditText)findViewById(R.id.title);
         description = (EditText)findViewById(R.id.description);
         tipo =(SwitchCompat) findViewById(R.id.tipo);
-        lugar2 = (Switch)findViewById(R.id.lugar);
+        lugar2 = (FloatingActionButton) findViewById(R.id.lugar);
         createEvent = (Button)findViewById(R.id.createEvent);
         categoria = (Spinner)findViewById(R.id.categoria);
         selectPlace = (Switch)findViewById(R.id.selectlugar);
 
+        mProgres = new ProgressDialog(this);
 
         DisplayMetrics dm = new DisplayMetrics();
         getWindowManager().getDefaultDisplay().getMetrics(dm);
@@ -160,8 +182,6 @@ public class Popup_create extends Activity  implements GoogleApiClient.OnConnect
             public void onItemSelected(AdapterView<?> parent, View view, int pos, long id) {
                 Object item = parent.getItemAtPosition(pos);
                 cate = item.toString();
-
-                Log.d("CATEGORI", "q es " + cate);
 
             }
             public void onNothingSelected(AdapterView<?> parent) {
@@ -193,27 +213,18 @@ public class Popup_create extends Activity  implements GoogleApiClient.OnConnect
         lugar2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (view.getId() == R.id.lugar){
-                    if (lugar2.isChecked()) {
-
                         Intent intent = new Intent(getApplicationContext(),ReadUbication.class);
-                        startActivity(intent);
-
-                    }else{
-
-                    }
-                }
+                        startActivityForResult(intent,SECACT_REQUEST_CODE);
             }
+
         });
 
         selectPlace.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (v.getId() == R.id.selectlugar){
                     if (selectPlace.isChecked()){
                         LocationManager locationManager = (LocationManager) Popup_create.this.getSystemService(Popup_create.this.LOCATION_SERVICE);
                         if (ActivityCompat.checkSelfPermission(Popup_create.this, android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(Popup_create.this, android.Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-                            Log.d("MENSAJE:", "Faltan permisos");
                             ActivityCompat.requestPermissions(Popup_create.this, new String[]{android.Manifest.permission.ACCESS_FINE_LOCATION, android.Manifest.permission.ACCESS_COARSE_LOCATION},
                                     MY_PERMISSIONS_REQUEST);
                             return;
@@ -221,14 +232,16 @@ public class Popup_create extends Activity  implements GoogleApiClient.OnConnect
                         if (!locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)) {
                             builAlertMessageNoGps();
                         } else {
+                            mProgres.setMessage("Obteniendo coordenadas...");
+                            mProgres.show();
                             locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 1000, 1, new LocationListener() {
                                 @Override
                                 public void onLocationChanged(Location location) {
-                                    valorLat = (location.getLatitude()) + "";
-                                    valorLong = (location.getLongitude()) + "";
-                                    Log.i("Latitud1::", valorLat);
-                                    Log.i("Longitud1::", valorLong);
+                                    valorLat = (location.getLatitude());
+                                    valorLong = (location.getLongitude());
+                                    Toast.makeText(Popup_create.this, "Éxito al obtener ubicación", Toast.LENGTH_SHORT).show();
                                     if (location.getLatitude() != 0.0 && location.getLongitude() != 0.0) {
+                                        mProgres.dismiss();
                                         try {
                                             Geocoder geocoder = new Geocoder(Popup_create.this, Locale.getDefault());
                                             List<Address> list = geocoder.getFromLocation(
@@ -242,10 +255,6 @@ public class Popup_create extends Activity  implements GoogleApiClient.OnConnect
                                             e.printStackTrace();
                                         }
                                     }
-                                    //    Toast.makeText(getContext(), dato, Toast.LENGTH_SHORT).show();
-                                    //  Toast.makeText(getContext(), valorLong, Toast.LENGTH_SHORT).show();
-                                    // Toast.
-                                    // RegAnuncio();
                                 }
 
 
@@ -263,7 +272,7 @@ public class Popup_create extends Activity  implements GoogleApiClient.OnConnect
                             });
                         }
                     }
-                }
+
             }
         });
 
@@ -300,18 +309,10 @@ public class Popup_create extends Activity  implements GoogleApiClient.OnConnect
         });
 
 
-        //Valor de ubicación desde la opción seleccionar ubicación
-        Bundle datos = this.getIntent().getExtras();
-        valorLat = datos.getString("latitud");
-        valorLong = datos.getString("longitud");
-
-        Log.d("Lat","your lat"+valorLat);
 
     }
 
-
-
-    private void crearEvento() {
+     private void crearEvento() {
         final String title2 = title.getText().toString().trim();
         final String description2 = description.getText().toString().trim();
         final String date2 = date.getText().toString().trim();
@@ -330,8 +331,13 @@ public class Popup_create extends Activity  implements GoogleApiClient.OnConnect
              currentUserDB.child("fecha").setValue(date2);
              currentUserDB.child("hora").setValue(time2);
              currentUserDB.child("tipo").setValue(tipodet);
-             currentUserDB.child("ubilat").setValue(Double.parseDouble(valorLat));
-             currentUserDB.child("ubilong").setValue(Double.parseDouble(valorLong));
+             currentUserDB.child("ubilat").setValue(valorLat);
+             currentUserDB.child("ubilong").setValue(valorLong);
+
+                title.setText("");
+                description.setText("");
+                date.setText("");
+                time.setText("");
 
                 Toast.makeText(Popup_create.this,"Exito al registrar el evento",Toast.LENGTH_SHORT).show();
              }else{
@@ -407,4 +413,42 @@ public class Popup_create extends Activity  implements GoogleApiClient.OnConnect
     public void onPointerCaptureChanged(boolean hasCapture) {
 
     }
+
+    //Mantener los datos del formulario crear evento al regresa desde la actividad ReadUbication
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+
+
+        String title3 = title.getText().toString();
+        String description3 = description.getText().toString();
+        String date3 = date.getText().toString();
+        String time3 = time.getText().toString();
+
+        outState.putString("title4", title3);
+        outState.putString("description4", description3);
+        outState.putString("date4", date3);
+        outState.putString("time4", time3);
+
+        Toast.makeText(this, "LLega "+title3, Toast.LENGTH_SHORT).show();
+        super.onSaveInstanceState(outState);
+    }
+
+    @Override
+    protected void onRestoreInstanceState(Bundle savedInstanceState) {
+        super.onRestoreInstanceState(savedInstanceState);
+
+            String titles = savedInstanceState.getString("title4");
+            title.setText(titles);
+            String descriptions = savedInstanceState.getString("description4");
+            description.setText(descriptions);
+            String dates = savedInstanceState.getString("date4");
+            date.setText(dates);
+            String times = savedInstanceState.getString("time4");
+            time.setText(times);
+
+            Toast.makeText(this, "LLegará "+titles, Toast.LENGTH_SHORT).show();
+    }
+
+
 }

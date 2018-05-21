@@ -19,7 +19,7 @@
             android:layout_width="match_parent"
             android:layout_height="260dp"
             android:layout_below="@+id/linearLayout1"
-            android:background="@color/colorPrimary"
+            android:background="#ef9a9a"
             android:orientation="vertical">
 
             <ImageView
@@ -171,8 +171,26 @@
             android:layout_marginTop="192dp"
             android:clickable="true"
             android:src="@drawable/create"
-            app:backgroundTint="#7FFF00" />
+            app:backgroundTint="@color/cardview_dark_background" />
 
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/invite_button"
+            android:layout_width="58dp"
+            android:layout_height="56dp"
+            android:layout_alignParentLeft="true"
+            android:layout_alignTop="@+id/pro_profile_edit"
+            android:clickable="true"
+            android:src="@drawable/ic_forum_white"
+            app:backgroundTint="@color/facebookBlue"
+            android:layout_marginLeft="27dp" />
+
+        <FrameLayout
+            android:id="@+id/snackbar_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentLeft="true"
+            android:layout_margin="16dp"/>
 
     </RelativeLayout>
 
