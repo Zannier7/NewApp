@@ -68,6 +68,14 @@ public class PerfilFragment extends Fragment implements GoogleApiClient.OnConnec
     private static final int REQUEST_INVITE = 0;
 
     @Override
+    public void onPause() {
+        super.onPause();
+
+        googleApiClient.stopAutoManage(getActivity());
+        googleApiClient.disconnect();
+    }
+
+    @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState){
         final View view=inflater.inflate(R.layout.fragment_perfil,container,false);
 
@@ -78,6 +86,7 @@ public class PerfilFragment extends Fragment implements GoogleApiClient.OnConnec
         FirebaseUser user = firebaseAuth.getCurrentUser();
         userID = user.getUid();
 
+
         //BOTON INVITE
         view.findViewById(R.id.invite_button).setOnClickListener(this);
 
@@ -87,6 +96,8 @@ public class PerfilFragment extends Fragment implements GoogleApiClient.OnConnec
         nameTextView = (TextView) view.findViewById(R.id.nameTextView);
         emailTextView = (TextView) view.findViewById(R.id.emailTextView);
         pro_descripcion = (TextView)view.findViewById(R.id.pro_descripcion);
+
+
 
         pro_profile_edit = (FloatingActionButton) view.findViewById(R.id.pro_profile_edit);
         pro_profile_edit.setOnClickListener(new View.OnClickListener() {
@@ -101,8 +112,7 @@ public class PerfilFragment extends Fragment implements GoogleApiClient.OnConnec
         //Google Invite inicializando plug
         googleApiClient = new GoogleApiClient.Builder(getContext())
                 .addApi(AppInvite.API)
-                .enableAutoManage(getActivity(),this)
-                .build();
+                .enableAutoManage(getActivity(),this).build();
         boolean autoLaunchDeepLink = true;
         AppInvite.AppInviteApi.getInvitation(googleApiClient, getActivity(), autoLaunchDeepLink)
                 .setResultCallback(

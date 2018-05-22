@@ -22,7 +22,7 @@ import com.google.firebase.database.FirebaseDatabase;
 
 public class Update_Pass extends AppCompatActivity {
 
-    private EditText pass1;
+
     private Button cambiar_pass;
     private EditText correo;
     private FloatingActionButton atrasM;
@@ -38,14 +38,14 @@ public class Update_Pass extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_updatepass);
 
-        pass1 = (EditText)findViewById(R.id.pass1);
+
         cambiar_pass = (Button) findViewById(R.id.cambiar_pass);
         atrasM = (FloatingActionButton)findViewById(R.id.atrasM);
         correo = (EditText)findViewById(R.id.correo);
         mProgress = new ProgressDialog(this);
         mAuth = FirebaseAuth.getInstance();
         firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
-        pass1.setVisibility(View.GONE);
+
 
         atrasM.setOnClickListener(new View.OnClickListener() {
             @Override
