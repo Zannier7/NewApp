@@ -28,14 +28,16 @@
         android:layout_gravity = "center"
         android:layout_marginTop = "15dp" />
     <TextView
+        android:id="@+id/popup_des_email"
         android:layout_width = "wrap_content"
         android:layout_height = "wrap_content"
-        android:text = "Elina Grofild"
+        android:text = "nombre"
         android:textStyle = "bold"
         android:textColor = "@color/white"
         android:layout_gravity = "center_horizontal"
         android:layout_marginTop = "5dp" />
     <TextView
+        android:id="@+id/popup_des_categoria"
         android:layout_width = "wrap_content"
         android:layout_height = "wrap_content"
         android:text = "Montreal, Canadá"
@@ -48,48 +50,7 @@ android:layout_marginTop = "15dp"
 android:orientation = "horizontal"
 android:layout_width = "match_parent"
 android:layout_height = "wrap_content" >
-<LinearLayout
-    android:background = "@color/colorPrimary"
 
-    android:orientation = "vertical"
-    android:layout_weight = "1"
-    android:layout_width = "0dp"
-    android:layout_height = "100dp" >
-
-    <TextView
-        android:layout_width = "wrap_content"
-        android:layout_height = "wrap_content"
-        android:text = "150"
-        android:textSize = "18sp"
-        android:textColor = "@color/white" />
-    <TextView
-        android:layout_width = "wrap_content"
-        android:layout_height = "wrap_content"
-        android:text = "Seguidores"
-        android:textSize = "18sp"
-        android:textColor = "@color/white" />
-</LinearLayout >
-
-<LinearLayout
-    android:background = "@color/colorPrimaryDark"
-    android:orientation = "vertical"
-    android:layout_weight = "1"
-    android:layout_width = "0dp"
-    android:layout_height = "100dp" >
-
-    <TextView
-        android:layout_width = "wrap_content"
-        android:layout_height = "wrap_content"
-        android:text = "19"
-        android:textSize = "18sp"
-        android:textColor = "@color/white" />
-    <TextView
-        android:layout_width = "wrap_content"
-        android:layout_height = "wrap_content"
-        android:text = "Ciudades"
-        android:textSize = "18sp"
-        android:textColor = "@color/white" />
-</LinearLayout >
 <LinearLayout
     android:background = "@color/com_facebook_blue"
 
@@ -99,22 +60,26 @@ android:layout_height = "wrap_content" >
     android:layout_height = "100dp" >
 
     <TextView
+        android:id="@+id/popup_des_titulo"
         android:layout_width = "wrap_content"
         android:layout_height = "wrap_content"
-        android:text = "50"
+        android:text = "titulo"
         android:textSize = "18sp"
+        android:layout_gravity = "center_horizontal"
         android:textColor = "@color/white" />
     <TextView
+        android:id="@+id/popup_des_descripcion"
         android:layout_width = "wrap_content"
         android:layout_height = "wrap_content"
-        android:text = "Publicaciones"
-        android:textSize = "18sp"
+        android:text = "descripcion"
+        android:textSize = "16sp"
+        android:layout_gravity = "center_horizontal"
         android:textColor = "@color/white" />
 </LinearLayout >
 </LinearLayout >
 
 <Button
-
+android:id="@+id/popup_des_btn"
 android:layout_width = "wrap_content"
 android:layout_height = "wrap_content"
 android:text = "Sígueme"

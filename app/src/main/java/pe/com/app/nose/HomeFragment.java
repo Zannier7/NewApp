@@ -73,6 +73,15 @@ public class   HomeFragment extends Fragment implements OnMapReadyCallback {
         firebaseAuth = FirebaseAuth.getInstance();
         mfirebaseDatabase = FirebaseDatabase.getInstance();
         final DatabaseReference myRefEvento = mfirebaseDatabase.getReference(FirebaseReferences.EVENTO_REFERENCE);
+        Bundle direccion = getActivity().getIntent().getExtras();
+
+
+
+        if(direccion !=null){
+            double direccionlag = direccion.getDouble("DIRECCIONLAG");
+            Log.d("penanieto","penanieto"+ direccionlag);
+            Toast.makeText(getActivity(),"direc " + direccionlag,Toast.LENGTH_SHORT).show();
+        }
 
 
         myRefEvento.addValueEventListener(new ValueEventListener() {
@@ -91,8 +100,19 @@ public class   HomeFragment extends Fragment implements OnMapReadyCallback {
                     Marker mMarker =  mMap.addMarker(new MarkerOptions()
                             .position(new LatLng(ubitlati, ubitlongi))
                             .title(titulo)
+                            .snippet(llave)
                             .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN)));
 
+                    mMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
+                        @Override
+                        public boolean onMarkerClick(Marker marker) {
+                                Intent intent = new Intent(getActivity(),PopupDescripcion.class);
+                                String claveone = marker.getSnippet();
+                                intent.putExtra("CLAVEONE",claveone);
+                                startActivity(intent);
+                            return false;
+                        }
+                    });
 
 
 
@@ -129,6 +149,8 @@ public class   HomeFragment extends Fragment implements OnMapReadyCallback {
                 .findFragmentById(R.id.map);
 
         mapFragment.getMapAsync(this);
+
+
 
 
         return view;
