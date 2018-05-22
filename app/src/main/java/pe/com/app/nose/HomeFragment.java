@@ -77,33 +77,23 @@ public class   HomeFragment extends Fragment implements OnMapReadyCallback {
 
         myRefEvento.addValueEventListener(new ValueEventListener() {
             @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
+            public void onDataChange(final DataSnapshot dataSnapshot) {
 
-                for(DataSnapshot datasnapshot: dataSnapshot.getChildren()){
-                    Eventodb eventodb = datasnapshot.getValue(Eventodb.class);
-                    String titulo = eventodb.getTitulo();
-                    String hora = eventodb.getHora();
-                    double ubitlati = eventodb.getUbilat();
-                    double ubitlongi = eventodb.getUbilong();
+                for(final DataSnapshot datasnapshot: dataSnapshot.getChildren()){
+                     final String llave = datasnapshot.getKey();
+                     final Eventodb eventodb = datasnapshot.getValue(Eventodb.class);
+                     final String titulo = eventodb.getTitulo();
+                     final String hora = eventodb.getHora();
+                    final double ubitlati = eventodb.getUbilat();
+                    final double ubitlongi = eventodb.getUbilong();
 
 
-                    mMap.addMarker(new MarkerOptions()
+                    Marker mMarker =  mMap.addMarker(new MarkerOptions()
                             .position(new LatLng(ubitlati, ubitlongi))
                             .title(titulo)
                             .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN)));
 
 
-
-                    mMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
-                        @Override
-                        public boolean onMarkerClick(Marker marker) {
-                            Intent intent = new Intent(getActivity(),PopupDescripcion.class);
-                            
-
-                            startActivity(intent);
-                            return false;
-                        }
-                    });
 
 
                 }
