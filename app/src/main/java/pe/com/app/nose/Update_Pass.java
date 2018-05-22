@@ -62,33 +62,25 @@ public class Update_Pass extends AppCompatActivity {
             }
 
             private void cambiarPassword() {
-                final String correo2=correo.getText().toString().trim();
-                final String password1 = pass1.getText().toString().trim();
+                 String correo2=correo.getText().toString().trim();
 
 
                 if (correo2.equals("")){
                     Toast.makeText(Update_Pass.this, "Ingrese su correo de la aplicacion", Toast.LENGTH_SHORT).show();
                 }else{
-
                         mProgress.setMessage("Cambiando Contraseña...");
                         mProgress.show();
+
                         mAuth.sendPasswordResetEmail(correo2).addOnCompleteListener(new OnCompleteListener<Void>() {
+
                             @Override
                             public void onComplete(@NonNull Task<Void> task) {
-                                mProgress.dismiss();
                                 if (task.isSuccessful()){
-
-                                    firebaseUser.updatePassword(password1).addOnCompleteListener(new OnCompleteListener<Void>() {
-                                        @Override
-                                        public void onComplete(@NonNull Task<Void> task) {
-                                            if (task.isSuccessful()){
-                                                Toast.makeText(Update_Pass.this, "Revisa tu correo ;),Te enviamos un mensaje", Toast.LENGTH_SHORT).show();
-                                                finish();
-                                            }else {
-                                                Toast.makeText(Update_Pass.this, "No podemos procesar el cambio de contraseña, ingrese correctamente el correo", Toast.LENGTH_SHORT).show();
-                                            }
-                                        }
-                                    });
+                                    mProgress.dismiss();
+                                    Toast.makeText(Update_Pass.this, "Revisa tu correo ;),Te enviamos un mensaje", Toast.LENGTH_SHORT).show();
+                                }else {
+                                    mProgress.dismiss();
+                                    Toast.makeText(Update_Pass.this, "No podemos procesar el cambio de contraseña, ingrese correctamente el correo", Toast.LENGTH_SHORT).show();
                                 }
                             }
                         });
