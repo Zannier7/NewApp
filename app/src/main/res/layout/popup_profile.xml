@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#000"
+    android:background="@color/colorPrimary"
     android:theme="@style/Theme.AppCompat.Light.NoActionBar">
 
     <RelativeLayout
@@ -51,7 +51,7 @@
                 android:id="@+id/imageView_userIcon"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
-                android:background="@color/colorPrimary"
+                android:background="#2f2f4f"
                 android:padding="8dp"
                 android:src="@drawable/pro_profile"
                 android:tint="@color/white"
@@ -85,7 +85,7 @@
                 android:id="@+id/imageView_passwordIcon"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
-                android:background="@color/colorPrimary"
+                android:background="#2f2f4f"
                 android:padding="8dp"
                 android:src="@drawable/pro_profile"
                 android:tint="@color/white" />
@@ -118,9 +118,9 @@
                 android:id="@+id/imageView_apellido"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
-                android:background="@color/colorPrimary"
+                android:background="#2f2f4f"
                 android:padding="8dp"
-                android:src="@drawable/pro_profile"
+                android:src="@drawable/pro_phone"
                 android:tint="@color/white" />
 
             <EditText
@@ -153,9 +153,9 @@
                 android:id="@+id/imageView_nombre"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
-                android:background="@color/colorPrimary"
+                android:background="#2f2f4f"
                 android:padding="8dp"
-                android:src="@drawable/pro_profile"
+                android:src="@drawable/pro_birthday"
                 android:tint="@color/white" />
 
             <EditText
@@ -188,9 +188,9 @@
                 android:id="@+id/imageView_descripcion"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
-                android:background="@color/colorPrimary"
+                android:background="#2f2f4f"
                 android:padding="8dp"
-                android:src="@drawable/pro_profile"
+                android:src="@drawable/pro_info"
                 android:tint="@color/white" />
 
             <EditText
@@ -222,7 +222,7 @@
             android:layout_below="@+id/relativedescripcion"
             android:layout_marginTop = "10dp"
             android:layout_gravity = "center_horizontal"
-            android:backgroundTint="@color/colorPrimary"
+            android:backgroundTint="#2f2f4f"
             android:textColor="@color/white" />
 
     </RelativeLayout>

@@ -62,6 +62,7 @@ public class PopupPerfil extends Activity {
         popup_updatetbn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 DatabaseReference updatepro = myRefpopup.child(userID);
 
                 final String nombre_s = popup_nombre.getText().toString().trim();
@@ -79,6 +80,7 @@ public class PopupPerfil extends Activity {
                     updatepro.child("descripcion").setValue(popup_descripcion_s);
                     updatepro.child("uid").setValue(userID);
                     updatepro.child("correo").setValue(emailfire);
+
                     Toast.makeText(PopupPerfil.this,"Exito al Actualizar",Toast.LENGTH_SHORT).show();
                 }
 
