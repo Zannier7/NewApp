@@ -1,5 +1,6 @@
 package pe.com.app.nose;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -48,6 +49,8 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Locale;
 
+import static android.app.Activity.RESULT_OK;
+
 
 public class   HomeFragment extends Fragment implements OnMapReadyCallback {
 
@@ -65,23 +68,35 @@ public class   HomeFragment extends Fragment implements OnMapReadyCallback {
     private FirebaseDatabase mfirebaseDatabase;
 
     private static int PETICION_PERMISO_LOCALIZACION = 101;
+    private static final int SECACTI_REQUEST_CODE = 0;
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (requestCode==SECACTI_REQUEST_CODE){
+            if (resultCode==RESULT_OK){
+                double ubitlagdirection = data.getDoubleExtra("DIRECCIONLAG",0);
+                double ubitlongdirection = data.getDoubleExtra("DIRECCIONLONG",0);
+
+                Log.d("asd","llega papa " +ubitlagdirection +","+ ubitlongdirection);
+                Toast.makeText(getActivity(), "ubicacion "+ubitlagdirection +", "+ ubitlongdirection , Toast.LENGTH_SHORT).show();
+
+
+
+
+            }
+        }else  if(resultCode==SECACTI_REQUEST_CODE){
+        }
+    }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container,Bundle savedInstanceState) {
         final View view = inflater.inflate(R.layout.fragment_home, container, false);
 
         firebaseAuth = FirebaseAuth.getInstance();
         mfirebaseDatabase = FirebaseDatabase.getInstance();
         final DatabaseReference myRefEvento = mfirebaseDatabase.getReference(FirebaseReferences.EVENTO_REFERENCE);
-        Bundle direccion = getActivity().getIntent().getExtras();
 
-
-
-        if(direccion !=null){
-            double direccionlag = direccion.getDouble("DIRECCIONLAG");
-            Log.d("penanieto","penanieto"+ direccionlag);
-            Toast.makeText(getActivity(),"direc " + direccionlag,Toast.LENGTH_SHORT).show();
-        }
 
 
         myRefEvento.addValueEventListener(new ValueEventListener() {
@@ -109,7 +124,7 @@ public class   HomeFragment extends Fragment implements OnMapReadyCallback {
                                 Intent intent = new Intent(getActivity(),PopupDescripcion.class);
                                 String claveone = marker.getSnippet();
                                 intent.putExtra("CLAVEONE",claveone);
-                                startActivity(intent);
+                                startActivityForResult(intent,SECACTI_REQUEST_CODE);
                             return false;
                         }
                     });
@@ -137,7 +152,7 @@ public class   HomeFragment extends Fragment implements OnMapReadyCallback {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getActivity(),Popup_create.class);
-                startActivity(intent);
+                startActivityForResult(intent,345);
             }
         });
 
@@ -155,6 +170,7 @@ public class   HomeFragment extends Fragment implements OnMapReadyCallback {
 
         return view;
     }
+
 
     @Override
     public void onMapReady(GoogleMap googleMap) {

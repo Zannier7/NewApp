@@ -430,7 +430,6 @@ public class Popup_create extends Activity  implements GoogleApiClient.OnConnect
         outState.putString("date4", date3);
         outState.putString("time4", time3);
 
-        Toast.makeText(this, "LLega "+title3, Toast.LENGTH_SHORT).show();
         super.onSaveInstanceState(outState);
     }
 

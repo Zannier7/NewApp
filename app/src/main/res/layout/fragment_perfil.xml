@@ -165,8 +165,8 @@
 
         <android.support.design.widget.FloatingActionButton
             android:id="@+id/pro_profile_edit"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
             android:layout_alignParentRight="true"
             android:layout_alignParentTop="true"
             android:layout_marginRight="27dp"
@@ -177,8 +177,8 @@
 
         <android.support.design.widget.FloatingActionButton
             android:id="@+id/invite_button"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
             android:layout_alignParentLeft="true"
             android:layout_alignTop="@+id/pro_profile_edit"
             android:clickable="true"
