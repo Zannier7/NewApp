@@ -117,30 +117,6 @@ public class Popup_create extends Activity  implements GoogleApiClient.OnConnect
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.popup_create);
-        /* <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal" >
-
-        <android.support.design.widget.FloatingActionButton
-            android:id="@+id/addFriends"
-            android:layout_width="100dp"
-            android:layout_height="50dp"
-            android:layout_marginLeft="150dp"
-            android:clickable="true"
-            android:backgroundTint="@color/white"
-            android:src="@drawable/ic_fb"/>
-
-        <android.support.design.widget.FloatingActionButton
-            android:id="@+id/googleInvite"
-            android:layout_width="100dp"
-            android:layout_height="50dp"
-            android:layout_marginLeft="5dp"
-            android:clickable="true"
-            android:backgroundTint="@color/white"
-            android:src="@drawable/gicon"/>
-    </LinearLayout>*/
-
 
 
         smonth = C.get(Calendar.MONTH);
@@ -169,7 +145,7 @@ public class Popup_create extends Activity  implements GoogleApiClient.OnConnect
 
         /*Obtener categoria*/
         listcat = new ArrayList<>();
-        final String[] cat={"Teatro","Cine","Arte","Ambiente","Concierto","Tecnología","Otro.."};
+        final String[] cat={"Artístico","Concierto","Tecnología","Deporte","Conferencia","Moda","Gastronomía","Otro"};
         Collections.addAll(listcat,cat);
         adapSpinner = new ArrayAdapter<>(this,android.R.layout.simple_spinner_item,listcat);
         adapSpinner.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);

@@ -432,7 +432,7 @@ public class   HomeFragment extends Fragment implements OnMapReadyCallback, Dire
 
     private void builAlertMessageNoGps() {
         final AlertDialog.Builder builder= new AlertDialog.Builder(getContext());
-        builder.setMessage("Su Gps esta desabilitado, desea habilitarlo?")
+        builder.setMessage("Su GPS esta desabilitado, desea habilitarlo?")
                 .setCancelable(false)
                 .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                     public void onClick(@SuppressWarnings("Unussed")final DialogInterface dialog, @SuppressWarnings ("Unussed") final int id){
