@@ -56,6 +56,7 @@ public class PopupDescripcion extends Activity{
             String claveone = bundle.getString("CLAVEONE");
 
         myRef.child(claveone).addValueEventListener(new ValueEventListener() {
+
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
 

@@ -1,9 +1,11 @@
 package pe.com.app.nose;
 
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.Color;
 import android.location.Address;
 import android.location.Criteria;
 import android.location.Geocoder;
@@ -38,6 +40,8 @@ import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.android.gms.maps.model.Polyline;
+import com.google.android.gms.maps.model.PolylineOptions;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -46,13 +50,15 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
 import static android.app.Activity.RESULT_OK;
 
 
-public class   HomeFragment extends Fragment implements OnMapReadyCallback {
+public class   HomeFragment extends Fragment implements OnMapReadyCallback, DirectionFinderListener {
 
 
     private FloatingActionButton create;
@@ -62,6 +68,10 @@ public class   HomeFragment extends Fragment implements OnMapReadyCallback {
     double lng = 0.0;
     String mensaje1;
 
+    private List<Marker> originMarkers = new ArrayList<>();
+    private List<Marker> destinationMarkers = new ArrayList<>();
+    private List<Polyline> polylinePaths = new ArrayList<>();
+    private ProgressDialog progressDialog;
 
     private FirebaseAuth firebaseAuth;
     private FirebaseAuth.AuthStateListener firebaseAuthListener;
@@ -77,11 +87,14 @@ public class   HomeFragment extends Fragment implements OnMapReadyCallback {
             if (resultCode==RESULT_OK){
                 double ubitlagdirection = data.getDoubleExtra("DIRECCIONLAG",0);
                 double ubitlongdirection = data.getDoubleExtra("DIRECCIONLONG",0);
+                String origin = lat + "," + lng;
+                String destination = Double.toString(ubitlagdirection) + "," + Double.toString(ubitlongdirection);
 
-                Log.d("asd","llega papa " +ubitlagdirection +","+ ubitlongdirection);
-                Toast.makeText(getActivity(), "ubicacion "+ubitlagdirection +", "+ ubitlongdirection , Toast.LENGTH_SHORT).show();
-
-
+                try {
+                    new DirectionFinder(this, origin, destination).execute();
+                } catch (UnsupportedEncodingException e) {
+                    e.printStackTrace();
+                }
 
 
             }
@@ -121,11 +134,20 @@ public class   HomeFragment extends Fragment implements OnMapReadyCallback {
                     mMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
                         @Override
                         public boolean onMarkerClick(Marker marker) {
+
+                            if (marker.getSnippet() !=null){
                                 Intent intent = new Intent(getActivity(),PopupDescripcion.class);
                                 String claveone = marker.getSnippet();
                                 intent.putExtra("CLAVEONE",claveone);
                                 startActivityForResult(intent,SECACTI_REQUEST_CODE);
+                            }
+
+                              else {
+                                Toast.makeText(getActivity(),"Hola",Toast.LENGTH_LONG).show();
+                            }
+
                             return false;
+
                         }
                     });
 
@@ -278,5 +300,62 @@ public class   HomeFragment extends Fragment implements OnMapReadyCallback {
     }
 
 
+    @Override
+    public void onDirectionFinderStart() {
+        progressDialog = ProgressDialog.show(getActivity(), "Por favor espere",
+                "Encontrando la dirección..!", true);
 
+        if (originMarkers != null) {
+            for (Marker marker : originMarkers) {
+                marker.remove();
+            }
+        }
+
+        if (destinationMarkers != null) {
+            for (Marker marker : destinationMarkers) {
+                marker.remove();
+            }
+        }
+
+        if (polylinePaths != null) {
+            for (Polyline polyline:polylinePaths ) {
+                polyline.remove();
+            }
+        }
+    }
+
+
+
+    @Override
+    public void onDirectionFinderSuccess(List<Route> routes) {
+        progressDialog.dismiss();
+        polylinePaths = new ArrayList<>();
+        originMarkers = new ArrayList<>();
+        destinationMarkers = new ArrayList<>();
+
+        for (Route route : routes) {
+            mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(route.startLocation, 16));
+            //((TextView) findViewById(R.id.tvDuration)).setText(route.duration.text);
+            //((TextView) findViewById(R.id.tvDistance)).setText(route.distance.text);
+
+            originMarkers.add(mMap.addMarker(new MarkerOptions()
+                    .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_ROSE))
+                    .title(route.startAddress)
+                    .position(route.startLocation)));
+            destinationMarkers.add(mMap.addMarker(new MarkerOptions()
+                    .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_YELLOW))
+                    .title(route.endAddress)
+                    .position(route.endLocation)));
+
+            PolylineOptions polylineOptions = new PolylineOptions().
+                    geodesic(true).
+                    color(Color.BLUE).
+                    width(10);
+
+            for (int i = 0; i < route.points.size(); i++)
+                polylineOptions.add(route.points.get(i));
+
+            polylinePaths.add(mMap.addPolyline(polylineOptions));
+        }
+    }
 }
