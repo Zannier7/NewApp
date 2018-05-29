@@ -124,16 +124,76 @@ public class   HomeFragment extends Fragment implements OnMapReadyCallback, Dire
                      final String llave = datasnapshot.getKey();
                      final Eventodb eventodb = datasnapshot.getValue(Eventodb.class);
                      final String titulo = eventodb.getTitulo();
+                     final String categoria = eventodb.getCategoria();
                      final String hora = eventodb.getHora();
                     final double ubitlati = eventodb.getUbilat();
                     final double ubitlongi = eventodb.getUbilong();
 
+                    switch(categoria){
+                        case "Artistico":
+                            Marker mMarker =  mMap.addMarker(new MarkerOptions()
+                                    .position(new LatLng(ubitlati, ubitlongi))
+                                    .title(titulo)
+                                    .snippet(llave)
+                                    .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_ORANGE)));
+                            break;
+                        case "Concierto":
+                            Marker mMarkerConcierto =  mMap.addMarker(new MarkerOptions()
+                                    .position(new LatLng(ubitlati, ubitlongi))
+                                    .title(titulo)
+                                    .snippet(llave)
+                                    .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_MAGENTA)));
+                            break;
+                        case "Tecnologia":
+                            Marker mMarkerTecnologia =  mMap.addMarker(new MarkerOptions()
+                                    .position(new LatLng(ubitlati, ubitlongi))
+                                    .title(titulo)
+                                    .snippet(llave)
+                                    .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_BLUE)));
 
-                    Marker mMarker =  mMap.addMarker(new MarkerOptions()
-                            .position(new LatLng(ubitlati, ubitlongi))
-                            .title(titulo)
-                            .snippet(llave)
-                            .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN)));
+                            break;
+                        case "Deporte":
+                            Marker mMarkerDeporte =  mMap.addMarker(new MarkerOptions()
+                                    .position(new LatLng(ubitlati, ubitlongi))
+                                    .title(titulo)
+                                    .snippet(llave)
+                                    .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN)));
+                             break;
+                        case "Conferencia":
+                            Marker mMarkerConferencia =  mMap.addMarker(new MarkerOptions()
+                                    .position(new LatLng(ubitlati, ubitlongi))
+                                    .title(titulo)
+                                    .snippet(llave)
+                                    .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_MAGENTA)));
+                            break;
+                        case "Moda":
+                            Marker mMarkerModa =  mMap.addMarker(new MarkerOptions()
+                                    .position(new LatLng(ubitlati, ubitlongi))
+                                    .title(titulo)
+                                    .snippet(llave)
+                                    .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_ROSE)));
+                            break;
+                        case "Gastronomia":
+                            Marker mMarkerGastronomia =  mMap.addMarker(new MarkerOptions()
+                                    .position(new LatLng(ubitlati, ubitlongi))
+                                    .title(titulo)
+                                    .snippet(llave)
+                                    .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_VIOLET)));
+                            break;
+                        case "Otros":
+                            Marker mMarkerOtros =  mMap.addMarker(new MarkerOptions()
+                                    .position(new LatLng(ubitlati, ubitlongi))
+                                    .title(titulo)
+                                    .snippet(llave)
+                                    .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_CYAN)));
+                            break;
+
+
+
+                    }
+
+
+
 
                     mMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
                         @Override
