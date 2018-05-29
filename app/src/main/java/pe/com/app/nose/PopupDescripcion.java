@@ -20,7 +20,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-
+import org.w3c.dom.Text;
 
 
 public class PopupDescripcion extends Activity{
@@ -30,6 +30,8 @@ public class PopupDescripcion extends Activity{
     private FirebaseDatabase mfirebaseDatabase;
     private TextView popup_des_email,popup_des_titulo,popup_des_descripcion,popup_des_categoria;
     private Button popup_des_btn;
+    private TextView hora;
+    private TextView fecha;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,6 +53,8 @@ public class PopupDescripcion extends Activity{
         popup_des_descripcion = (TextView) findViewById(R.id.popup_des_descripcion);
         popup_des_categoria = (TextView) findViewById(R.id.popup_des_categoria);
         popup_des_btn = (Button) findViewById(R.id.popup_des_btn);
+        fecha =(TextView) findViewById(R.id.fecha);
+        hora =(TextView)        findViewById(R.id.hora);
 
         if(bundle !=null){
             String claveone = bundle.getString("CLAVEONE");
@@ -65,6 +69,8 @@ public class PopupDescripcion extends Activity{
                     popup_des_email.setText(eventodb.getEmail());
                     popup_des_titulo.setText(eventodb.getTitulo());
                     popup_des_categoria.setText(eventodb.getCategoria());
+                    fecha.setText(eventodb.getFecha());
+                    hora.setText(eventodb.getHora());
                     popup_des_descripcion.setText(eventodb.getDescripcion());
 
                     popup_des_btn.setOnClickListener(new View.OnClickListener() {

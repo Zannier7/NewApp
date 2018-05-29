@@ -211,6 +211,8 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
 
     private void handleSignInResult(GoogleSignInResult result) {
         if (result.isSuccess()) {
+            progressDialog.setMessage("Ingresando... Find your Fun");
+            progressDialog.show();
             firebaseAuthWithGoogle(result.getSignInAccount());
         } else {
             Toast.makeText(this, "No se pudo iniciar sesion con google", Toast.LENGTH_SHORT).show();
@@ -230,11 +232,8 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
     }
 
 
-
-
-
-
     private void goMainScreen() {
+        progressDialog.dismiss();
         Intent intent = new Intent(this, InicioActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(intent);

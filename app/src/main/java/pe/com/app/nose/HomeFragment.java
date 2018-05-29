@@ -1,8 +1,10 @@
 package pe.com.app.nose;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
@@ -201,9 +203,16 @@ public class   HomeFragment extends Fragment implements OnMapReadyCallback, Dire
 
         mMap = googleMap;
         if (ActivityCompat.checkSelfPermission(getContext(), android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(getContext(), android.Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions((Activity) getContext(), new String[]{android.Manifest.permission.ACCESS_FINE_LOCATION, android.Manifest.permission.ACCESS_COARSE_LOCATION},
+                    PETICION_PERMISO_LOCALIZACION);
 
+            LocationManager locationManager = (LocationManager) getContext().getSystemService(getContext().LOCATION_SERVICE);
+            if (!locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)) {
+                builAlertMessageNoGps();
+            }
             return;
         }
+
         mMap.setMyLocationEnabled(true);
 
         UiSettings uiSettings = googleMap.getUiSettings();
@@ -341,11 +350,11 @@ public class   HomeFragment extends Fragment implements OnMapReadyCallback, Dire
             tvDistance.setText(route.distance.text);
 
             originMarkers.add(mMap.addMarker(new MarkerOptions()
-                    .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_ROSE))
+                    .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED))
                     .title(route.startAddress)
                     .position(route.startLocation)));
             destinationMarkers.add(mMap.addMarker(new MarkerOptions()
-                    .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_YELLOW))
+                    .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN))
                     .title(route.endAddress)
                     .position(route.endLocation)));
 
@@ -359,5 +368,24 @@ public class   HomeFragment extends Fragment implements OnMapReadyCallback, Dire
 
             polylinePaths.add(mMap.addPolyline(polylineOptions));
         }
+    }
+
+    private void builAlertMessageNoGps() {
+        final AlertDialog.Builder builder= new AlertDialog.Builder(getContext());
+        builder.setMessage("Su Gps esta desabilitado, desea habilitarlo?")
+                .setCancelable(false)
+                .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                    public void onClick(@SuppressWarnings("Unussed")final DialogInterface dialog, @SuppressWarnings ("Unussed") final int id){
+                        startActivity(new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS));
+                    }
+                })
+                .setNegativeButton("No", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(final DialogInterface dialog, @SuppressWarnings ("Unussed") final int id) {
+                        dialog.cancel();
+                    }
+                });
+        final AlertDialog alert=builder.create();
+        alert.show();
     }
 }

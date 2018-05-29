@@ -14,7 +14,8 @@
             android:text="Crear Evento"
             android:layout_gravity="center"
             android:textColor="@color/colorPrimary"
-            android:textSize="25sp"/>
+            android:textSize="25sp"
+            android:padding="15dp"/>
 
     <ScrollView
     android:layout_width="match_parent"
@@ -49,10 +50,10 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentTop="true"
                 android:layout_centerHorizontal="true"
+                android:drawableLeft="@drawable/title_icon"
                 android:ems="10"
                 android:hint="Título"
-                android:inputType="textPersonName"
-                />
+                android:inputType="textPersonName" />
 
         </android.support.design.widget.TextInputLayout>
 
@@ -71,10 +72,10 @@
                 android:layout_alignParentTop="true"
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="166dp"
+                android:drawableLeft="@drawable/description_icon"
                 android:ems="10"
                 android:hint="Descripción"
-                android:inputType="textMultiLine"
-                />
+                android:inputType="textMultiLine" />
         </android.support.design.widget.TextInputLayout>
 
         <TextView
@@ -104,32 +105,34 @@
            android:orientation="horizontal"
            android:gravity="center_horizontal">
 
-            <EditText
-                android:id="@+id/date"
-                android:layout_width="100dp"
-                android:layout_height="wrap_content"
-                android:layout_alignParentTop="true"
-                android:layout_centerHorizontal="true"
-                android:clickable="true"
-                android:ems="10"
-                android:focusable="false"
-                android:hint="Fecha"
-                android:inputType="datetime"
-                android:paddingLeft="10dp" />
+        <EditText
+            android:id="@+id/date"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:clickable="true"
+            android:drawableLeft="@drawable/date_icon"
+            android:ems="10"
+            android:focusable="false"
+            android:hint="Fecha"
+            android:inputType="datetime"
+            android:paddingLeft="10dp" />
 
-            <EditText
-                android:id="@+id/time"
-                android:layout_width="100dp"
-                android:layout_height="wrap_content"
-                android:layout_alignParentTop="true"
-                android:layout_centerHorizontal="true"
-                android:clickable="true"
-                android:layout_marginLeft="20dp"
-                android:ems="10"
-                android:focusable="false"
-                android:hint="Hora"
-                android:inputType="time"
-                android:paddingLeft="10dp" />
+        <EditText
+            android:id="@+id/time"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginLeft="20dp"
+            android:clickable="true"
+            android:drawableLeft="@drawable/time_icon"
+            android:ems="10"
+            android:focusable="false"
+            android:hint="Hora"
+            android:inputType="time"
+            android:paddingLeft="10dp" />
 
         </LinearLayout>
     <LinearLayout
