@@ -166,7 +166,6 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
         };
 
 
-        
     }
 
     private void doLogin() {

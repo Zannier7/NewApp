@@ -25,6 +25,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.maps.CameraUpdate;
@@ -72,6 +73,8 @@ public class   HomeFragment extends Fragment implements OnMapReadyCallback, Dire
     private List<Marker> destinationMarkers = new ArrayList<>();
     private List<Polyline> polylinePaths = new ArrayList<>();
     private ProgressDialog progressDialog;
+    private TextView tvDistance;
+    private TextView txtimeD;
 
     private FirebaseAuth firebaseAuth;
     private FirebaseAuth.AuthStateListener firebaseAuthListener;
@@ -109,9 +112,8 @@ public class   HomeFragment extends Fragment implements OnMapReadyCallback, Dire
         firebaseAuth = FirebaseAuth.getInstance();
         mfirebaseDatabase = FirebaseDatabase.getInstance();
         final DatabaseReference myRefEvento = mfirebaseDatabase.getReference(FirebaseReferences.EVENTO_REFERENCE);
-
-
-
+        tvDistance = (TextView) view.findViewById(R.id.tvDistance);
+        txtimeD =(TextView) view.findViewById(R.id.txtimeD);
         myRefEvento.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(final DataSnapshot dataSnapshot) {
@@ -143,7 +145,7 @@ public class   HomeFragment extends Fragment implements OnMapReadyCallback, Dire
                             }
 
                               else {
-                                Toast.makeText(getActivity(),"Hola",Toast.LENGTH_LONG).show();
+                                Log.d("Nothing", "no hay nada varon");
                             }
 
                             return false;
@@ -335,8 +337,8 @@ public class   HomeFragment extends Fragment implements OnMapReadyCallback, Dire
 
         for (Route route : routes) {
             mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(route.startLocation, 16));
-            //((TextView) findViewById(R.id.tvDuration)).setText(route.duration.text);
-            //((TextView) findViewById(R.id.tvDistance)).setText(route.distance.text);
+            txtimeD.setText(route.duration.text);
+            tvDistance.setText(route.distance.text);
 
             originMarkers.add(mMap.addMarker(new MarkerOptions()
                     .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_ROSE))
