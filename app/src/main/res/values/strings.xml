@@ -14,12 +14,14 @@
     <string name="categ_selec">Seleccione una categoria:</string>
 
     <string-array name="tipoEventos">
-        <item>Teatro</item>
-        <item>Cine</item>
-        <item>Arte</item>
-        <item>Ambiente</item>
+        <item>Artístico</item>
         <item>Concierto</item>
         <item>Tecnología</item>
+        <item>Deporte</item>
+        <item>Conferencia</item>
+        <item>Moda</item>
+        <item>Gastronomía</item>
+        <item>Otros</item>
     </string-array>
 
 
