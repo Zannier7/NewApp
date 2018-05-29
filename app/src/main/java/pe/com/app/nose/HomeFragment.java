@@ -204,7 +204,10 @@ public class   HomeFragment extends Fragment implements OnMapReadyCallback, Dire
             ActivityCompat.requestPermissions((Activity) getContext(), new String[]{android.Manifest.permission.ACCESS_FINE_LOCATION, android.Manifest.permission.ACCESS_COARSE_LOCATION},
                     PETICION_PERMISO_LOCALIZACION);
 
-            builAlertMessageNoGps();
+            LocationManager locationManager = (LocationManager) getContext().getSystemService(getContext().LOCATION_SERVICE);
+            if (!locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)) {
+                builAlertMessageNoGps();
+            }
             return;
         }
 
