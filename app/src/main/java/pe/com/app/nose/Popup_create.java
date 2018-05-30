@@ -31,6 +31,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.FrameLayout;
 import android.widget.Spinner;
 import android.widget.Switch;
 import android.widget.TimePicker;
@@ -73,6 +74,7 @@ public class Popup_create extends Activity  implements GoogleApiClient.OnConnect
     private FloatingActionButton googleInvite;
 
     private ProgressDialog mProgress;
+    private FrameLayout fl;
 
     private FirebaseAuth mAuth;
     private FirebaseAuth.AuthStateListener fireAuthStateListener;
@@ -137,11 +139,14 @@ public class Popup_create extends Activity  implements GoogleApiClient.OnConnect
 
         DisplayMetrics dm = new DisplayMetrics();
         getWindowManager().getDefaultDisplay().getMetrics(dm);
-
         int width = dm.widthPixels;
         int height = dm.heightPixels;
 
-        getWindow().setLayout((int)(width*.8),(int)(height*.6));
+        /*getWindow().setLayout((int)(width*.8),(int)(height*.6));*/
+
+        fl = (FrameLayout) findViewById( R.id.mainmenu);
+        fl.getForeground().setAlpha( 0);
+
 
         /*Obtener categoria*/
         listcat = new ArrayList<>();
@@ -274,6 +279,7 @@ public class Popup_create extends Activity  implements GoogleApiClient.OnConnect
             @Override
             public void onClick(View v) {
                 crearEvento();
+                finish();
             }
         });
 
