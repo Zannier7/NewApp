@@ -74,7 +74,6 @@ public class Popup_create extends Activity  implements GoogleApiClient.OnConnect
     private FloatingActionButton googleInvite;
 
     private ProgressDialog mProgress;
-    private FrameLayout fl;
 
     private FirebaseAuth mAuth;
     private FirebaseAuth.AuthStateListener fireAuthStateListener;
@@ -142,10 +141,7 @@ public class Popup_create extends Activity  implements GoogleApiClient.OnConnect
         int width = dm.widthPixels;
         int height = dm.heightPixels;
 
-        /*getWindow().setLayout((int)(width*.8),(int)(height*.6));*/
-
-        fl = (FrameLayout) findViewById( R.id.mainmenu);
-        fl.getForeground().setAlpha( 0);
+        //getWindow().setLayout((int)(width*.8),(int)(height*.6));
 
 
         /*Obtener categoria*/
@@ -191,14 +187,16 @@ public class Popup_create extends Activity  implements GoogleApiClient.OnConnect
             }
         });
         /*switchUbicación*/
-        lugar2.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                        Intent intent = new Intent(getApplicationContext(),ReadUbication.class);
-                        startActivityForResult(intent,SECACT_REQUEST_CODE);
-            }
 
-        });
+
+            lugar2.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Intent intent = new Intent(getApplicationContext(),ReadUbication.class);
+                    startActivityForResult(intent,SECACT_REQUEST_CODE);
+                }
+
+            });
 
         selectPlace.setOnClickListener(new View.OnClickListener() {
             @Override
