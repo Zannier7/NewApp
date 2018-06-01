@@ -31,7 +31,6 @@
             </FrameLayout>
         </LinearLayout>
 
-
         <LinearLayout
             android:id="@+id/linearLayout2"
             android:layout_width="360dp"
@@ -211,10 +210,9 @@
             android:text="nombre/apellidos"
             android:gravity="center_horizontal"
             android:layout_marginLeft="95dp"
-            android:layout_marginTop="140dp"
+            android:layout_marginTop="130dp"
             android:textColor="#ffff"
-            android:textSize="21sp"
-            android:textStyle="bold" />
+            android:textSize="18sp"/>
 
         <FrameLayout
             android:id="@+id/snackbar_layout"
