@@ -24,16 +24,17 @@
     android:scrollbarStyle="insideOverlay">
 
     <LinearLayout
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:layout_gravity="center_horizontal">
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="30dp">
 
 
 
 
     <LinearLayout
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
@@ -83,7 +84,7 @@
             android:layout_height="wrap_content"
             android:text="Seleccionar una categoria:"
             android:layout_gravity="center_horizontal"
-            android:layout_marginTop="10dp"/>
+            android:layout_marginTop="18dp"/>
 
         <Spinner
             android:layout_gravity="center_horizontal"
@@ -103,11 +104,12 @@
            android:layout_width="match_parent"
            android:layout_height="wrap_content"
            android:orientation="horizontal"
-           android:gravity="center_horizontal">
+           android:gravity="center_horizontal"
+           android:layout_marginTop="10dp">
 
         <EditText
             android:id="@+id/date"
-            android:layout_width="100dp"
+            android:layout_width="120dp"
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
             android:layout_centerHorizontal="true"
@@ -116,12 +118,11 @@
             android:ems="10"
             android:focusable="false"
             android:hint="Fecha"
-            android:inputType="datetime"
-            android:paddingLeft="10dp" />
+            android:inputType="datetime"/>
 
         <EditText
             android:id="@+id/time"
-            android:layout_width="100dp"
+            android:layout_width="120dp"
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
             android:layout_centerHorizontal="true"
@@ -131,8 +132,7 @@
             android:ems="10"
             android:focusable="false"
             android:hint="Hora"
-            android:inputType="time"
-            android:paddingLeft="10dp" />
+            android:inputType="time" />
 
         </LinearLayout>
     <LinearLayout
@@ -159,7 +159,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
-        android:layout_marginTop="10dp">
+        android:layout_marginTop="12dp">
 
         <Switch
             android:id="@+id/selectlugar"
@@ -176,25 +176,26 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:layout_marginTop="10dp">
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Seleccionar lugar"
-                android:paddingTop="8dp"
+                android:paddingTop="13dp"
                 android:layout_marginLeft="5dp"
                 android:textColor="#000"/>
 
 
             <android.support.design.widget.FloatingActionButton
                 android:id="@+id/lugar"
-                android:layout_width="wrap_content"
-                android:layout_height="30dp"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
                 android:layout_marginBottom="11dp"
                 android:layout_marginLeft="5dp"
                 android:clickable="true"
-                android:src="@mipmap/ubi_round"
+                android:src="@drawable/location"
                 app:backgroundTint="@color/colorPrimary" />
         </LinearLayout>
 
@@ -203,7 +204,7 @@
         android:layout_width = "wrap_content"
         android:layout_height = "wrap_content"
         android:text="Crear Evento"
-        android:layout_marginTop="15dp"
+        android:layout_marginTop="20dp"
         android:layout_gravity="center_horizontal"
         android:backgroundTint="@color/colorPrimary"
         android:textColor="@color/white" />

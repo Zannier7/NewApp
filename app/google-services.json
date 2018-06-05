@@ -25,11 +25,15 @@
         {
           "client_id": "790339130209-t0k0o12c4lqh2no4mui52df826tnrrlu.apps.googleusercontent.com",
           "client_type": 3
+        },
+        {
+          "client_id": "790339130209-t0k0o12c4lqh2no4mui52df826tnrrlu.apps.googleusercontent.com",
+          "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyAu2QuUBbTPUK-AdtfHWbUNun7On6bDsNY"
+          "current_key": "AIzaSyB0z_iRmUcYjkMHDrlOvstziKczyCLNrw4"
         }
       ],
       "services": {

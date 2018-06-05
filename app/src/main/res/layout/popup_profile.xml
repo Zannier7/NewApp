@@ -1,19 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorPrimary"
+    android:background="@color/editProfile"
     android:theme="@style/Theme.AppCompat.Light.NoActionBar">
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-
-
-
+        android:layout_height="470dp">
 
         <RelativeLayout
             android:id="@+id/correo"
@@ -21,41 +15,38 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="15dp"
             android:layout_marginRight="15dp"
-            android:layout_marginTop="15dp" >
-
+            android:layout_marginTop="15dp">
 
             <TextView
                 android:id="@+id/popup_correo"
-                android:layout_width = "wrap_content"
-                android:layout_height = "wrap_content"
-                android:textStyle = "bold"
-                android:text = ""
-                android:textColor = "@color/white"
-                android:layout_centerHorizontal="true" />
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:text="Editar Perfil"
+                android:textColor="@color/white"
+                android:textSize="20sp"
+                android:textStyle="bold" />
 
-        </RelativeLayout >
-
-
+        </RelativeLayout>
 
 
         <RelativeLayout
             android:id="@+id/relativeLayoutcorreo"
             android:layout_width="match_parent"
-            android:layout_below="@+id/correo"
             android:layout_height="wrap_content"
+            android:layout_below="@+id/correo"
             android:layout_marginLeft="30dp"
             android:layout_marginRight="30dp"
-            android:layout_marginTop="30dp">
+            android:layout_marginTop="20dp">
 
             <ImageView
                 android:id="@+id/imageView_userIcon"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
-                android:background="#2f2f4f"
+                android:background="@color/colorPrimary"
                 android:padding="8dp"
                 android:src="@drawable/pro_profile"
-                android:tint="@color/white"
-                />
+                android:tint="@color/white" />
 
             <EditText
                 android:id="@+id/popup_nombre"
@@ -64,9 +55,9 @@
                 android:layout_alignBottom="@+id/imageView_userIcon"
                 android:layout_alignParentTop="true"
                 android:layout_toRightOf="@+id/imageView_userIcon"
-                android:background="@color/editTextBG"
-                android:inputType="text"
+                android:background="@drawable/rounded_profile"
                 android:hint="Nombre"
+                android:inputType="text"
                 android:paddingLeft="20dp"
                 android:textSize="15sp" />
 
@@ -85,7 +76,7 @@
                 android:id="@+id/imageView_passwordIcon"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
-                android:background="#2f2f4f"
+                android:background="@color/colorPrimary"
                 android:padding="8dp"
                 android:src="@drawable/pro_profile"
                 android:tint="@color/white" />
@@ -97,7 +88,7 @@
                 android:layout_alignBottom="@+id/imageView_passwordIcon"
                 android:layout_alignParentTop="true"
                 android:layout_toRightOf="@+id/imageView_passwordIcon"
-                android:background="@color/editTextBG"
+                android:background="@drawable/rounded_profile"
                 android:hint="Apellido"
                 android:inputType="text"
                 android:paddingLeft="20dp"
@@ -118,7 +109,7 @@
                 android:id="@+id/imageView_apellido"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
-                android:background="#2f2f4f"
+                android:background="@color/colorPrimary"
                 android:padding="8dp"
                 android:src="@drawable/pro_phone"
                 android:tint="@color/white" />
@@ -130,7 +121,7 @@
                 android:layout_alignBottom="@+id/imageView_apellido"
                 android:layout_alignParentTop="true"
                 android:layout_toRightOf="@+id/imageView_apellido"
-                android:background="@color/editTextBG"
+                android:background="@drawable/rounded_profile"
                 android:hint="Número de celular"
                 android:inputType="phone"
                 android:paddingLeft="20dp"
@@ -153,7 +144,7 @@
                 android:id="@+id/imageView_nombre"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
-                android:background="#2f2f4f"
+                android:background="@color/colorPrimary"
                 android:padding="8dp"
                 android:src="@drawable/pro_birthday"
                 android:tint="@color/white" />
@@ -165,7 +156,7 @@
                 android:layout_alignBottom="@+id/imageView_nombre"
                 android:layout_alignParentTop="true"
                 android:layout_toRightOf="@+id/imageView_nombre"
-                android:background="@color/editTextBG"
+                android:background="@drawable/rounded_profile"
                 android:hint="Fecha de nacimiento"
                 android:inputType="date"
                 android:paddingLeft="20dp"
@@ -188,7 +179,7 @@
                 android:id="@+id/imageView_descripcion"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
-                android:background="#2f2f4f"
+                android:background="@color/colorPrimary"
                 android:padding="8dp"
                 android:src="@drawable/pro_info"
                 android:tint="@color/white" />
@@ -200,7 +191,7 @@
                 android:layout_alignBottom="@+id/imageView_descripcion"
                 android:layout_alignParentTop="true"
                 android:layout_toRightOf="@+id/imageView_descripcion"
-                android:background="@color/editTextBG"
+                android:background="@drawable/rounded_profile"
                 android:hint="Sobre mi"
                 android:inputType="textMultiLine"
                 android:paddingLeft="20dp"
@@ -210,20 +201,16 @@
         </RelativeLayout>
 
 
-
-
-
         <Button
             android:id="@+id/popup_updatetbn"
-            android:layout_width = "wrap_content"
-            android:layout_height = "wrap_content"
-            android:layout_centerHorizontal="true"
-            android:text = "Guardar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_below="@+id/relativedescripcion"
-            android:layout_marginTop = "10dp"
-            android:layout_gravity = "center_horizontal"
-            android:backgroundTint="#2f2f4f"
-            android:textColor="@color/white" />
+            android:layout_centerHorizontal="true"
+            android:layout_gravity="center_horizontal"
+            android:backgroundTint="@color/white"
+            android:text="Editar Perfil"
+            android:textColor="@color/colorPrimary" />
 
     </RelativeLayout>
 

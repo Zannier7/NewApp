@@ -19,6 +19,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -62,6 +63,7 @@ public class PerfilFragment extends Fragment implements GoogleApiClient.OnConnec
     private TextView pro_descripcion;
     private String userID;
     private FirebaseDatabase mfirebaseDatabase;
+    private FrameLayout fl;
 
     //PSF NEED FOR INVITE
     private static final String TAG = PerfilFragment.class.getSimpleName();
@@ -96,6 +98,11 @@ public class PerfilFragment extends Fragment implements GoogleApiClient.OnConnec
         nameTextView = (TextView) view.findViewById(R.id.nameTextView);
         emailTextView = (TextView) view.findViewById(R.id.emailTextView);
         pro_descripcion = (TextView)view.findViewById(R.id.pro_descripcion);
+
+        fl = (FrameLayout) view.findViewById( R.id.mainmenu);
+
+       fl.getForeground().setAlpha(150);
+
 
 
 

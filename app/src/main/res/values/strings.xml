@@ -31,10 +31,10 @@
     <string name="deep_link_fmt" formatted="false">Deep Link: %s</string>
     <string name="invitation_id_fmt" formatted="false">Invitation ID: %s</string>
 
-    <string name="invitation_title">Send App Invite Quickstart Invitation</string>
-    <string name="invitation_message">This app is terrific, give it a try and get $5 off!</string>
+    <string name="invitation_title">Enviar Invitación -> </string>
+    <string name="invitation_message">Hey hoola..Quiero que seas parte de mi evento. No DUDES en ASISTIR la pasarás muy bien </string>
     <string name="invitation_deep_link">http://example.com/offer/five_dollar_offer</string>
-    <string name="invitation_custom_image">https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png</string>
+    <string name="invitation_custom_image">https://http2.mlstatic.com/cuadros-al-oleo-abstracto-minimalista-en-1-lienzo-D_NQ_NP_743006-MLM25867629872_082017-F.jpg</string>
     <string name="invitation_cta">Install!</string>
     <string name="send_failed">Sending invitations failed</string>
     <string name="invite_dialog_title">You got an invitation!</string>
