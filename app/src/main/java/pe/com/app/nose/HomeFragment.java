@@ -195,8 +195,6 @@ public class   HomeFragment extends Fragment implements OnMapReadyCallback, Dire
 
 
 
-
-
                     mMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
                         @Override
                         public boolean onMarkerClick(Marker marker) {
