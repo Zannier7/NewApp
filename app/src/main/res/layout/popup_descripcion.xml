@@ -101,7 +101,7 @@
             android:layout_height = "wrap_content"
             android:text = "Sígueme"
             android:layout_marginTop = "15dp"
-            android:backgroundTint="#212121"
+            android:backgroundTint="#1555a9"
             android:textColor="@color/white" />
 
     </LinearLayout>

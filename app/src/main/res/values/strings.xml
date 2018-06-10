@@ -14,7 +14,6 @@
     <string name="categ_selec">Seleccione una categoria:</string>
 
     <string-array name="tipoEventos">
-        <item>Seleccionar</item>
         <item>Todos los eventos</item>
         <item>Artístico</item>
         <item>Concierto</item>
