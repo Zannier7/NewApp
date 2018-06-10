@@ -26,7 +26,9 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -77,7 +79,7 @@ public class   HomeFragment extends Fragment implements OnMapReadyCallback, Dire
     private ProgressDialog progressDialog;
     private TextView tvDistance;
     private TextView txtimeD;
-
+    private Spinner listacategoria;
     private FirebaseAuth firebaseAuth;
     private FirebaseAuth.AuthStateListener firebaseAuthListener;
     private FirebaseDatabase mfirebaseDatabase;
@@ -113,21 +115,98 @@ public class   HomeFragment extends Fragment implements OnMapReadyCallback, Dire
 
         firebaseAuth = FirebaseAuth.getInstance();
         mfirebaseDatabase = FirebaseDatabase.getInstance();
-        final DatabaseReference myRefEvento = mfirebaseDatabase.getReference(FirebaseReferences.EVENTO_REFERENCE);
+
         tvDistance = (TextView) view.findViewById(R.id.tvDistance);
         txtimeD =(TextView) view.findViewById(R.id.txtimeD);
+        listacategoria = (Spinner) view.findViewById(R.id.listacategoria);
+
+
+
+        /*getLocation2();*/
+        create = (FloatingActionButton)view.findViewById(R.id.create);
+        create.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(),Popup_create.class);
+                startActivityForResult(intent,345);
+            }
+        });
+
+
+
+
+
+        SupportMapFragment mapFragment = (SupportMapFragment) this.getChildFragmentManager()
+                .findFragmentById(R.id.map);
+
+        mapFragment.getMapAsync(this);
+
+
+
+
+        return view;
+    }
+
+
+    @Override
+    public void onMapReady(GoogleMap googleMap) {
+
+
+        mMap = googleMap;
+        if (ActivityCompat.checkSelfPermission(getContext(), android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(getContext(), android.Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions((Activity) getContext(), new String[]{android.Manifest.permission.ACCESS_FINE_LOCATION, android.Manifest.permission.ACCESS_COARSE_LOCATION},
+                    PETICION_PERMISO_LOCALIZACION);
+
+            LocationManager locationManager = (LocationManager) getContext().getSystemService(getContext().LOCATION_SERVICE);
+            if (!locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)) {
+                builAlertMessageNoGps();
+            }
+            return;
+        }
+
+        mMap.setMyLocationEnabled(true);
+
+        UiSettings uiSettings = googleMap.getUiSettings();
+
+        uiSettings.setAllGesturesEnabled(true);
+        uiSettings.setCompassEnabled(true);
+        uiSettings.setRotateGesturesEnabled(true);
+        uiSettings.setScrollGesturesEnabled(true);
+        uiSettings.setTiltGesturesEnabled(true);
+        uiSettings.setZoomGesturesEnabled(true);
+
+        miUbicacion();
+
+        final DatabaseReference myRefEvento = mfirebaseDatabase.getReference(FirebaseReferences.EVENTO_REFERENCE);
         myRefEvento.addValueEventListener(new ValueEventListener() {
+
+
+
             @Override
             public void onDataChange(final DataSnapshot dataSnapshot) {
 
                 for(final DataSnapshot datasnapshot: dataSnapshot.getChildren()){
-                     final String llave = datasnapshot.getKey();
-                     final Eventodb eventodb = datasnapshot.getValue(Eventodb.class);
-                     final String titulo = eventodb.getTitulo();
-                     final String categoria = eventodb.getCategoria();
-                     final String hora = eventodb.getHora();
+                    final String llave = datasnapshot.getKey();
+                    final Eventodb eventodb = datasnapshot.getValue(Eventodb.class);
+                    final String titulo = eventodb.getTitulo();
+                    final String categoria = eventodb.getCategoria();
+                    final String hora = eventodb.getHora();
                     final double ubitlati = eventodb.getUbilat();
                     final double ubitlongi = eventodb.getUbilong();
+
+                listacategoria.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                    @Override
+                    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                      final String categoriaselect = listacategoria.getSelectedItem().toString();
+                        Toast.makeText(getContext(),  categoriaselect + " seleccionado" , Toast.LENGTH_SHORT).show();
+                        
+                    }
+
+                    @Override
+                    public void onNothingSelected(AdapterView<?> parent) {
+
+                    }
+                    });
 
                     if (categoria==null){
                         Toast.makeText(getContext(), "Cargando mapa", Toast.LENGTH_SHORT).show();
@@ -206,7 +285,7 @@ public class   HomeFragment extends Fragment implements OnMapReadyCallback, Dire
                                 startActivityForResult(intent,SECACTI_REQUEST_CODE);
                             }
 
-                              else {
+                            else {
                                 Log.d("Nothing", "no hay nada varon");
                             }
 
@@ -229,62 +308,6 @@ public class   HomeFragment extends Fragment implements OnMapReadyCallback, Dire
 
             }
         });
-
-
-
-        /*getLocation2();*/
-        create = (FloatingActionButton)view.findViewById(R.id.create);
-        create.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getActivity(),Popup_create.class);
-                startActivityForResult(intent,345);
-            }
-        });
-
-
-
-
-
-        SupportMapFragment mapFragment = (SupportMapFragment) this.getChildFragmentManager()
-                .findFragmentById(R.id.map);
-
-        mapFragment.getMapAsync(this);
-
-
-
-
-        return view;
-    }
-
-
-    @Override
-    public void onMapReady(GoogleMap googleMap) {
-
-        mMap = googleMap;
-        if (ActivityCompat.checkSelfPermission(getContext(), android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(getContext(), android.Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-            ActivityCompat.requestPermissions((Activity) getContext(), new String[]{android.Manifest.permission.ACCESS_FINE_LOCATION, android.Manifest.permission.ACCESS_COARSE_LOCATION},
-                    PETICION_PERMISO_LOCALIZACION);
-
-            LocationManager locationManager = (LocationManager) getContext().getSystemService(getContext().LOCATION_SERVICE);
-            if (!locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)) {
-                builAlertMessageNoGps();
-            }
-            return;
-        }
-
-        mMap.setMyLocationEnabled(true);
-
-        UiSettings uiSettings = googleMap.getUiSettings();
-
-        uiSettings.setAllGesturesEnabled(true);
-        uiSettings.setCompassEnabled(true);
-        uiSettings.setRotateGesturesEnabled(true);
-        uiSettings.setScrollGesturesEnabled(true);
-        uiSettings.setTiltGesturesEnabled(true);
-        uiSettings.setZoomGesturesEnabled(true);
-
-        miUbicacion();
 
 
     }
