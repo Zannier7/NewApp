@@ -27,8 +27,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginTop="30dp">
+        android:layout_gravity="center_horizontal">
 
 
 
@@ -76,7 +75,8 @@
                 android:drawableLeft="@drawable/description_icon"
                 android:ems="10"
                 android:hint="Descripción"
-                android:inputType="textMultiLine" />
+                android:inputType="textMultiLine"
+                android:maxLength="100"/>
         </android.support.design.widget.TextInputLayout>
 
         <TextView
@@ -204,7 +204,7 @@
         android:layout_width = "wrap_content"
         android:layout_height = "wrap_content"
         android:text="Crear Evento"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="10dp"
         android:layout_gravity="center_horizontal"
         android:backgroundTint="@color/colorPrimary"
         android:textColor="@color/white" />

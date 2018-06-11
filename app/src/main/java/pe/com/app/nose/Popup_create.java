@@ -80,6 +80,7 @@ public class Popup_create extends Activity  implements GoogleApiClient.OnConnect
 
     private int nyear, nmonth,nday, syear,smonth,sday;
     static final int DATE_ID=0;
+
     Calendar C = Calendar.getInstance();
     int hour = C.get(Calendar.HOUR_OF_DAY);
     int minute = C.get(Calendar.MINUTE);
