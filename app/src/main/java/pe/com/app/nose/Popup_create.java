@@ -348,7 +348,7 @@ public class Popup_create extends Activity  implements GoogleApiClient.OnConnect
 
 
     private void colocar_fecha(){
-        date.setText((nmonth + 1)+"/"+nday+"/"+nyear+" ");
+        date.setText(nday+"/"+(nmonth + 1)+"/"+nyear+" ");
     }
 
 
