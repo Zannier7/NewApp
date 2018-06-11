@@ -22,6 +22,7 @@ import android.support.v4.app.ActivityCompat;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -52,6 +53,7 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
 import java.io.IOException;
@@ -63,8 +65,9 @@ import java.util.Locale;
 import static android.app.Activity.RESULT_OK;
 
 
-public class   HomeFragment extends Fragment implements OnMapReadyCallback, DirectionFinderListener {
+public class HomeFragment extends Fragment implements OnMapReadyCallback, DirectionFinderListener {
 
+    public static final String TAG = HomeFragment.class.getSimpleName();
 
     private FloatingActionButton create;
     private GoogleMap mMap;
@@ -72,7 +75,7 @@ public class   HomeFragment extends Fragment implements OnMapReadyCallback, Dire
     double lat = 0.0;
     double lng = 0.0;
     String mensaje1;
-
+    String categoriaseleccionado;
     private List<Marker> originMarkers = new ArrayList<>();
     private List<Marker> destinationMarkers = new ArrayList<>();
     private List<Polyline> polylinePaths = new ArrayList<>();
@@ -86,14 +89,15 @@ public class   HomeFragment extends Fragment implements OnMapReadyCallback, Dire
 
     private static int PETICION_PERMISO_LOCALIZACION = 101;
     private static final int SECACTI_REQUEST_CODE = 0;
+
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-        if (requestCode==SECACTI_REQUEST_CODE){
-            if (resultCode==RESULT_OK){
-                double ubitlagdirection = data.getDoubleExtra("DIRECCIONLAG",0);
-                double ubitlongdirection = data.getDoubleExtra("DIRECCIONLONG",0);
+        if (requestCode == SECACTI_REQUEST_CODE) {
+            if (resultCode == RESULT_OK) {
+                double ubitlagdirection = data.getDoubleExtra("DIRECCIONLAG", 0);
+                double ubitlongdirection = data.getDoubleExtra("DIRECCIONLONG", 0);
                 String origin = lat + "," + lng;
                 String destination = Double.toString(ubitlagdirection) + "," + Double.toString(ubitlongdirection);
 
@@ -105,43 +109,38 @@ public class   HomeFragment extends Fragment implements OnMapReadyCallback, Dire
 
 
             }
-        }else  if(resultCode==SECACTI_REQUEST_CODE){
+        } else if (resultCode == SECACTI_REQUEST_CODE) {
         }
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container,Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
         final View view = inflater.inflate(R.layout.fragment_home, container, false);
 
         firebaseAuth = FirebaseAuth.getInstance();
         mfirebaseDatabase = FirebaseDatabase.getInstance();
 
         tvDistance = (TextView) view.findViewById(R.id.tvDistance);
-        txtimeD =(TextView) view.findViewById(R.id.txtimeD);
+        txtimeD = (TextView) view.findViewById(R.id.txtimeD);
         listacategoria = (Spinner) view.findViewById(R.id.listacategoria);
 
 
 
         /*getLocation2();*/
-        create = (FloatingActionButton)view.findViewById(R.id.create);
+        create = (FloatingActionButton) view.findViewById(R.id.create);
         create.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getActivity(),Popup_create.class);
-                startActivityForResult(intent,345);
+                Intent intent = new Intent(getActivity(), Popup_create.class);
+                startActivityForResult(intent, 345);
             }
         });
-
-
-
 
 
         SupportMapFragment mapFragment = (SupportMapFragment) this.getChildFragmentManager()
                 .findFragmentById(R.id.map);
 
         mapFragment.getMapAsync(this);
-
-
 
 
         return view;
@@ -177,15 +176,15 @@ public class   HomeFragment extends Fragment implements OnMapReadyCallback, Dire
 
         miUbicacion();
 
+
         final DatabaseReference myRefEvento = mfirebaseDatabase.getReference(FirebaseReferences.EVENTO_REFERENCE);
         myRefEvento.addValueEventListener(new ValueEventListener() {
-
 
 
             @Override
             public void onDataChange(final DataSnapshot dataSnapshot) {
 
-                for(final DataSnapshot datasnapshot: dataSnapshot.getChildren()){
+                for (final DataSnapshot datasnapshot : dataSnapshot.getChildren()) {
                     final String llave = datasnapshot.getKey();
                     final Eventodb eventodb = datasnapshot.getValue(Eventodb.class);
                     final String titulo = eventodb.getTitulo();
@@ -193,41 +192,52 @@ public class   HomeFragment extends Fragment implements OnMapReadyCallback, Dire
                     final String hora = eventodb.getHora();
                     final double ubitlati = eventodb.getUbilat();
                     final double ubitlongi = eventodb.getUbilong();
+                    listacategoria.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                        @Override
+                        public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                            //categoriaseleccionado = listacategoria.getSelectedItem().toString();
+                            selecToPosition(listacategoria.getSelectedItem().toString(),
+                                    ubitlati,
+                                    ubitlongi,
+                                    titulo,
+                                    llave);
+                            Toast.makeText(getContext(), "Cargando mapa" + categoriaseleccionado, Toast.LENGTH_SHORT).show();
 
-                listacategoria.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-                    @Override
-                    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                      final String categoriaselect = listacategoria.getSelectedItem().toString();
-                        Toast.makeText(getContext(),  categoriaselect + " seleccionado" , Toast.LENGTH_SHORT).show();
-                        
-                    }
+                        }
 
-                    @Override
-                    public void onNothingSelected(AdapterView<?> parent) {
+                        @Override
+                        public void onNothingSelected(AdapterView<?> parent) {
 
-                    }
+                        }
                     });
 
-                    if (categoria==null){
+
+
+                    if (categoria == null) {
                         Toast.makeText(getContext(), "Cargando mapa", Toast.LENGTH_SHORT).show();
-                    } else if (categoria!=null){
-                        switch(categoria){
+                    } else if (categoria != null) {
+                        switch (categoria) {
                             case "Artistico":
-                                Marker mMarker =  mMap.addMarker(new MarkerOptions()
-                                        .position(new LatLng(ubitlati, ubitlongi))
-                                        .title(titulo)
-                                        .snippet(llave)
-                                        .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_ORANGE)));
+                                Marker marker = mMap.addMarker(new MarkerOptions()
+                                    .position(new LatLng(ubitlati, ubitlongi))
+                                    .title(titulo)
+                                    .snippet(llave)
+                                    .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_ORANGE)));
+                                /*selecToPosition(listacategoria.getSelectedItem().toString(),
+                                        ubitlati,
+                                        ubitlongi,
+                                        titulo,
+                                        llave);*/
                                 break;
                             case "Concierto":
-                                Marker mMarkerConcierto =  mMap.addMarker(new MarkerOptions()
+                                Marker mMarkerConcierto = mMap.addMarker(new MarkerOptions()
                                         .position(new LatLng(ubitlati, ubitlongi))
                                         .title(titulo)
                                         .snippet(llave)
                                         .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_MAGENTA)));
                                 break;
                             case "Tecnologia":
-                                Marker mMarkerTecnologia =  mMap.addMarker(new MarkerOptions()
+                                Marker mMarkerTecnologia = mMap.addMarker(new MarkerOptions()
                                         .position(new LatLng(ubitlati, ubitlongi))
                                         .title(titulo)
                                         .snippet(llave)
@@ -235,35 +245,35 @@ public class   HomeFragment extends Fragment implements OnMapReadyCallback, Dire
 
                                 break;
                             case "Deporte":
-                                Marker mMarkerDeporte =  mMap.addMarker(new MarkerOptions()
+                                Marker mMarkerDeporte = mMap.addMarker(new MarkerOptions()
                                         .position(new LatLng(ubitlati, ubitlongi))
                                         .title(titulo)
                                         .snippet(llave)
                                         .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN)));
                                 break;
                             case "Conferencia":
-                                Marker mMarkerConferencia =  mMap.addMarker(new MarkerOptions()
+                                Marker mMarkerConferencia = mMap.addMarker(new MarkerOptions()
                                         .position(new LatLng(ubitlati, ubitlongi))
                                         .title(titulo)
                                         .snippet(llave)
                                         .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_MAGENTA)));
                                 break;
                             case "Moda":
-                                Marker mMarkerModa =  mMap.addMarker(new MarkerOptions()
+                                Marker mMarkerModa = mMap.addMarker(new MarkerOptions()
                                         .position(new LatLng(ubitlati, ubitlongi))
                                         .title(titulo)
                                         .snippet(llave)
                                         .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_ROSE)));
                                 break;
                             case "Gastronomia":
-                                Marker mMarkerGastronomia =  mMap.addMarker(new MarkerOptions()
+                                Marker mMarkerGastronomia = mMap.addMarker(new MarkerOptions()
                                         .position(new LatLng(ubitlati, ubitlongi))
                                         .title(titulo)
                                         .snippet(llave)
                                         .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_VIOLET)));
                                 break;
                             case "Otros":
-                                Marker mMarkerOtros =  mMap.addMarker(new MarkerOptions()
+                                Marker mMarkerOtros = mMap.addMarker(new MarkerOptions()
                                         .position(new LatLng(ubitlati, ubitlongi))
                                         .title(titulo)
                                         .snippet(llave)
@@ -273,19 +283,16 @@ public class   HomeFragment extends Fragment implements OnMapReadyCallback, Dire
                     }
 
 
-
                     mMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
                         @Override
                         public boolean onMarkerClick(Marker marker) {
 
-                            if (marker.getSnippet() !=null){
-                                Intent intent = new Intent(getActivity(),PopupDescripcion.class);
+                            if (marker.getSnippet() != null) {
+                                Intent intent = new Intent(getActivity(), PopupDescripcion.class);
                                 String claveone = marker.getSnippet();
-                                intent.putExtra("CLAVEONE",claveone);
-                                startActivityForResult(intent,SECACTI_REQUEST_CODE);
-                            }
-
-                            else {
+                                intent.putExtra("CLAVEONE", claveone);
+                                startActivityForResult(intent, SECACTI_REQUEST_CODE);
+                            } else {
                                 Log.d("Nothing", "no hay nada varon");
                             }
 
@@ -295,10 +302,7 @@ public class   HomeFragment extends Fragment implements OnMapReadyCallback, Dire
                     });
 
 
-
                 }
-
-
 
 
             }
@@ -312,10 +316,105 @@ public class   HomeFragment extends Fragment implements OnMapReadyCallback, Dire
 
     }
 
-    public void locationStart(){
+    private void initListener() {
+        listacategoria.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+               /* selecToPosition(listacategoria.getSelectedItem().toString(),
+                        ubitlati,
+                        ubitlongi,
+                        titulo,
+                        llave);*/
+                Toast.makeText(getContext(), "Cargando mapa" + categoriaseleccionado, Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+    }
+
+    private void selecToPosition(String categoriaseleccionado, final double ubitlati, final double ubitlongi, final String titulo, final String llave) {
+        this.categoriaseleccionado = categoriaseleccionado;
+
+        DatabaseReference myRefEvento = mfirebaseDatabase.getReference();
+        Query query = myRefEvento.child(FirebaseReferences.EVENTO_REFERENCE)
+                .orderByChild("categoria")
+                .equalTo(categoriaseleccionado);
+        query.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                if (dataSnapshot.exists()) {
+
+                    for (DataSnapshot dataResult : dataSnapshot.getChildren()) {
+                        // do with your result
+                        Eventodb eventodb = dataResult.getValue(Eventodb.class);
+
+                        switch (eventodb.getCategoria()) {
+                            case "Artistico":
+                                Log.d(TAG, "dataResult : " + dataResult.getKey());
+                                Log.d(TAG, "Artistico");
+                                //onResume();
+                                Marker mMarker = mMap.addMarker(new MarkerOptions()
+                                        .position(new LatLng(ubitlati, ubitlongi))
+                                        .title(titulo)
+                                        .snippet(llave).visible(false)
+                                        .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_ORANGE)));
+
+                                break;
+                            case "Concierto":
+                                Marker mMarkerConcierto = mMap.addMarker(new MarkerOptions()
+                                        .position(new LatLng(ubitlati, ubitlongi))
+                                        .title(titulo)
+                                        .snippet(llave)
+                                        .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_MAGENTA)));
+                                mMarkerConcierto.setVisible(false);
+                                break;
+                            default:
+                                Log.d(TAG, "default");
+                                break;
+
+                        }
+
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+
+        /*switch (categoriaseleccionado) {
+            case "Artistico":
+
+
+                //onResume();
+                Marker mMarker = mMap.addMarker(new MarkerOptions()
+                        .position(new LatLng(ubitlati, ubitlongi))
+                        .title(titulo)
+                        .snippet(llave)
+                        .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_ORANGE)));
+                break;
+            case "Concierto":
+                Marker mMarkerConcierto = mMap.addMarker(new MarkerOptions()
+                        .position(new LatLng(ubitlati, ubitlongi))
+                        .title(titulo)
+                        .snippet(llave)
+                        .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_MAGENTA)));
+                break;
+            default:
+                break;
+
+        }*/
+    }
+
+    public void locationStart() {
         LocationManager mlocManager = (LocationManager) getActivity().getSystemService(Context.LOCATION_SERVICE);
         final boolean gpsEnabled = mlocManager.isProviderEnabled(LocationManager.GPS_PROVIDER);
-        if (!gpsEnabled){
+        if (!gpsEnabled) {
             Intent settingsIntent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
             startActivity(settingsIntent);
         }
@@ -371,7 +470,6 @@ public class   HomeFragment extends Fragment implements OnMapReadyCallback, Dire
     };
 
 
-
     private void miUbicacion() {
         if (ActivityCompat.checkSelfPermission(getContext(), android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(getContext(), android.Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             ActivityCompat.requestPermissions(getActivity(),
@@ -382,7 +480,7 @@ public class   HomeFragment extends Fragment implements OnMapReadyCallback, Dire
             LocationManager locationManager = (LocationManager) getActivity().getSystemService(Context.LOCATION_SERVICE);
             Location location = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
             ActualizarUbicacion(location);
-            locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER,1200,0,locListener);
+            locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 1200, 0, locListener);
         }
 
     }
@@ -412,12 +510,11 @@ public class   HomeFragment extends Fragment implements OnMapReadyCallback, Dire
         }
 
         if (polylinePaths != null) {
-            for (Polyline polyline:polylinePaths ) {
+            for (Polyline polyline : polylinePaths) {
                 polyline.remove();
             }
         }
     }
-
 
 
     @Override
@@ -454,21 +551,27 @@ public class   HomeFragment extends Fragment implements OnMapReadyCallback, Dire
     }
 
     private void builAlertMessageNoGps() {
-        final AlertDialog.Builder builder= new AlertDialog.Builder(getContext());
+        final AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
         builder.setMessage("Su GPS esta desabilitado, desea habilitarlo?")
                 .setCancelable(false)
                 .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
-                    public void onClick(@SuppressWarnings("Unussed")final DialogInterface dialog, @SuppressWarnings ("Unussed") final int id){
+                    public void onClick(@SuppressWarnings("Unussed") final DialogInterface dialog, @SuppressWarnings("Unussed") final int id) {
                         startActivity(new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS));
                     }
                 })
                 .setNegativeButton("No", new DialogInterface.OnClickListener() {
                     @Override
-                    public void onClick(final DialogInterface dialog, @SuppressWarnings ("Unussed") final int id) {
+                    public void onClick(final DialogInterface dialog, @SuppressWarnings("Unussed") final int id) {
                         dialog.cancel();
                     }
                 });
-        final AlertDialog alert=builder.create();
+        final AlertDialog alert = builder.create();
         alert.show();
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        Log.d(TAG, "onResume");
     }
 }

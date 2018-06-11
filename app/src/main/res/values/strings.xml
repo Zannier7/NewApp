@@ -16,13 +16,13 @@
     <string-array name="tipoEventos">
         <item>Seleccionar</item>
         <item>Todos los eventos</item>
-        <item>Artístico</item>
+        <item>Artistico</item>
         <item>Concierto</item>
-        <item>Tecnología</item>
+        <item>Tecnologia</item>
         <item>Deporte</item>
         <item>Conferencia</item>
         <item>Moda</item>
-        <item>Gastronomía</item>
+        <item>Gastronomia</item>
         <item>Otros</item>
     </string-array>
 
