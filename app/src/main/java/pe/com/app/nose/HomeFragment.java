@@ -90,6 +90,16 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback, Direct
     private FirebaseAuth.AuthStateListener firebaseAuthListener;
     private FirebaseDatabase mfirebaseDatabase;
 
+    Marker mMarkerArtistico, mMarkerConcierto,mMarkerTecnologia, mMarkerDeporte, mMarkerConferencia, mMarkerModa, mMarkerGastronomia, mMarkerOtros;
+    private List<Marker> mMarkerArtisticoList = new ArrayList<>();
+    private List<Marker> mMarkerConciertoList = new ArrayList<>();
+    private List<Marker> mMarkerTecnologiaList = new ArrayList<>();
+    private List<Marker> mMarkerDeporteList = new ArrayList<>();
+    private List<Marker> mMarkerConferenciaList = new ArrayList<>();
+    private List<Marker> mMarkerModaList = new ArrayList<>();
+    private List<Marker> mMarkerGastronomiaList = new ArrayList<>();
+    private List<Marker> mMarkerOtrosList = new ArrayList<>();
+
     private static int PETICION_PERMISO_LOCALIZACION = 101;
     private static final int SECACTI_REQUEST_CODE = 0;
 
@@ -201,13 +211,7 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback, Direct
                         @Override
                         public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                             //categoriaseleccionado = listacategoria.getSelectedItem().toString();
-                            selecToPosition(listacategoria.getSelectedItem().toString(),
-                                    ubitlati,
-                                    ubitlongi,
-                                    titulo,
-                                    llave);
-                            Toast.makeText(getContext(), "Cargando mapa" + categoriaseleccionado, Toast.LENGTH_SHORT).show();
-
+                            selecToPosition(listacategoria.getSelectedItem().toString());
                         }
 
                         @Override
@@ -237,66 +241,68 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback, Direct
                             } else if (categoria != null && date !=null) {
                                 switch (categoria) {
                                     case "Artistico":
-                                        Marker marker = mMap.addMarker(new MarkerOptions()
+                                        mMarkerArtistico = mMap.addMarker(new MarkerOptions()
                                                 .position(new LatLng(ubitlati, ubitlongi))
                                                 .title(titulo)
                                                 .snippet(llave)
                                                 .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_ORANGE)));
-                                /*selecToPosition(listacategoria.getSelectedItem().toString(),
-                                        ubitlati,
-                                        ubitlongi,
-                                        titulo,
-                                        llave);*/
+                                        mMarkerArtisticoList.add(mMarkerArtistico);
                                         break;
                                     case "Concierto":
-                                        Marker mMarkerConcierto = mMap.addMarker(new MarkerOptions()
+                                        mMarkerConcierto = mMap.addMarker(new MarkerOptions()
                                                 .position(new LatLng(ubitlati, ubitlongi))
                                                 .title(titulo)
                                                 .snippet(llave)
                                                 .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_MAGENTA)));
+                                        mMarkerConciertoList.add(mMarkerConcierto);
                                         break;
                                     case "Tecnologia":
-                                        Marker mMarkerTecnologia = mMap.addMarker(new MarkerOptions()
+                                        mMarkerTecnologia =  mMap.addMarker(new MarkerOptions()
                                                 .position(new LatLng(ubitlati, ubitlongi))
                                                 .title(titulo)
                                                 .snippet(llave)
                                                 .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_BLUE)));
-
+                                        mMarkerTecnologiaList.add(mMarkerTecnologia);
                                         break;
                                     case "Deporte":
-                                        Marker mMarkerDeporte = mMap.addMarker(new MarkerOptions()
+                                        mMarkerDeporte =  mMap.addMarker(new MarkerOptions()
                                                 .position(new LatLng(ubitlati, ubitlongi))
                                                 .title(titulo)
                                                 .snippet(llave)
                                                 .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN)));
+                                        mMarkerDeporteList.add(mMarkerDeporte);
                                         break;
                                     case "Conferencia":
-                                        Marker mMarkerConferencia = mMap.addMarker(new MarkerOptions()
+                                        mMarkerConferencia  =  mMap.addMarker(new MarkerOptions()
                                                 .position(new LatLng(ubitlati, ubitlongi))
                                                 .title(titulo)
                                                 .snippet(llave)
                                                 .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_MAGENTA)));
+                                        mMarkerConferenciaList.add(mMarkerConferencia);
                                         break;
                                     case "Moda":
-                                        Marker mMarkerModa = mMap.addMarker(new MarkerOptions()
+                                        mMarkerModa =  mMap.addMarker(new MarkerOptions()
                                                 .position(new LatLng(ubitlati, ubitlongi))
                                                 .title(titulo)
                                                 .snippet(llave)
                                                 .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_ROSE)));
+                                        mMarkerModaList.add(mMarkerModa);
                                         break;
                                     case "Gastronomia":
-                                        Marker mMarkerGastronomia = mMap.addMarker(new MarkerOptions()
+                                        mMarkerGastronomia =  mMap.addMarker(new MarkerOptions()
                                                 .position(new LatLng(ubitlati, ubitlongi))
                                                 .title(titulo)
                                                 .snippet(llave)
                                                 .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_VIOLET)));
+                                        mMarkerGastronomiaList.add(mMarkerGastronomia);
                                         break;
                                     case "Otros":
-                                        Marker mMarkerOtros = mMap.addMarker(new MarkerOptions()
+                                        mMarkerOtros =  mMap.addMarker(new MarkerOptions()
                                                 .position(new LatLng(ubitlati, ubitlongi))
                                                 .title(titulo)
                                                 .snippet(llave)
                                                 .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_CYAN)));
+                                        mMarkerOtrosList.add(mMarkerOtros);
                                         break;
                                 }
                             }
@@ -338,100 +344,7 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback, Direct
 
     }
 
-    private void initListener() {
-        listacategoria.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-               /* selecToPosition(listacategoria.getSelectedItem().toString(),
-                        ubitlati,
-                        ubitlongi,
-                        titulo,
-                        llave);*/
-                Toast.makeText(getContext(), "Cargando mapa" + categoriaseleccionado, Toast.LENGTH_SHORT).show();
-            }
 
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-
-            }
-        });
-    }
-
-    private void selecToPosition(String categoriaseleccionado, final double ubitlati, final double ubitlongi, final String titulo, final String llave) {
-        this.categoriaseleccionado = categoriaseleccionado;
-
-        DatabaseReference myRefEvento = mfirebaseDatabase.getReference();
-        Query query = myRefEvento.child(FirebaseReferences.EVENTO_REFERENCE)
-                .orderByChild("categoria")
-                .equalTo(categoriaseleccionado);
-        query.addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                if (dataSnapshot.exists()) {
-
-                    for (DataSnapshot dataResult : dataSnapshot.getChildren()) {
-                        // do with your result
-                        Eventodb eventodb = dataResult.getValue(Eventodb.class);
-
-                        switch (eventodb.getCategoria()) {
-                            case "Artistico":
-                                Log.d(TAG, "dataResult : " + dataResult.getKey());
-                                Log.d(TAG, "Artistico");
-                                //onResume();
-                                Marker mMarker = mMap.addMarker(new MarkerOptions()
-                                        .position(new LatLng(ubitlati, ubitlongi))
-                                        .title(titulo)
-                                        .snippet(llave).visible(false)
-                                        .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_ORANGE)));
-
-                                break;
-                            case "Concierto":
-                                Marker mMarkerConcierto = mMap.addMarker(new MarkerOptions()
-                                        .position(new LatLng(ubitlati, ubitlongi))
-                                        .title(titulo)
-                                        .snippet(llave)
-                                        .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_MAGENTA)));
-                                mMarkerConcierto.setVisible(false);
-                                break;
-                            default:
-                                Log.d(TAG, "default");
-                                break;
-
-                        }
-
-                    }
-                }
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-
-            }
-        });
-
-        /*switch (categoriaseleccionado) {
-            case "Artistico":
-
-
-                //onResume();
-                Marker mMarker = mMap.addMarker(new MarkerOptions()
-                        .position(new LatLng(ubitlati, ubitlongi))
-                        .title(titulo)
-                        .snippet(llave)
-                        .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_ORANGE)));
-                break;
-            case "Concierto":
-                Marker mMarkerConcierto = mMap.addMarker(new MarkerOptions()
-                        .position(new LatLng(ubitlati, ubitlongi))
-                        .title(titulo)
-                        .snippet(llave)
-                        .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_MAGENTA)));
-                break;
-            default:
-                break;
-
-        }*/
-    }
 
     public void locationStart() {
         LocationManager mlocManager = (LocationManager) getActivity().getSystemService(Context.LOCATION_SERVICE);
@@ -590,6 +503,231 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback, Direct
         final AlertDialog alert = builder.create();
         alert.show();
     }
+
+
+    private void selecToPosition(String categoriaseleccionado) {
+        Log.d(TAG, "ArtisticoLIst" + categoriaseleccionado);
+        DatabaseReference myRefEvento = mfirebaseDatabase.getReference();
+        Query query = myRefEvento.child(FirebaseReferences.EVENTO_REFERENCE)
+                .orderByChild("categoria")
+                .equalTo(categoriaseleccionado);
+        query.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                if (dataSnapshot.exists()) {
+                    for (DataSnapshot dataResult : dataSnapshot.getChildren()) {
+                        Eventodb eventodb = dataResult.getValue(Eventodb.class);
+                        switch (eventodb.getCategoria()) {
+                            case "Artistico":
+
+                                mostrarMarkerArtisticoLista(mMarkerArtisticoList);
+                                ocultarMarkerConciertoLista(mMarkerConciertoList);
+                                ocultarMarkerTecnologiaLista(mMarkerTecnologiaList);
+                                ocultarMarkerDeporteLista(mMarkerDeporteList);
+                                ocultarMarkerConferenciaLista(mMarkerConferenciaList);
+                                ocultarMarkerModaLista(mMarkerModaList);
+                                ocultarMarkerGastronomiaLista(mMarkerGastronomiaList);
+
+                                break;
+                            case "Concierto":
+                                mostrarMarkerConciertoLista(mMarkerConciertoList);
+                                ocultarMarkerArtisticoLista(mMarkerArtisticoList);
+                                ocultarMarkerTecnologiaLista(mMarkerTecnologiaList);
+                                ocultarMarkerDeporteLista(mMarkerDeporteList);
+                                ocultarMarkerConferenciaLista(mMarkerConferenciaList);
+                                ocultarMarkerModaLista(mMarkerModaList);
+                                ocultarMarkerGastronomiaLista(mMarkerGastronomiaList);
+                                ocultarMarkerOtrosLista(mMarkerOtrosList);
+                                break;
+                            case "Tecnologia":
+                                mostrarMarkerTecnologicoLista(mMarkerTecnologiaList);
+                                ocultarMarkerArtisticoLista(mMarkerArtisticoList);
+                                ocultarMarkerConciertoLista(mMarkerConciertoList);
+                                ocultarMarkerDeporteLista(mMarkerDeporteList);
+                                ocultarMarkerConferenciaLista(mMarkerConferenciaList);
+                                ocultarMarkerModaLista(mMarkerModaList);
+                                ocultarMarkerGastronomiaLista(mMarkerGastronomiaList);
+                                ocultarMarkerOtrosLista(mMarkerOtrosList);
+                                break;
+
+                            case "Deporte":
+                                mostrarMarkerDeporteLista(mMarkerDeporteList);
+                                ocultarMarkerArtisticoLista(mMarkerArtisticoList);
+                                ocultarMarkerConciertoLista(mMarkerConciertoList);
+                                ocultarMarkerTecnologiaLista(mMarkerTecnologiaList);
+                                ocultarMarkerConferenciaLista(mMarkerConferenciaList);
+                                ocultarMarkerModaLista(mMarkerModaList);
+                                ocultarMarkerGastronomiaLista(mMarkerGastronomiaList);
+                                ocultarMarkerOtrosLista(mMarkerOtrosList);
+                                break;
+
+                            case "Conferencia":
+                                mostrarMarkerConferenciaLista(mMarkerConferenciaList);
+                                ocultarMarkerArtisticoLista(mMarkerArtisticoList);
+                                ocultarMarkerConciertoLista(mMarkerConciertoList);
+                                ocultarMarkerTecnologiaLista(mMarkerTecnologiaList);
+                                ocultarMarkerDeporteLista(mMarkerDeporteList);
+                                ocultarMarkerModaLista(mMarkerModaList);
+                                ocultarMarkerGastronomiaLista(mMarkerGastronomiaList);
+                                ocultarMarkerOtrosLista(mMarkerOtrosList);
+                                break;
+
+                            case "Moda":
+                                mostrarMarkerModaLista(mMarkerModaList);
+                                ocultarMarkerArtisticoLista(mMarkerArtisticoList);
+                                ocultarMarkerConciertoLista(mMarkerConciertoList);
+                                ocultarMarkerTecnologiaLista(mMarkerTecnologiaList);
+                                ocultarMarkerDeporteLista(mMarkerDeporteList);
+                                ocultarMarkerConferenciaLista(mMarkerConferenciaList);
+                                ocultarMarkerGastronomiaLista(mMarkerGastronomiaList);
+                                ocultarMarkerOtrosLista(mMarkerOtrosList);
+
+                                break;
+
+                            case "Gastronomia":
+                                mostrarMarkerGastronomiaLista(mMarkerGastronomiaList);
+                                ocultarMarkerArtisticoLista(mMarkerArtisticoList);
+                                ocultarMarkerConciertoLista(mMarkerConciertoList);
+                                ocultarMarkerTecnologiaLista(mMarkerTecnologiaList);
+                                ocultarMarkerDeporteLista(mMarkerDeporteList);
+                                ocultarMarkerConferenciaLista(mMarkerConferenciaList);
+                                ocultarMarkerModaLista(mMarkerModaList);
+                                ocultarMarkerOtrosLista(mMarkerOtrosList);
+                                break;
+
+                            case "Otros":
+                                mostrarMarkerOtrosLista(mMarkerOtrosList);
+                                ocultarMarkerArtisticoLista(mMarkerArtisticoList);
+                                ocultarMarkerConciertoLista(mMarkerConciertoList);
+                                ocultarMarkerTecnologiaLista(mMarkerTecnologiaList);
+                                ocultarMarkerDeporteLista(mMarkerDeporteList);
+                                ocultarMarkerConferenciaLista(mMarkerConferenciaList);
+                                ocultarMarkerModaLista(mMarkerModaList);
+                                ocultarMarkerGastronomiaLista(mMarkerGastronomiaList);
+                                break;
+
+                            default:
+                                mostrarMarkerArtisticoLista(mMarkerArtisticoList);
+                                mostrarMarkerConciertoLista(mMarkerConciertoList);
+                                mostrarMarkerTecnologicoLista(mMarkerTecnologiaList);
+                                mostrarMarkerDeporteLista(mMarkerDeporteList);
+                                mostrarMarkerConferenciaLista(mMarkerConferenciaList);
+                                mostrarMarkerModaLista(mMarkerModaList);
+                                mostrarMarkerGastronomiaLista(mMarkerGastronomiaList);
+                                mostrarMarkerOtrosLista(mMarkerOtrosList);
+                                break;
+
+                        }
+
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+
+    }
+
+    private void mostrarMarkerOtrosLista(List<Marker> mMarkerOtrosList) {
+        for(Marker marker :mMarkerOtrosList){
+            marker.setVisible(true);
+        }
+    }
+
+    private void mostrarMarkerGastronomiaLista(List<Marker> mMarkerGastronomiaList) {
+        for(Marker marker :mMarkerGastronomiaList){
+            marker.setVisible(true);
+        }
+    }
+
+    private void mostrarMarkerModaLista(List<Marker> mMarkerModaList) {
+        for(Marker marker :mMarkerModaList){
+            marker.setVisible(true);
+        }
+    }
+
+    private void mostrarMarkerConferenciaLista(List<Marker> mMarkerConferenciaList) {
+        for(Marker marker :mMarkerConferenciaList){
+            marker.setVisible(true);
+        }
+    }
+
+    private void mostrarMarkerDeporteLista(List<Marker> mMarkerDeporteList) {
+        for(Marker marker :mMarkerDeporteList){
+            marker.setVisible(true);
+        }
+    }
+
+    private void ocultarMarkerOtrosLista(List<Marker> mMarkerOtrosList) {
+        for(Marker marker : mMarkerOtrosList){
+            marker.setVisible(false);
+        }
+    }
+
+    private void ocultarMarkerGastronomiaLista(List<Marker> mMarkerGastronomiaList) {
+        for(Marker marker : mMarkerGastronomiaList){
+            marker.setVisible(false);
+        }
+    }
+
+    private void ocultarMarkerModaLista(List<Marker> mMarkerModaList) {
+        for(Marker marker : mMarkerModaList){
+            marker.setVisible(false);
+        }
+    }
+
+    private void ocultarMarkerConferenciaLista(List<Marker> mMarkerConferenciaList) {
+        for(Marker marker : mMarkerConferenciaList){
+            marker.setVisible(false);
+        }
+    }
+
+    private void ocultarMarkerDeporteLista(List<Marker> mMarkerDeporteList) {
+        for(Marker marker : mMarkerDeporteList){
+            marker.setVisible(false);
+        }
+    }
+
+    private void ocultarMarkerTecnologiaLista(List<Marker> mMarkerTecnologiaList) {
+        for(Marker marker : mMarkerTecnologiaList){
+            marker.setVisible(false);
+        }
+    }
+
+    private void mostrarMarkerTecnologicoLista(List<Marker> mMarkerTecnologiaList) {
+        for(Marker marker :mMarkerTecnologiaList){
+            marker.setVisible(true);
+        }
+    }
+
+    private void ocultarMarkerArtisticoLista(List<Marker> mMarkerArtisticoList) {
+        for (Marker marker : mMarkerArtisticoList) {
+            marker.setVisible(false);
+        }
+    }
+
+    private void mostrarMarkerConciertoLista(List<Marker> mMarkerConciertoList) {
+        for (Marker marker : mMarkerConciertoList) {
+            marker.setVisible(true);
+        }
+    }
+
+    private void ocultarMarkerConciertoLista(List<Marker> mMarkerConciertoList) {
+        for (Marker marker : mMarkerConciertoList) {
+            marker.setVisible(false);
+        }
+    }
+
+    private void mostrarMarkerArtisticoLista(List<Marker> mMarkerArtisticoList) {
+        for (Marker marker : mMarkerArtisticoList) {
+            marker.setVisible(true);
+        }
+    }
+
+
 
     @Override
     public void onResume() {
