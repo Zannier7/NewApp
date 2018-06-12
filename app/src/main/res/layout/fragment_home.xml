@@ -7,29 +7,29 @@
     tools:context=".HomeFragment">
 
 
-   <RelativeLayout
-       android:layout_width="match_parent"
-       android:layout_height="match_parent"
-       android:layout_marginBottom="70dp">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginBottom="70dp">
 
-       <fragment xmlns:android="http://schemas.android.com/apk/res/android"
-           xmlns:tools="http://schemas.android.com/tools"
-           android:layout_width="match_parent"
-           android:layout_height="match_parent"
-           android:id="@+id/map"
-           tools:context=".HomeFragment"
-           android:name="com.google.android.gms.maps.SupportMapFragment" />
+        <fragment xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:tools="http://schemas.android.com/tools"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/map"
+            tools:context=".HomeFragment"
+            android:name="com.google.android.gms.maps.SupportMapFragment" />
 
-       <Spinner
-           android:id="@+id/listacategoria"
-           android:layout_width="250dp"
-           android:layout_height="wrap_content"
-           android:layout_alignParentTop="true"
-           android:layout_centerHorizontal="true"
-           android:layout_marginTop="12dp"
-           android:entries="@array/tipoEventos"
-           android:background="@color/white"/>
-   </RelativeLayout>
+        <Spinner
+            android:id="@+id/listacategoria"
+            android:layout_width="250dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="12dp"
+            android:entries="@array/tipoEventos"
+            android:background="@color/white"/>
+    </RelativeLayout>
 
     <RelativeLayout
         android:layout_width="match_parent"
