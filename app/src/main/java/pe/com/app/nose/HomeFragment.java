@@ -245,7 +245,7 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback, Direct
                                                 .position(new LatLng(ubitlati, ubitlongi))
                                                 .title(titulo)
                                                 .snippet(llave)
-                                                .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_ORANGE)));
+                                                .icon(BitmapDescriptorFactory.fromResource(R.drawable.artistico)));
                                         mMarkerArtisticoList.add(mMarkerArtistico);
                                         break;
                                     case "Concierto":
@@ -253,7 +253,7 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback, Direct
                                                 .position(new LatLng(ubitlati, ubitlongi))
                                                 .title(titulo)
                                                 .snippet(llave)
-                                                .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_MAGENTA)));
+                                                .icon(BitmapDescriptorFactory.fromResource(R.drawable.concierto)));
                                         mMarkerConciertoList.add(mMarkerConcierto);
                                         break;
                                     case "Tecnologia":
@@ -261,7 +261,7 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback, Direct
                                                 .position(new LatLng(ubitlati, ubitlongi))
                                                 .title(titulo)
                                                 .snippet(llave)
-                                                .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_BLUE)));
+                                                .icon(BitmapDescriptorFactory.fromResource(R.drawable.tecnologia)));
                                         mMarkerTecnologiaList.add(mMarkerTecnologia);
                                         break;
                                     case "Deporte":
@@ -269,7 +269,7 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback, Direct
                                                 .position(new LatLng(ubitlati, ubitlongi))
                                                 .title(titulo)
                                                 .snippet(llave)
-                                                .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN)));
+                                                .icon(BitmapDescriptorFactory.fromResource(R.drawable.deportivo)));
                                         mMarkerDeporteList.add(mMarkerDeporte);
                                         break;
                                     case "Conferencia":
@@ -277,7 +277,7 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback, Direct
                                                 .position(new LatLng(ubitlati, ubitlongi))
                                                 .title(titulo)
                                                 .snippet(llave)
-                                                .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_MAGENTA)));
+                                                .icon(BitmapDescriptorFactory.fromResource(R.drawable.conferencia)));
                                         mMarkerConferenciaList.add(mMarkerConferencia);
                                         break;
                                     case "Moda":
@@ -285,7 +285,7 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback, Direct
                                                 .position(new LatLng(ubitlati, ubitlongi))
                                                 .title(titulo)
                                                 .snippet(llave)
-                                                .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_ROSE)));
+                                                .icon(BitmapDescriptorFactory.fromResource(R.drawable.moda)));
                                         mMarkerModaList.add(mMarkerModa);
                                         break;
                                     case "Gastronomia":
@@ -293,7 +293,7 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback, Direct
                                                 .position(new LatLng(ubitlati, ubitlongi))
                                                 .title(titulo)
                                                 .snippet(llave)
-                                                .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_VIOLET)));
+                                                .icon(BitmapDescriptorFactory.fromResource(R.drawable.gastronomia)));
                                         mMarkerGastronomiaList.add(mMarkerGastronomia);
                                         break;
                                     case "Otros":
@@ -301,7 +301,7 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback, Direct
                                                 .position(new LatLng(ubitlati, ubitlongi))
                                                 .title(titulo)
                                                 .snippet(llave)
-                                                .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_CYAN)));
+                                                .icon(BitmapDescriptorFactory.fromResource(R.drawable.otros)));
                                         mMarkerOtrosList.add(mMarkerOtros);
                                         break;
                                 }
