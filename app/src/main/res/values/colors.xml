@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="colorPrimary">#ff1744</color>
-    <color name="colorPrimaryDark">#f6fa2612</color>
+    <color name="colorPrimaryDark">#eb0e38</color>
     <color name="colorAccent">#1a5276</color>
     <color name="colorAdd">#3d5afe</color>
+    <color name="notification">#BDBDBD</color>
 
     <color name="facebookBlue">#3F5996</color>
     <color name="googleRed">#D03E2F</color>
