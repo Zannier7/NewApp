@@ -96,12 +96,30 @@
         android:gravity="center_horizontal">
 
         <Button
+            android:id="@+id/asistire"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:background="@drawable/asistire_animation"
+            android:text="asistire"
+            android:textColor="@color/white" />
+
+        <Button
             android:id="@+id/popup_des_btn"
             android:layout_width = "wrap_content"
             android:layout_height = "wrap_content"
-            android:text = "Sígueme"
+            android:text = "Ir"
             android:layout_marginTop = "15dp"
-            android:backgroundTint="#1555a9"
+            android:backgroundTint="@color/colorPrimary"
+            android:textColor="@color/white" />
+
+        <Button
+            android:id="@+id/interesa"
+            android:layout_width = "wrap_content"
+            android:layout_height = "wrap_content"
+            android:text = "Me interesa"
+            android:layout_marginTop = "15dp"
+            android:background="@drawable/interesa_animation"
             android:textColor="@color/white" />
 
     </LinearLayout>
