@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:cardview="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="5dp"
+    cardview:cardCornerRadius="10dp">
+
+  <LinearLayout
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:orientation="vertical">
+
+      <ImageView
+          android:id="@+id/categoria_img"
+          android:layout_width="match_parent"
+          android:layout_height="180dp"
+          android:background="@drawable/concert"/>
+
+      <LinearLayout
+          android:orientation="vertical"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content">
+
+          <TextView
+              android:id="@+id/titulo_e"
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:text="Chacla Festival"
+              android:textSize="20sp"
+              android:textStyle="bold"
+              android:paddingTop="10dp"
+              android:paddingLeft="10dp"/>
+
+          <TextView
+              android:id="@+id/categoria_e"
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:text="Concierto"
+              android:textSize="10sp"
+              android:paddingLeft="15dp"/>
+
+          <TextView
+              android:id="@+id/descripcion_e"
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:padding="15dp"
+              android:text="@string/description_event"
+              android:textStyle="italic" />
+
+          <LinearLayout
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:orientation="horizontal"
+              android:gravity="center_horizontal">
+
+              <LinearLayout
+                  android:layout_width="wrap_content"
+                  android:layout_height="wrap_content"
+                  android:padding="10dp">
+
+                  <ImageView
+                      android:layout_width="wrap_content"
+                      android:layout_height="wrap_content"
+                      android:background="@drawable/time_e"/>
+
+                  <TextView
+                      android:id="@+id/hora_e"
+                      android:layout_width="wrap_content"
+                      android:layout_height="wrap_content"
+                      android:text="10:20"
+                      android:layout_marginLeft="5dp"
+                      android:layout_marginTop="2dp"/>
+              </LinearLayout>
+
+
+              <LinearLayout
+                  android:layout_width="wrap_content"
+                  android:layout_height="wrap_content"
+                  android:padding="10dp">
+
+                  <ImageView
+                      android:layout_width="wrap_content"
+                      android:layout_height="wrap_content"
+                      android:background="@drawable/calendar_e"/>
+
+                  <TextView
+                      android:id="@+id/fecha_e"
+                      android:layout_width="wrap_content"
+                      android:layout_height="wrap_content"
+                      android:text="18/02/2018"
+                      android:layout_marginLeft="5dp"
+                      android:layout_marginTop="3dp"/>
+              </LinearLayout>
+          </LinearLayout>
+
+          <LinearLayout
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:orientation="horizontal"
+              android:layout_gravity="center_horizontal">
+
+              <Button
+                  android:id="@+id/delete_e"
+                  android:layout_width="70dp"
+                  android:layout_height="20dp"
+                  android:text="Eliminar"
+                  android:textColor="@color/white"
+                  android:layout_margin="20dp"
+                  android:background="@color/colorPrimary"/>
+
+              <Button
+                  android:id="@+id/edit_e"
+                  android:layout_width="60dp"
+                  android:layout_height="20dp"
+                  android:text="Editar"
+                  android:textColor="@color/white"
+                  android:layout_margin="20dp"
+                  android:background="@color/yellow"/>
+
+          </LinearLayout>
+      </LinearLayout>
+  </LinearLayout>
+</android.support.v7.widget.CardView>

@@ -5,10 +5,49 @@
     android:layout_height="match_parent"
     tools:context=".EventosFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="EVENTOS" />
+        xmlns:design="http://schemas.android.com/apk/res-auto"
+        android:theme="@style/Theme.AppCompat.Light.NoActionBar">
 
+        <LinearLayout
+            android:id="@+id/linearLayout1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <android.support.design.widget.BottomNavigationView
+                android:id="@+id/menuView2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                design:menu="@menu/second_menu"
+                android:background="@drawable/rounded_profile"
+                design:itemIconTint="@color/second_menu"
+                design:itemTextColor="@color/cardview_dark_background"/>
+        </LinearLayout>
+
+
+        <FrameLayout
+            android:id="@+id/fragmento_contenedor2"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@+id/linearLayout1">
+            <TextView
+                android:id="@+id/textC"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Administra tus eventos"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="100dp"
+                android:textStyle="bold"
+                android:textColor="@color/colorPrimaryDark"
+                android:textSize="20sp"/>
+        </FrameLayout>
+
+
+
+
+    </RelativeLayout>
 </FrameLayout>

@@ -2,6 +2,7 @@
 <resources>
     <color name="colorPrimary">#ff1744</color>
     <color name="colorPrimaryDark">#eb0e38</color>
+    <color name="second_menu">#FBC02D</color>
     <color name="colorAccent">#1a5276</color>
     <color name="colorAdd">#3d5afe</color>
     <color name="notification">#BDBDBD</color>
