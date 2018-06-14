@@ -527,6 +527,7 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback, Direct
                                 ocultarMarkerConferenciaLista(mMarkerConferenciaList);
                                 ocultarMarkerModaLista(mMarkerModaList);
                                 ocultarMarkerGastronomiaLista(mMarkerGastronomiaList);
+                                ocultarMarkerOtrosLista(mMarkerOtrosList);
 
                                 break;
                             case "Concierto":

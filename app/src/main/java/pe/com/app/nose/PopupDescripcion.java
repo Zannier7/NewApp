@@ -3,6 +3,7 @@ package pe.com.app.nose;
 import android.app.Activity;
 import android.app.FragmentTransaction;
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.DisplayMetrics;
@@ -32,6 +33,7 @@ public class PopupDescripcion extends Activity{
     private Button popup_des_btn;
     private TextView hora;
     private TextView fecha;
+    private Button interesa;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,6 +57,14 @@ public class PopupDescripcion extends Activity{
         popup_des_btn = (Button) findViewById(R.id.popup_des_btn);
         fecha =(TextView) findViewById(R.id.fecha);
         hora =(TextView)        findViewById(R.id.hora);
+        interesa =(Button)        findViewById(R.id.interesa);
+
+        interesa.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                interesa.setBackgroundResource(R.drawable.intresa_icon);
+            }
+        });
 
         if(bundle !=null){
             String claveone = bundle.getString("CLAVEONE");

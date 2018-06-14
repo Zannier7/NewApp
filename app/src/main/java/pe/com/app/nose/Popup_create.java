@@ -147,7 +147,7 @@ public class Popup_create extends Activity  implements GoogleApiClient.OnConnect
 
         /*Obtener categoria*/
         listcat = new ArrayList<>();
-        final String[] cat={"Artistico","Concierto","Tecnología","Deporte","Conferencia","Moda","Gastronomía","Otro"};
+        final String[] cat={"Artistico","Concierto","Tecnologia","Deporte","Conferencia","Moda","Gastronomia","Otros"};
         Collections.addAll(listcat,cat);
         adapSpinner = new ArrayAdapter<>(this,android.R.layout.simple_spinner_item,listcat);
         adapSpinner.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);

@@ -87,7 +87,7 @@
 
         <TextView
             android:id="@+id/tvDistance"
-            android:layout_width="49dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
             android:layout_alignParentRight="true"
@@ -98,7 +98,7 @@
 
         <TextView
             android:id="@+id/txtimeD"
-            android:layout_width="91dp"
+            android:layout_width="wrap_content"
             android:gravity="center"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
