@@ -11,6 +11,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.firebase.auth.FirebaseAuth;
@@ -33,7 +34,7 @@ public class Myevent_fragment extends Fragment {
     private int idposi;
     private FirebaseAuth mAuth;
     private ImageView categorias;
-    private String idevento;
+    private String llave;
 
     public Myevent_fragment(){
         //CONSTRUCTOR
@@ -67,15 +68,18 @@ public class Myevent_fragment extends Fragment {
 
                 for (final DataSnapshot datasnapshot : dataSnapshot.getChildren()) {
 
+                    llave = datasnapshot.getKey();
                     final Eventodb eventodb = datasnapshot.getValue(Eventodb.class);
-
                     email = eventodb.getEmail();
                     String categoria = eventodb.getCategoria();
-                    idevento = eventodb.getIdevento().toString();
 
-                     if (email.equals(email2)) {
-                         ListEvent.add(eventodb);
-                     }
+                    if (email == null) {
+                      onResume();
+                       } else if (email != null) {
+                        if (email.equals(email2)) {
+                            ListEvent.add(eventodb);
+                        }
+                    }
 
                 }
 
@@ -91,21 +95,26 @@ public class Myevent_fragment extends Fragment {
         myEventsAdapter.setOnItemClickListener(new MyEventsAdapter.OnItemClickListener() {
             @Override
             public void onEditEvent(int position) {
-                idposi = position;
                 Intent intent = new Intent(getActivity(), Edit_event.class);
-                intent.putExtra("idevento", idevento);
+                intent.putExtra("position",position);
+                intent.putExtra("idevento", llave);
                 startActivity(intent);
             }
 
             @Override
             public void onDeleteEvent(int position) {
                 idposi = position;
-                database.getReference().child("evento").child(idevento).removeValue();
+                database.getReference(FirebaseReferences.EVENTO_REFERENCE).child(llave)
+                        .removeValue();
+                Toast.makeText(getContext(), "Eliminando evento...", Toast.LENGTH_SHORT).show();
             }
         });
 
     return view;
     }
-
+    @Override
+    public void onResume() {
+        super.onResume();
+    }
 
 }

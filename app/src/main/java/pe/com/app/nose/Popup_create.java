@@ -87,6 +87,7 @@ public class Popup_create extends Activity  implements GoogleApiClient.OnConnect
 
     List<String> listcat;
     ArrayAdapter<String> adapSpinner;
+
     private static int posicion;
     private String cate;
     String tipodet;

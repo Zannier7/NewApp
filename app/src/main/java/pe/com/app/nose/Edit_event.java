@@ -20,6 +20,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
@@ -54,6 +55,7 @@ public class Edit_event extends AppCompatActivity {
     private FloatingActionButton lugar_e;
     private Switch myubi_e;
     private Button edit_evento;
+    private String cate;
 
     private FirebaseDatabase firebaseDatabase;
 
@@ -77,6 +79,19 @@ public class Edit_event extends AppCompatActivity {
     Double valorLat;
     String dato;
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (requestCode==SECACT_REQUEST_CODE){
+            if (resultCode==RESULT_OK){
+                valorLat = data.getDoubleExtra("latitud",0);
+                valorLong = data.getDoubleExtra("longitud",0);
+            }
+        }else{
+            Toast.makeText(this, "Error al leer DATOS", Toast.LENGTH_SHORT).show();
+        }
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -131,20 +146,62 @@ public class Edit_event extends AppCompatActivity {
         categoria_e.setAdapter(adapSpinner);
         String inicializarItem = "Concierto";
 
+        categoria_e.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            public void onItemSelected(AdapterView<?> parent, View view, int pos, long id) {
+                Object item = parent.getItemAtPosition(pos);
+                cate = item.toString();
+
+            }
+            public void onNothingSelected(AdapterView<?> parent) {
+            }
+        });
 
         //Obteniendo idevento
         Bundle parametros = this.getIntent().getExtras();
-        final String datos = parametros.getString("idevento");
-
-        Log.d("Datos",datos);
+        final String llave = parametros.getString("idevento");
 
         //cargar datos desde FB
         firebaseDatabase = FirebaseDatabase.getInstance();
 
         final DatabaseReference myRefedit = firebaseDatabase.getReference(FirebaseReferences.EVENTO_REFERENCE);
 
-        myRefedit.child(datos).addValueEventListener(new
-                                                                                        ValueEventListener() {
+        edit_evento.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                DatabaseReference updatepro = myRefedit.child(llave);
+
+                final String title_u = title_e.getText().toString().trim();
+                final String description_u = description_e.getText().toString().trim();
+                final String date_u = date_e.getText().toString().trim();
+                final String time_u = time_e.getText().toString().trim();
+
+                if (updatepro.child("correo") != null){
+
+                    updatepro.child("titulo").setValue(title_u);
+                    updatepro.child("descripcion").setValue(description_u);
+                    updatepro.child("hora").setValue(time_u);
+                    updatepro.child("fecha").setValue(date_u);
+                    updatepro.child("categoria").setValue(cate);
+
+                    Toast.makeText(Edit_event.this,"Exito al Actualizar",Toast.LENGTH_SHORT).show();
+                }
+                else {
+                    updatepro.setValue(llave);
+                    updatepro.child("titulo").setValue(title_u);
+                    updatepro.child("descripcion").setValue(description_u);
+                    updatepro.child("hora").setValue(time_u);
+                    updatepro.child("fecha").setValue(date_u);
+                    updatepro.child("categoria").setValue(cat);
+                    Toast.makeText(Edit_event.this,"Exito al Actualizar",Toast.LENGTH_SHORT)
+                            .show();
+
+                }
+                finish();
+            }
+        });
+
+        myRefedit.child(llave).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(final DataSnapshot dataSnapshot) {
 
@@ -156,7 +213,6 @@ public class Edit_event extends AppCompatActivity {
                             date_e.setText(eventodb.getFecha());
                             time_e.setText(eventodb.getHora());
 
-                            Toast.makeText(Edit_event.this, "LLeno", Toast.LENGTH_SHORT).show();
                         }
                         catch ( Exception e){
 
@@ -165,7 +221,6 @@ public class Edit_event extends AppCompatActivity {
                             date_e.setText("");
                             time_e.setText("");
 
-                            Toast.makeText(Edit_event.this, "Vacio", Toast.LENGTH_SHORT).show();
                         }
                     }
 
@@ -175,6 +230,7 @@ public class Edit_event extends AppCompatActivity {
 
             }
         });
+
         //Evento desde otra ubicación
         lugar_e.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -299,4 +355,38 @@ public class Edit_event extends AppCompatActivity {
         final AlertDialog alert=builder.create();
         alert.show();
     }
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+
+
+        String title3 = title_e.getText().toString();
+        String description3 = description_e.getText().toString();
+        String date3 = date_e.getText().toString();
+        String time3 = time_e.getText().toString();
+
+        outState.putString("title4", title3);
+        outState.putString("description4", description3);
+        outState.putString("date4", date3);
+        outState.putString("time4", time3);
+
+        super.onSaveInstanceState(outState);
+    }
+
+    @Override
+    protected void onRestoreInstanceState(Bundle savedInstanceState) {
+        super.onRestoreInstanceState(savedInstanceState);
+
+        String titles = savedInstanceState.getString("title4");
+        title_e.setText(titles);
+        String descriptions = savedInstanceState.getString("description4");
+        description_e.setText(descriptions);
+        String dates = savedInstanceState.getString("date4");
+        date_e.setText(dates);
+        String times = savedInstanceState.getString("time4");
+        time_e.setText(times);
+
+        Toast.makeText(this, "LLegará "+titles, Toast.LENGTH_SHORT).show();
+    }
+
 }

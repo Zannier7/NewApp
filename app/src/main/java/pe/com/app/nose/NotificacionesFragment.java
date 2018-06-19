@@ -64,6 +64,7 @@ public class NotificacionesFragment extends Fragment {
                     email = eventodb.getEmail();
 
                     if (email.equals(email2)) {
+                        onResume();
                         Log.d("Iguales","Correos iguales");
                     }else {
                         ListEvent.add(eventodb);
