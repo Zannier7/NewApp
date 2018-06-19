@@ -18,15 +18,17 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 public class PopupPerfil extends Activity {
+
     private EditText popup_nombre, popup_apellido, popup_numero, popup_fechanac, popup_descripcion;
     private TextView popup_correo;
     private Button popup_updatetbn;
 
     private FirebaseAuth firebaseAuth;
     private FirebaseAuth.AuthStateListener firebaseAuthListener;
+    private FirebaseDatabase mfirebaseDatabase;
+
     private String userID;
     private String emailfire;
-    private FirebaseDatabase mfirebaseDatabase;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,7 +54,9 @@ public class PopupPerfil extends Activity {
 
         firebaseAuth = FirebaseAuth.getInstance();
         mfirebaseDatabase = FirebaseDatabase.getInstance();
+
         final DatabaseReference myRefpopup = mfirebaseDatabase.getReference(FirebaseReferences.USUARIO_REFERENCE);
+
         FirebaseUser user = firebaseAuth.getCurrentUser();
         userID = user.getUid();
         emailfire = user.getEmail();

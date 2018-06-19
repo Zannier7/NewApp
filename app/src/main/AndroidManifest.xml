@@ -67,11 +67,11 @@
             android:name=".ReadUbication"
             android:theme="@style/AppTheme.CustomTheme" />
         <activity android:name=".Invite_Google" />
-
-        <activity android:name=".Delete_event"
+        <activity
+            android:name=".Delete_event"
             android:theme="@style/AppTheme.CustomTheme" />
-
-        <activity android:name=".Edit_event"/>
+        <activity android:name=".Edit_event" />
+        <activity android:name=".Read_ubication2"></activity>
     </application>
 
 </manifest>

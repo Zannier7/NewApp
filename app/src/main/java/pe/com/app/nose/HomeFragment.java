@@ -186,8 +186,11 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback, Direct
             public void onDataChange(final DataSnapshot dataSnapshot) {
 
                 for (final DataSnapshot datasnapshot : dataSnapshot.getChildren()) {
+
                     final String llave = datasnapshot.getKey();
+
                     final Eventodb eventodb = datasnapshot.getValue(Eventodb.class);
+
                     final String titulo = eventodb.getTitulo();
                     final String categoria = eventodb.getCategoria();
                     final String hora = eventodb.getHora();

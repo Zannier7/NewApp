@@ -304,6 +304,7 @@ public class Popup_create extends Activity  implements GoogleApiClient.OnConnect
 
              DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference().child("evento");
              DatabaseReference currentUserDB = mDatabase.child(UUID.randomUUID().toString());
+             currentUserDB.child("idevento").setValue(UUID.randomUUID().toString());
              currentUserDB.child("email").setValue(email);
              currentUserDB.child("idusuario").setValue(uid);
              currentUserDB.child("titulo").setValue(title2);

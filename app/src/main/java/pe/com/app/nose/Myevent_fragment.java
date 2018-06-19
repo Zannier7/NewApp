@@ -33,6 +33,7 @@ public class Myevent_fragment extends Fragment {
     private int idposi;
     private FirebaseAuth mAuth;
     private ImageView categorias;
+    private String idevento;
 
     public Myevent_fragment(){
         //CONSTRUCTOR
@@ -56,51 +57,28 @@ public class Myevent_fragment extends Fragment {
         FirebaseUser user = mAuth.getCurrentUser();
         final String email2= user.getEmail();
 
-        FirebaseDatabase database = FirebaseDatabase.getInstance();
+        final FirebaseDatabase database = FirebaseDatabase.getInstance();
 
         database.getReference().child("evento").addValueEventListener(new ValueEventListener() {
 
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 String email = null;
+
                 for (final DataSnapshot datasnapshot : dataSnapshot.getChildren()) {
+
                     final Eventodb eventodb = datasnapshot.getValue(Eventodb.class);
+
                     email = eventodb.getEmail();
                     String categoria = eventodb.getCategoria();
+                    idevento = eventodb.getIdevento().toString();
 
                      if (email.equals(email2)) {
-                         /*switch (categoria) {
-
-                             case "Artistico":
-
-                                 categorias.setBackgroundResource(R.drawable.artistico2);
-                                 break;
-                             case "Concierto":
-                                 categorias.setBackgroundResource(R.drawable.concert);
-                                 break;
-                             case "Tecnologia":
-                                 categorias.setBackgroundResource(R.drawable.tecnologia2);
-                                 break;
-                             case "Deporte":
-                                 categorias.setBackgroundResource(R.drawable.deportes2);
-                                 break;
-                             case "Conferencia":
-                                 categorias.setBackgroundResource(R.drawable.conferencia2);
-                                 break;
-                             case "Moda":
-                                 categorias.setBackgroundResource(R.drawable.moda2);
-                                 break;
-                             case "Gastronomia":
-                                 categorias.setBackgroundResource(R.drawable.gastronomia2);
-                                 break;
-                             case "Otros":
-                                 categorias.setBackgroundResource(R.drawable.otros2);
-                                 break;
-                         }*/
                          ListEvent.add(eventodb);
                      }
 
                 }
+
                 myEventsAdapter.notifyDataSetChanged();
             }
 
@@ -114,23 +92,15 @@ public class Myevent_fragment extends Fragment {
             @Override
             public void onEditEvent(int position) {
                 idposi = position;
-                /*int id = L.get(idposi).getIdcontact();
-                String na = contactlist.get(idposi).getName();
-                Log.d("no", "porque " + na);*/
                 Intent intent = new Intent(getActivity(), Edit_event.class);
-                intent.putExtra("idcontacto", "1212");
+                intent.putExtra("idevento", idevento);
                 startActivity(intent);
             }
 
             @Override
             public void onDeleteEvent(int position) {
                 idposi = position;
-                /*int id = L.get(idposi).getIdcontact();
-                String na = contactlist.get(idposi).getName();
-                Log.d("no", "porque " + na);*/
-                Intent intent = new Intent(getActivity(), Delete_event.class);
-                intent.putExtra("idcontacto", "1212");
-                startActivity(intent);
+                database.getReference().child("evento").child(idevento).removeValue();
             }
         });
 

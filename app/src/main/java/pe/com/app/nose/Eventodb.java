@@ -10,6 +10,7 @@ public class Eventodb {
     private String titulo;
     private double ubilat;
     private double ubilong;
+    private String idevento;
 
     public Eventodb() {
     }
@@ -24,6 +25,19 @@ public class Eventodb {
         this.titulo = titulo;
         this.ubilat = ubilat;
         this.ubilong = ubilong;
+    }
+
+    public Eventodb(String categoria, String descripcion, String email, String fecha, String hora, String idusuario, String titulo, double ubilat, double ubilong, String idevento) {
+        this.categoria = categoria;
+        this.descripcion = descripcion;
+        this.email = email;
+        this.fecha = fecha;
+        this.hora = hora;
+        this.idusuario = idusuario;
+        this.titulo = titulo;
+        this.ubilat = ubilat;
+        this.ubilong = ubilong;
+        this.idevento = idevento;
     }
 
     public String getCategoria() {
@@ -96,5 +110,13 @@ public class Eventodb {
 
     public void setUbilong(double ubilong) {
         this.ubilong = ubilong;
+    }
+
+    public String getIdevento() {
+        return idevento;
+    }
+
+    public void setIdevento(String idevento) {
+        this.idevento = idevento;
     }
 }
