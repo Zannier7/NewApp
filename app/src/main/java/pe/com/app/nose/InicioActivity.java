@@ -1,16 +1,13 @@
 package pe.com.app.nose;
 
-import android.app.Fragment;
-import android.app.FragmentManager;
-import android.app.FragmentTransaction;
-import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.MenuItem;
-import android.widget.Switch;
+
+import pe.com.app.nose.View.ConfiguracionFragment;
 
 public class InicioActivity extends AppCompatActivity {
 

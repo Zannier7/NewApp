@@ -11,7 +11,7 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 
-import pe.com.app.nose.Eventodb;
+import pe.com.app.nose.Entidad.Eventodb;
 import pe.com.app.nose.R;
 
 public class NotificationAdapter extends RecyclerView.Adapter<NotificationAdapter.MyViewHolder>{

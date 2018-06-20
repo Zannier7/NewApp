@@ -1,4 +1,4 @@
-package pe.com.app.nose;
+package pe.com.app.nose.Entidad;
 
 public class Eventodb {
     private String categoria;

@@ -6,16 +6,13 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.bumptech.glide.RequestManager;
-
 import java.util.ArrayList;
 
-import pe.com.app.nose.Eventodb;
+import pe.com.app.nose.Entidad.Eventodb;
 import pe.com.app.nose.R;
 
 public class MyEventsAdapter extends RecyclerView.Adapter<MyEventsAdapter.MyViewHolder> {

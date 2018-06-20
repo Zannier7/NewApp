@@ -17,6 +17,9 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import pe.com.app.nose.Entidad.FirebaseReferences;
+import pe.com.app.nose.Entidad.Usuariodb;
+
 public class PopupPerfil extends Activity {
 
     private EditText popup_nombre, popup_apellido, popup_numero, popup_fechanac, popup_descripcion;

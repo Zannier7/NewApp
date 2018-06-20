@@ -1,4 +1,4 @@
-package pe.com.app.nose;
+package pe.com.app.nose.View;
 
 import android.content.Context;
 import android.net.Uri;
@@ -9,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import pe.com.app.nose.R;
 
 
 public class ConfiguracionFragment extends Fragment {

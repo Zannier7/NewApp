@@ -1,4 +1,4 @@
-package pe.com.app.nose;
+package pe.com.app.nose.Model;
 
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
@@ -8,6 +8,8 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.google.android.gms.appinvite.AppInviteReferral;
+
+import pe.com.app.nose.R;
 
 public class Invite_Google extends AppCompatActivity implements View.OnClickListener{
 

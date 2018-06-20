@@ -1,12 +1,13 @@
-package pe.com.app.nose;
+package pe.com.app.nose.Entidad;
 
 import com.google.android.gms.maps.model.LatLng;
 
 import java.util.List;
 
-/**
- * Created by Mai Thanh Hiep on 4/3/2016.
- */
+import pe.com.app.nose.Model.Distance;
+import pe.com.app.nose.Model.Duration;
+
+
 public class Route {
     public Distance distance;
     public Duration duration;

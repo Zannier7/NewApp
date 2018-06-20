@@ -51,7 +51,7 @@
                 <data android:scheme="@string/fb_login_protocol_scheme" />
             </intent-filter>
         </activity>
-        <activity android:name=".Register" />
+        <activity android:name=".View.Register" />
         <activity android:name=".Update_Pass" />
         <activity android:name=".InicioActivity" />
         <activity
@@ -66,10 +66,7 @@
         <activity
             android:name=".ReadUbication"
             android:theme="@style/AppTheme.CustomTheme" />
-        <activity android:name=".Invite_Google" />
-        <activity
-            android:name=".Delete_event"
-            android:theme="@style/AppTheme.CustomTheme" />
+        <activity android:name=".Model.Invite_Google" />
         <activity android:name=".Edit_event" />
         <activity android:name=".Read_ubication2"></activity>
     </application>

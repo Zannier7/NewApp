@@ -1,4 +1,4 @@
-package pe.com.app.nose;
+package pe.com.app.nose.Entidad;
 
 public class FirebaseReferences {
     final public static String USUARIO_REFERENCE = "user";

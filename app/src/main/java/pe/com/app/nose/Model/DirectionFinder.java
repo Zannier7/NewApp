@@ -1,4 +1,4 @@
-package pe.com.app.nose;
+package pe.com.app.nose.Model;
 
 import android.os.AsyncTask;
 
@@ -18,6 +18,9 @@ import java.net.URL;
 import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.List;
+
+import pe.com.app.nose.Interfaces.DirectionFinderListener;
+import pe.com.app.nose.Entidad.Route;
 
 /**
  * Created by Mai Thanh Hiep on 4/3/2016.
