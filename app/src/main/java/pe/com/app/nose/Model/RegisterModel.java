@@ -66,7 +66,7 @@ public class RegisterModel {
     }
 
     private void colocar_fecha(){
-        birthday_reg.setText((nmonth + 1)+"/"+nday+"/"+nyear+" ");
+        //birthday_reg.setText((nmonth + 1)+"/"+nday+"/"+nyear+" ");
     }
 
     private DatePickerDialog.OnDateSetListener nDatesetlistener =
