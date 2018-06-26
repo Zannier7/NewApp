@@ -50,7 +50,7 @@ public class Update_Pass extends AppCompatActivity {
         atrasM.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(Update_Pass.this, MenuActivity.class);
+                Intent intent = new Intent(Update_Pass.this, MainActivity.class);
                 startActivity(intent);
             }
         });

@@ -15,6 +15,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
@@ -52,7 +53,7 @@ public class PerfilFragment extends Fragment implements GoogleApiClient.OnConnec
     private GoogleApiClient googleApiClient;
     private FirebaseAuth firebaseAuth;
     private FirebaseAuth.AuthStateListener firebaseAuthListener;
-    private Button cerrarSesion;
+    private LinearLayout cerrarSesion;
     private TextView pro_descripcion;
     private String userID;
     private FirebaseDatabase mfirebaseDatabase;
@@ -160,7 +161,7 @@ public class PerfilFragment extends Fragment implements GoogleApiClient.OnConnec
 
 
 
-        cerrarSesion = (Button) view.findViewById(R.id.cerrarSesion);
+        cerrarSesion = (LinearLayout) view.findViewById(R.id.cerrarSesion);
         cerrarSesion.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

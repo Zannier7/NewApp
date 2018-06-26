@@ -7,24 +7,18 @@
     android:title="@string/inicio" />
 
 <item
-    android:id="@+id/menu_perfil"
-    android:icon="@drawable/menu_perfil"
-    android:title="@string/perfil" />
+        android:id="@+id/menu_evento"
+        android:icon="@drawable/menu_evento"
+        android:title="@string/eventos" />
 
 <item
     android:id="@+id/menu_notificaciones"
     android:icon="@drawable/menu_notificaciones"
     android:title="@string/notificaciones" />
 
+
     <item
-        android:id="@+id/menu_evento"
-        android:icon="@drawable/menu_evento"
-        android:title="@string/eventos" />
-
-
-<item
-    android:id="@+id/menu_configuracion"
-    android:icon="@drawable/menu_configuracion"
-    android:title="@string/configuraciones" />
-
+        android:id="@+id/menu_perfil"
+        android:icon="@drawable/menu_perfil"
+        android:title="@string/perfil" />
 </menu>

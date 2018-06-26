@@ -7,8 +7,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.MenuItem;
 
-import pe.com.app.nose.View.ConfiguracionFragment;
-
 public class InicioActivity extends AppCompatActivity {
 
 
@@ -33,17 +31,17 @@ public class InicioActivity extends AppCompatActivity {
                            case R.id.menu_home:
                                selectedFragment  = new HomeFragment();
                                break;
-                           case R.id.menu_perfil:
-                               selectedFragment = new PerfilFragment();
-                               break;
-                           case R.id.menu_notificaciones:
-                               selectedFragment = new NotificacionesFragment();
-                               break;
+
                            case R.id.menu_evento:
                                selectedFragment = new EventosFragment();
                                break;
-                           case R.id.menu_configuracion:
-                               selectedFragment = new ConfiguracionFragment();
+
+                           case R.id.menu_notificaciones:
+                               selectedFragment = new NotificacionesFragment();
+                               break;
+
+                           case R.id.menu_perfil:
+                               selectedFragment = new PerfilFragment();
                                break;
                        }
                             getSupportFragmentManager().beginTransaction().replace(R.id.fragmento_contenedor,selectedFragment).commit();
