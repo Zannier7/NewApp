@@ -139,14 +139,6 @@
                 android:layout_marginRight="30dp"
                 android:layout_marginTop="10dp">
 
-                <CheckBox
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
-                    android:text="Recuerdame"
-                    android:textColor="@color/textColor"
-                    android:textSize="12sp" />
-
                 <Button
                     android:id="@+id/tvForgotPass"
                     android:layout_width="wrap_content"
@@ -228,11 +220,9 @@
                 android:id="@+id/register_button"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/linearLayout2"
-                android:layout_centerHorizontal="true"
-                android:layout_marginBottom="10dp"
-                android:layout_marginTop="20dp"
-                android:text="No tienes cuenta? Registrate" />
+                android:layout_alignBaseline="@+id/relativeLayout3"
+                android:text="Registrate...!"
+                android:layout_alignLeft="@+id/relativeLayout1" />
 
         </RelativeLayout>
 

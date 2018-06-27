@@ -6,6 +6,7 @@ import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,6 +21,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import pe.com.app.nose.Adapters.MyEventsAdapter;
 import pe.com.app.nose.Entidad.Eventodb;
@@ -35,7 +37,6 @@ public class Myevent_fragment extends Fragment {
     private FirebaseAuth mAuth;
     private ImageView categorias;
     private String llave;
-
     public Myevent_fragment(){
         //CONSTRUCTOR
     }
@@ -60,23 +61,22 @@ public class Myevent_fragment extends Fragment {
 
         final FirebaseDatabase database = FirebaseDatabase.getInstance();
 
-        database.getReference().child("evento").addValueEventListener(new ValueEventListener() {
+        database.getReference(FirebaseReferences.EVENTO_REFERENCE).addValueEventListener(new ValueEventListener() {
 
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 String email = null;
-
                 for (final DataSnapshot datasnapshot : dataSnapshot.getChildren()) {
 
-                    llave = datasnapshot.getKey();
                     final Eventodb eventodb = datasnapshot.getValue(Eventodb.class);
+                    assert eventodb != null;
                     email = eventodb.getEmail();
-                    String categoria = eventodb.getCategoria();
 
                     if (email == null) {
                       onResume();
                        } else if (email != null) {
-                        if (email.equals(email2)) {
+                        if (email2.equals(email)) {
+                            llave = datasnapshot.getKey();
                             ListEvent.add(eventodb);
                         }
                     }
@@ -95,10 +95,12 @@ public class Myevent_fragment extends Fragment {
         myEventsAdapter.setOnItemClickListener(new MyEventsAdapter.OnItemClickListener() {
             @Override
             public void onEditEvent(int position) {
+                String idposis = ListEvent.get(position).getIdevento();
                 Intent intent = new Intent(getActivity(), Edit_event.class);
-                intent.putExtra("position",position);
                 intent.putExtra("idevento", llave);
+                intent.putExtra("position",idposis);
                 startActivity(intent);
+                Log.e("idevento",idposis);
             }
 
             @Override
@@ -107,6 +109,7 @@ public class Myevent_fragment extends Fragment {
                 database.getReference(FirebaseReferences.EVENTO_REFERENCE).child(llave)
                         .removeValue();
                 Toast.makeText(getContext(), "Eliminando evento...", Toast.LENGTH_SHORT).show();
+                onStart();
             }
         });
 

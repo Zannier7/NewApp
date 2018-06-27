@@ -1,4 +1,4 @@
-package pe.com.app.nose;
+package pe.com.app.nose.Model;
 
 import android.content.Context;
 import android.content.pm.ActivityInfo;
@@ -15,6 +15,10 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+
+import pe.com.app.nose.Eventsavailable_fragment;
+import pe.com.app.nose.Myevent_fragment;
+import pe.com.app.nose.R;
 
 
 public class EventosFragment extends Fragment {

@@ -19,7 +19,7 @@
 
       <LinearLayout
           android:orientation="vertical"
-          android:layout_width="wrap_content"
+          android:layout_width="match_parent"
           android:layout_height="wrap_content">
 
           <TextView
@@ -95,28 +95,29 @@
           </LinearLayout>
 
           <LinearLayout
-              android:layout_width="wrap_content"
+              android:layout_width="match_parent"
               android:layout_height="wrap_content"
-              android:orientation="horizontal"
-              android:layout_gravity="center_horizontal">
+              android:gravity="center_horizontal">
 
               <Button
                   android:id="@+id/delete_e"
-                  android:layout_width="70dp"
-                  android:layout_height="20dp"
+                  android:layout_width="80dp"
+                  android:layout_height="30dp"
                   android:text="Eliminar"
                   android:textColor="@color/white"
                   android:layout_margin="20dp"
-                  android:background="@color/colorPrimary"/>
+                  android:backgroundTint="@color/colorPrimary"
+                  android:background="@drawable/rounded_event"/>
 
               <Button
                   android:id="@+id/edit_e"
-                  android:layout_width="60dp"
-                  android:layout_height="20dp"
+                  android:layout_width="80dp"
+                  android:layout_height="30dp"
                   android:text="Editar"
                   android:textColor="@color/white"
                   android:layout_margin="20dp"
-                  android:background="@color/yellow"/>
+                  android:backgroundTint="@color/yellow"
+                  android:background="@drawable/rounded_event"/>
 
           </LinearLayout>
       </LinearLayout>

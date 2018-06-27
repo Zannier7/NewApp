@@ -30,6 +30,7 @@ public class NotificacionesFragment extends Fragment {
     RecyclerView recyclerView;
     NotificationAdapter notificationAdapter;
     private FirebaseAuth mAuth;
+
     public NotificacionesFragment(){
         //CONSTRUCTOR
     }
@@ -56,17 +57,22 @@ public class NotificacionesFragment extends Fragment {
         database.getReference().child("evento").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+
+
                 String email = null;
+
                 for (final DataSnapshot datasnapshot : dataSnapshot.getChildren()) {
+
                     final Eventodb eventodb = datasnapshot.getValue(Eventodb.class);
                     email = eventodb.getEmail();
 
-                    if (email.equals(email2)) {
-                        onResume();
-                        Log.d("Iguales","Correos iguales");
-                    }else {
+                    if (email==null) {
+                    }else if(email.equals(email2)) {
+
+                        }else{
                         ListEvent.add(eventodb);
                     }
+
                 }
                 notificationAdapter.notifyDataSetChanged();
             }
