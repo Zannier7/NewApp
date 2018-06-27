@@ -3,10 +3,12 @@ package pe.com.app.nose;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.DisplayMetrics;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -15,6 +17,8 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+
+import java.util.UUID;
 
 import pe.com.app.nose.Entidad.Eventodb;
 import pe.com.app.nose.Entidad.FirebaseReferences;
@@ -30,7 +34,8 @@ public class PopupDescripcion extends Activity{
     private TextView hora;
     private TextView fecha;
     private Button interesa;
-
+    private String userID;
+    int click = 0;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -54,16 +59,11 @@ public class PopupDescripcion extends Activity{
         fecha =(TextView) findViewById(R.id.fecha);
         hora =(TextView)        findViewById(R.id.hora);
         interesa =(Button)        findViewById(R.id.interesa);
+        userID = user.getUid();
 
-        interesa.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                interesa.setBackgroundResource(R.drawable.intresa_icon);
-            }
-        });
 
         if(bundle !=null){
-            String claveone = bundle.getString("CLAVEONE");
+           final String claveone = bundle.getString("CLAVEONE");
 
         myRef.child(claveone).addValueEventListener(new ValueEventListener() {
 
@@ -95,6 +95,45 @@ public class PopupDescripcion extends Activity{
                         }
                     });
 
+
+                    interesa.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            interesa.setBackgroundResource(R.drawable.intresa_icon);
+
+                            click++;
+                            Handler handler = new Handler();
+                            Runnable r = new Runnable() {
+
+                                @Override
+                                public void run() {
+                                    click = 0;
+                                }
+                            };
+
+                            if (click == 1) {
+                                interesa.setBackgroundResource(R.drawable.intresa_icon);
+                                DatabaseReference anadirfavref = mfirebaseDatabase.getReference(FirebaseReferences.FAVORITO_REFERENCE);
+                                DatabaseReference currentUserDB = anadirfavref.child(UUID.randomUUID().toString());
+                                currentUserDB.child("idevento").setValue(claveone);
+                                currentUserDB.child("idusuario").setValue(userID);
+
+                                Toast.makeText(PopupDescripcion.this, "haber" + claveone, Toast.LENGTH_SHORT).show();
+
+                                // handler.postDelayed(r, 250);
+                            } else if (click == 2) {
+                                interesa.setBackgroundResource(R.drawable.interesa_animation);
+
+                                click = 0;
+
+                            }
+
+
+                        }
+                    });
+
+
+
                 } catch (Exception e) {
 
                 }
@@ -109,6 +148,8 @@ public class PopupDescripcion extends Activity{
 
 
     }
+
+
 
 
     }
