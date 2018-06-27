@@ -1,4 +1,4 @@
-package pe.com.app.nose;
+package pe.com.app.nose.Model;
 
 import android.content.pm.ActivityInfo;
 import android.support.annotation.NonNull;
@@ -6,6 +6,11 @@ import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.MenuItem;
+
+import pe.com.app.nose.HomeFragment;
+import pe.com.app.nose.NotificacionesFragment;
+import pe.com.app.nose.PerfilFragment;
+import pe.com.app.nose.R;
 
 public class InicioActivity extends AppCompatActivity {
 

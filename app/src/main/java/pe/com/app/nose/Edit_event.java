@@ -160,6 +160,9 @@ public class Edit_event extends AppCompatActivity {
         //Obteniendo idevento
         Bundle parametros = this.getIntent().getExtras();
         final String llave = parametros.getString("idevento");
+        final String position = parametros.getString("position");
+
+        Log.e("llave",llave);
 
         //cargar datos desde FB
         firebaseDatabase = FirebaseDatabase.getInstance();
@@ -208,11 +211,12 @@ public class Edit_event extends AppCompatActivity {
 
                         try {
                             Eventodb eventodb = dataSnapshot.getValue(Eventodb.class);
-
+                            String hello = eventodb.getIdevento();
+                            if (position.equals(hello)){
                             title_e.setText(eventodb.getTitulo());
                             description_e.setText(eventodb.getDescripcion());
                             date_e.setText(eventodb.getFecha());
-                            time_e.setText(eventodb.getHora());
+                            time_e.setText(eventodb.getHora());}
 
                         }
                         catch ( Exception e){

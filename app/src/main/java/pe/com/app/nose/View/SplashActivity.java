@@ -1,9 +1,12 @@
-package pe.com.app.nose;
+package pe.com.app.nose.View;
 
 import android.content.Intent;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+
+import pe.com.app.nose.MainActivity;
+import pe.com.app.nose.R;
 
 public class SplashActivity extends AppCompatActivity {
 

@@ -127,11 +127,6 @@ public class ReadUbication extends AppCompatActivity implements GoogleMap.OnMark
             Address address = list.get(0);
             marker.setTitle(address.getAddressLine(0));
             marker.showInfoWindow();
-
-
-            Log.d("Lat","your lat"+lat);
-            Log.d("Long","your long"+lat);
-
         } catch (IOException e) {
             e.printStackTrace();
         }

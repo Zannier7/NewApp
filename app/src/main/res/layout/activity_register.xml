@@ -20,7 +20,7 @@
         android:layout_width="wrap_content"
         android:layout_height="300dp"
         android:orientation="vertical"
-        android:layout_marginTop="200dp"
+        android:layout_marginTop="150dp"
         android:layout_centerHorizontal="true">
         <EditText
             android:id="@+id/birthday_reg"
@@ -109,17 +109,15 @@
         android:textColor="@color/com_facebook_button_text_color" />
 
 
-
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/atrasM"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"
-        android:layout_marginBottom="21dp"
-        android:layout_marginRight="29dp"
+        android:layout_alignTop="@+id/button_reg"
+        android:layout_marginRight="12dp"
         android:clickable="true"
-        app:backgroundTint="@color/colorAccent"
-        android:src="@drawable/back"/>
+        android:src="@drawable/back"
+        app:backgroundTint="@color/colorAccent" />
 
 </RelativeLayout>

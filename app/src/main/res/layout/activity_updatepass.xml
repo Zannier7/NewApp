@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Update_Pass"
+    tools:context=".View.Update_Pass"
     android:orientation="vertical">
 
     <ImageView
@@ -24,7 +24,7 @@
         android:gravity="center_horizontal">
 
         <EditText
-            android:id="@+id/correo"
+            android:id="@+id/correo2"
             android:layout_width="282dp"
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"

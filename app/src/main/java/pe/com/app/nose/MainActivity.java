@@ -41,7 +41,9 @@ import com.google.firebase.auth.GoogleAuthProvider;
 
 import java.util.Arrays;
 
+import pe.com.app.nose.Model.InicioActivity;
 import pe.com.app.nose.View.Register;
+import pe.com.app.nose.View.Update_Pass;
 
 public class MainActivity extends AppCompatActivity implements GoogleApiClient.OnConnectionFailedListener {
     private LoginButton loginButton;
